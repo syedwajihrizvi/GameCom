@@ -1,19 +1,26 @@
-import { Grid, GridItem } from '@chakra-ui/react'
+import { Grid, GridItem, useColorMode } from '@chakra-ui/react'
 import './App.css'
+import NavBar from './components/NavBar'
+import SideBar from './components/SideBar'
+import GameGrid from './components/GameGrid'
 
 function App() {
+  const { toggleColorMode } = useColorMode()
   return (
     <Grid
   templateAreas={`"header header"
-                  "nav main"`}>
-      <GridItem pl='2' bg='orange.300' area={'header'}>
-        Header
+                  "nav main"`}
+  templateColumns={{base: '1fr',
+                    lg: '200px 1fr'
+                  }}>
+      <GridItem pl='2' area={'header'}>
+        <NavBar handleSwitchChange={toggleColorMode}/>
       </GridItem>
-      <GridItem pl='2' bg='pink.300' area={'nav'}>
-        Nav
+      <GridItem area={'nav'}>
+        <SideBar/>
       </GridItem>
-      <GridItem pl='2' bg='green.300' area={'main'}>
-        Main
+      <GridItem pl='2'area={'main'}>
+        <GameGrid/>
       </GridItem>
     </Grid>
   )
