@@ -1,17 +1,17 @@
 import axios from "axios";
 import keys from '../../private/keys'
-import { FetchResponse, Genre } from "../hooks/useGenres";
 
-const url = "https://cors-anywhere.herokuapp.com/https://www.giantbomb.com/api"
-const logger = (data: FetchResponse<Genre>) => {
-    console.log(data)
+export interface FetchResponse<T> {
+    count: number
+    results: T[]
 }
+
+const heroku_development_url = "https://cors-anywhere.herokuapp.com"
+const url = `${heroku_development_url}/https://bipn930cal.execute-api.us-west-2.amazonaws.com/production/v4`
 const client = axios.create({
     baseURL: url,
-    params: {
-        'api_key': keys.giantBombKey,
-        'format': 'json',
-        'json_callback': logger
+    headers: {
+        'x-api-key': keys.awsKey,
     }
 })
 
