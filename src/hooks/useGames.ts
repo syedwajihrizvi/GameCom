@@ -16,7 +16,7 @@ export interface Game {
 const useGames = () => {
 
     const fetchGames = () => {
-        return apiClient.post<Game[]>('/games', "fields genres,platforms,name,slug,cover,aggregated_rating,rating,total_rating,game_modes; sort hypes desc; limit 8;")
+        return apiClient.post<Game[]>('/games', "fields genres,platforms,name,slug,cover,aggregated_rating,rating,total_rating,game_modes; sort hypes desc; limit 9;")
         .then(res => res.data)
 
     }

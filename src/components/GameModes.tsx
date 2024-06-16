@@ -7,7 +7,8 @@ interface Props {
 function GameModes({gameModes}: Props) {
     return (
         <HStack>
-            {gameModes.map(mode => <Icon boxSize={10} color='red.300' as={GameModeIcons.getGameModeIcon(mode)}/>)}
+            {gameModes.map(mode => 
+            <Icon marginTop={1} boxSize={6} as={GameModeIcons.getGameModeIcon(mode)}/>)}
         </HStack>
     )
 }
