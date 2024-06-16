@@ -3,9 +3,17 @@ import './App.css'
 import NavBar from './components/NavBar'
 import SideBar from './components/SideBar'
 import GameGrid from './components/GameGrid'
+import { useState } from 'react'
 
 function App() {
+  const [search, setSearch]= useState('')
   const { toggleColorMode } = useColorMode()
+
+  const handleSearchSubmit = (searchQuery: string) => {
+    if (searchQuery != search && searchQuery.length > 0)
+      setSearch(searchQuery)
+  }
+
   return (
     <Grid
   templateAreas={`"header header"
@@ -14,13 +22,13 @@ function App() {
                     lg: '200px 1fr'
                   }}>
       <GridItem pl='2' area={'header'}>
-        <NavBar handleSwitchChange={toggleColorMode}/>
+        <NavBar handleSearchSubmit = {handleSearchSubmit} handleSwitchChange={toggleColorMode}/>
       </GridItem>
       <GridItem area={'nav'}>
         <SideBar/>
       </GridItem>
       <GridItem pl='2'area={'main'}>
-        <GameGrid/>
+        <GameGrid query={search}/>
       </GridItem>
     </Grid>
   )
