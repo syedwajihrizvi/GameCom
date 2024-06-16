@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery} from "@tanstack/react-query"
 import apiClient from "../utils/apiService"
 
 export interface Game {
@@ -15,14 +15,18 @@ export interface Game {
 
 const useGames = () => {
 
-    const fetchGames = () => {
-        return apiClient.post<Game[]>('/games', "fields genres,platforms,name,slug,cover,aggregated_rating,rating,total_rating,game_modes; sort hypes desc; limit 9;")
+    const fetchGames = (pageParam: number) => {
+        console.log('Page Param: ' + pageParam)
+        return apiClient.post<Game[]>('/games', `fields genres,platforms,name,slug,cover,aggregated_rating,rating,total_rating,game_modes; sort hypes desc; limit 9; offset ${pageParam};`)
         .then(res => res.data)
 
     }
-    return useQuery<Game[], Error>({
+    return useInfiniteQuery<Game[], Error>({
         queryKey: ['games'],
-        queryFn: fetchGames
+        queryFn: ({pageParam = 1}) => fetchGames(pageParam),
+        getNextPageParam: (lastPage, allPages) => {
+            return lastPage.length > 0 ? (allPages.length*9)+1 : undefined
+        }
     })
 }
 
