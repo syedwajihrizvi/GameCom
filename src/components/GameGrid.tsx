@@ -9,15 +9,15 @@ import GameModes from "./GameModes"
 import GameName from "./GameName"
 import InfiniteScroll from "react-infinite-scroll-component"
 import InfiniteLoader from "./InfiniteLoader"
+import { Query } from "../utils/query_utils"
 
 interface Props {
-    query: string
+    query: Query
 }
 
 function GameGrid({query}: Props) {
     const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames(query)
     const cardSkeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
     const numberOfGames = games ? games?.pages.reduce((total, currentValue) => total + currentValue.length, 0) : 0
     return (
         <>
@@ -38,7 +38,7 @@ function GameGrid({query}: Props) {
                                     <CardBody>
                                         <VStack>
                                             {game.cover && <GameImage coverId={game.cover}/>}
-                                            {!game.cover && <Image objectFit='cover' src={defaultPlaceHolder}/>}
+                                            {!game.cover && <Image objectFit='cover' src={defaultPlaceHolder} height='500px'/>}
                                             <GameName gameName={game.name}/>  
                                             <Container>
                                                 <HStack>
