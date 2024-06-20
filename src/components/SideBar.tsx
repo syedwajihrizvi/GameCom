@@ -23,7 +23,7 @@ function SideBar({onGenreSelect, currentGenre}: Props) {
             {allGenres}
             {genres?.map(genre => 
                 <Text backgroundColor={setGenreBackgroundColor(genre.id)} key={`${genre.id}_${genre.name}`} fontSize='lg' as='b' borderRadius={5} padding={3}>
-                    <Link onClick={() => onGenreSelect(genre.id)} key={genre.id}>{genre.name}</Link>
+                    <Link _hover='none' onClick={() => onGenreSelect(genre.id)} key={genre.id}>{genre.name}</Link>
                 </Text>)}
         </VStack>
     )

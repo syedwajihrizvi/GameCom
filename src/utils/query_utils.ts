@@ -14,3 +14,15 @@ export const generateGameQuery = (params: Query) => {
         queryString += `sort hypes desc; limit 9;`
     return queryString
 }
+
+export const generatePlatformsQuery = (platforms: number[]) => {
+    let queryString = "("
+    platforms.forEach((platformID, index) => {
+        if (index == platforms.length - 1)
+            queryString += `${platformID.toString()});`
+        else
+            queryString += `${platformID.toString()},`
+    })
+    queryString += "limit 100; sort name asc;"
+    return queryString
+}
