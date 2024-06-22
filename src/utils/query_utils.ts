@@ -1,17 +1,37 @@
+import { Platform } from "../hooks/usePlatforms"
+
 export interface Query {
     search: string | undefined,
-    genre: number | undefined
+    genre: number,
+    platform: Platform
 }
 
 export const generateGameQuery = (params: Query) => {
-    const {genre, search} = params
-    let queryString = `fields genres,platforms,name,slug,cover,aggregated_rating,rating,total_rating,game_modes;`
-    if (genre)
-        queryString += `where genres != n & genres = ${genre};`
+    const {genre, search, platform} = params
+    let queryString = `fields genres,platforms,name,cover,aggregated_rating,rating,total_rating,game_modes;`
+    console.log('Genre: ' + genre)
+    console.log('Platform: ' + platform.id)
+    if (platform.id > 0 || genre > 0) {
+        queryString += "where "
+        if (platform.id > 0 && genre == 0) {
+            console.log("Ran If Statement")
+            queryString += `platforms != n & platforms = (${platform.id});`         
+        }
+        else if (platform.id == 0 && genre > 0) {
+            console.log("Ran Else IfStatement")
+            queryString += `genres != n & genres = (${genre});`
+        }
+        else {
+            console.log("Ran Else Statement")
+            queryString += `platforms != n & platforms = (${platform.id}) & genres != n & genres = (${genre});`
+        }
+    }
+
     if (search)
         queryString += `search "${params.search}";`
     else
         queryString += `sort hypes desc; limit 9;`
+    console.log(queryString)
     return queryString
 }
 

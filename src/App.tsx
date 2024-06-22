@@ -5,21 +5,26 @@ import SideBar from './components/SideBar'
 import GameGrid from './components/GameGrid'
 import { useState } from 'react'
 import { Query } from './utils/query_utils'
-import PlatformSelector from './components/PlatformSelector'
+import PlatformSelector, {allPlatforms} from './components/PlatformSelector'
+import { Platform } from './hooks/usePlatforms'
 
 function App() {
-  const [query, setQuery] = useState<Query>({genre: 0} as Query)
+  const [query, setQuery] = useState<Query>({genre: 0, platform: allPlatforms} as Query)
   const { toggleColorMode } = useColorMode()
 
   const handleSearchSubmit = (searchQuery: string) => {
     if (searchQuery != query.search && searchQuery)
-      setQuery({search: searchQuery, genre: 0})
+      setQuery({...query, search: searchQuery, genre: 0, platform: allPlatforms})
   }
 
   const handleGenreSelect = (genreID: number) => {
     if (query.genre != genreID)
         setQuery({...query, genre:genreID, search: ''})
-        console.log("Search: " + query.search)
+  }
+
+  const handlePlatformSelect = (selectedPlatform: Platform) => {
+    if (query.platform.id != selectedPlatform.id)
+      setQuery({...query, platform: selectedPlatform})
   }
 
   return (
@@ -36,7 +41,7 @@ function App() {
         <SideBar onGenreSelect={handleGenreSelect} currentGenre={query.genre}/>
       </GridItem>
       <GridItem pl='2'area={'main'}>
-        <PlatformSelector/>
+        <PlatformSelector onPlatformSelect={handlePlatformSelect} currentPlatform={query.platform}/>
         <GameGrid query={query}/>
       </GridItem>
     </Grid>

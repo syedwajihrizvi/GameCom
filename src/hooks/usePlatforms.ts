@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import apiClient from "../utils/apiService"
 
-export interface Platforms {
+export interface Platform {
     id: number
     name: string
 }
@@ -9,12 +9,12 @@ export interface Platforms {
 export const usePlatforms = (platformQuery: string) => {
     
     const fetchPlatforms = () => 
-        apiClient.post<Platforms[]>(
+        apiClient.post<Platform[]>(
             "/platforms", 
             `fields name; where id = ${platformQuery}`)
             .then(res => res.data)
     
-    return useQuery<Platforms[], Error>({
+    return useQuery<Platform[], Error>({
         queryKey: ['platforms'],
         queryFn: fetchPlatforms
     })

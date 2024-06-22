@@ -15,7 +15,7 @@ export interface Game {
 }
 
 const useGames = (query: Query) => {
-
+    console.log(query)
     const fetchGames = (pageParam: number) => {
         const gameQuery = generateGameQuery(query)
         return apiClient.post<Game[]>('/games', `${gameQuery}offset ${pageParam};`)

@@ -25,8 +25,8 @@ function GameGrid({query}: Props) {
                 <SimpleGrid paddingBottom={5} paddingLeft={4} spacing={4} templateColumns='repeat(auto-fill, minmax(400px, 1fr))'>
                     {isLoading && cardSkeletons.map(skeleton =>
                         <Card borderRadius={10} width='400px' height='600px' key={skeleton}>
-                            <CardBody>
-                                <Skeleton />
+                            <CardBody key={skeleton+1}>
+                                <Skeleton key={skeleton+2}/>
                             </CardBody>
                         </Card>
                     )}
