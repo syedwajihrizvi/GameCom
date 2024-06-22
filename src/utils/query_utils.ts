@@ -1,30 +1,36 @@
+import { GameMode } from "../hooks/useGameModes"
 import { Platform } from "../hooks/usePlatforms"
 
 export interface Query {
     search: string | undefined,
     genre: number,
-    platform: Platform
+    platform: Platform,
+    gameMode: GameMode
 }
 
 export const generateGameQuery = (params: Query) => {
-    const {genre, search, platform} = params
+    const {genre, search, platform, gameMode} = params
     let queryString = `fields genres,platforms,name,cover,aggregated_rating,rating,total_rating,game_modes;`
     console.log('Genre: ' + genre)
     console.log('Platform: ' + platform.id)
-    if (platform.id > 0 || genre > 0) {
+    console.log('Game Modes: ' + gameMode.name)
+    if (platform.id > 0 || genre > 0 || gameMode.id > 0) {
         queryString += "where "
-        if (platform.id > 0 && genre == 0) {
+        if (platform.id > 0) {
             console.log("Ran If Statement")
-            queryString += `platforms != n & platforms = (${platform.id});`         
+            queryString += `platforms != n & platforms = (${platform.id})`  
+            if (genre > 0 || gameMode.id > 0)
+                queryString += ' & '   
         }
-        else if (platform.id == 0 && genre > 0) {
-            console.log("Ran Else IfStatement")
-            queryString += `genres != n & genres = (${genre});`
+        if (genre > 0) {
+            queryString += `genres != n & genres = (${genre})`
+            if (gameMode.id > 0)
+                queryString += ' & '
         }
-        else {
-            console.log("Ran Else Statement")
-            queryString += `platforms != n & platforms = (${platform.id}) & genres != n & genres = (${genre});`
+        if (gameMode.id > 0) {
+            queryString += `game_modes != n & game_modes = (${gameMode.id})`
         }
+        queryString += ';'
     }
 
     if (search)

@@ -1,4 +1,4 @@
-import { Grid, GridItem, useColorMode } from '@chakra-ui/react'
+import { Grid, GridItem, HStack, useColorMode } from '@chakra-ui/react'
 import './App.css'
 import NavBar from './components/NavBar'
 import SideBar from './components/SideBar'
@@ -7,9 +7,11 @@ import { useState } from 'react'
 import { Query } from './utils/query_utils'
 import PlatformSelector, {allPlatforms} from './components/PlatformSelector'
 import { Platform } from './hooks/usePlatforms'
+import GameModeSelector, { allGameModes } from './components/GameModeSelector'
+import { GameMode } from './hooks/useGameModes'
 
 function App() {
-  const [query, setQuery] = useState<Query>({genre: 0, platform: allPlatforms} as Query)
+  const [query, setQuery] = useState<Query>({genre: 0, platform: allPlatforms, gameMode: allGameModes} as Query)
   const { toggleColorMode } = useColorMode()
 
   const handleSearchSubmit = (searchQuery: string) => {
@@ -27,6 +29,11 @@ function App() {
       setQuery({...query, platform: selectedPlatform})
   }
 
+  const handleGameModeSelect = (selectedGameMode: GameMode) => {
+    if (selectedGameMode.id != query.gameMode.id)
+      setQuery({...query, gameMode: selectedGameMode})
+  }
+
   return (
     <Grid
   templateAreas={`"header header"
@@ -41,7 +48,10 @@ function App() {
         <SideBar onGenreSelect={handleGenreSelect} currentGenre={query.genre}/>
       </GridItem>
       <GridItem pl='2'area={'main'}>
-        <PlatformSelector onPlatformSelect={handlePlatformSelect} currentPlatform={query.platform}/>
+        <HStack>
+          <GameModeSelector onGameModeSelect={handleGameModeSelect} currentGameMode={query.gameMode}/>
+          <PlatformSelector onPlatformSelect={handlePlatformSelect} currentPlatform={query.platform}/>
+        </HStack>
         <GameGrid query={query}/>
       </GridItem>
     </Grid>
