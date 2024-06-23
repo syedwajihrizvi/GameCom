@@ -7,6 +7,7 @@ a) Front-End
    2) Do a _pip install_ to setup neccessary packages
    3) Run _npm run dev_ on a terminal
    4) Should see app running on whatever port Vite specifies. Default is 5173 if it is not being used
+
 b) BackEnd
    1) To avoid running into CORS issues
    2) Go to the following repo: https://github.com/syedwajihrizvi/cors-anywhere
