@@ -18,7 +18,7 @@ function OrderSelector({onOrderSelector, currentOrder}: Props) {
                 <IconButton aria-label='Descending' 
                             icon={<TriangleDownIcon/>} 
                             onClick={() => onOrderSelector('desc')}
-                            backgroundColor={currentOrder == 'desc'? 'green': ''}/>
+                            backgroundColor={currentOrder == 'desc'? 'red': ''}/>
             </ButtonGroup>
         </div>
     )

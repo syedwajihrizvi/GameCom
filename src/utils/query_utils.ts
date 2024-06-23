@@ -17,7 +17,6 @@ export const generateGameQuery = (params: Query) => {
     if (platform.id > 0 || genre > 0 || gameMode.id > 0) {
         queryString += "where "
         if (platform.id > 0) {
-            console.log("Ran If Statement")
             queryString += `platforms != n & platforms = (${platform.id})`  
             if (genre > 0 || gameMode.id > 0)
                 queryString += ' & '   
@@ -37,10 +36,14 @@ export const generateGameQuery = (params: Query) => {
         queryString += `search "${params.search}";`
     }
     else if (sort) {
-        queryString += `where ${sort.queryString} != n; sort ${sort.queryString} ${order}; limit 9;`
+        queryString += `sort ${sort.queryString} ${order}; limit 9;`
     }
     else {
-        queryString += `where rating != n; sort hypes desc; limit 9;`
+        if (platform.id == 0 && genre == 0 && gameMode.id == 0)
+            queryString += `sort rating_count desc;`
+        else
+        queryString += `sort hypes desc;`
+        queryString += `limit 9;`
     }
     console.log(queryString)
     return queryString
