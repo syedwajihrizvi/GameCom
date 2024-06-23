@@ -1,30 +1,15 @@
-# React + TypeScript + Vite
+This is a Project I created using the IGDB Game API. The project was built using React and the backend proxy was implemented using NodeJS to avoid any CORS issues when running locally.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Steps to Setup Locally
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+a) Front-End
+   1) Simple Clone the current repo using _git clone_
+   2) Do a _pip install_ to setup neccessary packages
+   3) Run _npm run dev_ on a terminal
+   4) Should see app running on whatever port Vite specifies. Default is 5173 if it is not being used
+b) BackEnd
+   1) To avoid running into CORS issues
+   2) Go to the following repo: https://github.com/syedwajihrizvi/cors-anywhere
+   3) Clone the repo using _git clone_
+   4) Run _node server.js_ on a separate terminal from the front end
+  
