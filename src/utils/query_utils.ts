@@ -1,3 +1,4 @@
+import { SortOption } from "../components/SortSelector"
 import { GameMode } from "../hooks/useGameModes"
 import { Platform } from "../hooks/usePlatforms"
 
@@ -5,15 +6,14 @@ export interface Query {
     search: string | undefined,
     genre: number,
     platform: Platform,
-    gameMode: GameMode
+    gameMode: GameMode,
+    sort: SortOption | undefined,
+    order: string
 }
 
 export const generateGameQuery = (params: Query) => {
-    const {genre, search, platform, gameMode} = params
+    const {genre, search, platform, gameMode, sort, order} = params
     let queryString = `fields genres,platforms,name,cover,aggregated_rating,rating,total_rating,game_modes;`
-    console.log('Genre: ' + genre)
-    console.log('Platform: ' + platform.id)
-    console.log('Game Modes: ' + gameMode.name)
     if (platform.id > 0 || genre > 0 || gameMode.id > 0) {
         queryString += "where "
         if (platform.id > 0) {
@@ -33,10 +33,15 @@ export const generateGameQuery = (params: Query) => {
         queryString += ';'
     }
 
-    if (search)
+    if (search) {
         queryString += `search "${params.search}";`
-    else
-        queryString += `sort hypes desc; limit 9;`
+    }
+    else if (sort) {
+        queryString += `where ${sort.queryString} != n; sort ${sort.queryString} ${order}; limit 9;`
+    }
+    else {
+        queryString += `where rating != n; sort hypes desc; limit 9;`
+    }
     console.log(queryString)
     return queryString
 }
