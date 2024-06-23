@@ -9,7 +9,7 @@ interface Props {
 function OrderSelector({onOrderSelector, currentOrder}: Props) {
 
     return (
-        <div className="platformsMenu">
+        <div className="menuList">
             <ButtonGroup size='md' isAttached variant='outline'>
                 <IconButton aria-label='Ascending' 
                             icon={<TriangleUpIcon />} 

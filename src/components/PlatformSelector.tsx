@@ -19,7 +19,7 @@ function PlatformSelector({onPlatformSelect, currentPlatform}: Props) {
     let {data:platforms} = usePlatforms(generatePlatformsQuery(PlatformIcons.getAllPlatformIds()))
     platforms = [{id: 0, name: "All Platforms"},...(platforms? platforms : [])]
     return (
-        <div className='platformsMenu'>
+        <div className='menuList'>
             <Menu>
                 <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                     {currentPlatform.name}

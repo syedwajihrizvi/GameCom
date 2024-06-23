@@ -18,7 +18,7 @@ function GameModeSelector({onGameModeSelect, currentGameMode}: Props) {
 
     gameModes = [allGameModes, ...(gameModes ? gameModes:[])]
     return (
-        <div className='platformsMenu'>
+        <div className='menuList'>
         <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                 {currentGameMode.name}

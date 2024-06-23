@@ -19,7 +19,7 @@ const sortOptions = [
 ]
 function SortSelector({onSortSelector, currentSortOption}: Props) {
     return (
-        <div className='platformsMenu'>
+        <div className='menuList'>
             <Menu>
                 <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                     Sort By: {currentSortOption ? currentSortOption .name: ""}
