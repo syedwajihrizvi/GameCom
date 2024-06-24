@@ -6,8 +6,9 @@ export interface FetchResponse<T> {
     results: T[]
 }
 
-const heroku_development_url = "http://localhost:8080/"
-const url = `${heroku_development_url}https://bipn930cal.execute-api.us-west-2.amazonaws.com/production/v4`
+const corsAnywhereProxy = "http://localhost:8080"
+const api = "https://bipn930cal.execute-api.us-west-2.amazonaws.com/production/v4"
+const url = `${corsAnywhereProxy}/${api}`
 const client = axios.create({
     baseURL: url,
     headers: {

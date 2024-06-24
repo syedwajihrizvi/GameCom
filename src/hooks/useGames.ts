@@ -15,15 +15,20 @@ export interface Game {
 }
 
 const useGames = (query: Query) => {
-    console.log(query)
     const fetchGames = (pageParam: number) => {
         const gameQuery = generateGameQuery(query)
         return apiClient.post<Game[]>('/games', `${gameQuery}offset ${pageParam};`)
         .then(res => res.data)
 
     }
+    const formattedQuery = {
+        ...query, 
+        gameMode: query.gameMode.name, 
+        platform: query.platform.name, 
+        sortOption: query.sort?.name
+    }
     return useInfiniteQuery<Game[], Error>({
-        queryKey: ['games', query],
+        queryKey: ['games', formattedQuery],
         queryFn: ({pageParam = 1}) => fetchGames(pageParam),
         getNextPageParam: (lastPage, allPages) => {
             return lastPage.length > 0 ? (allPages.length*9)+1 : undefined

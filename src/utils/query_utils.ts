@@ -45,7 +45,6 @@ export const generateGameQuery = (params: Query) => {
         queryString += `sort hypes desc;`
         queryString += `limit 9;`
     }
-    console.log(queryString)
     return queryString
 }
 
