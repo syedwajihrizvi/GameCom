@@ -11,19 +11,21 @@ import GameModeSelector, { allGameModes } from './components/GameModeSelector'
 import { GameMode } from './hooks/useGameModes'
 import SortSelector, { SortOption } from './components/SortSelector'
 import OrderSelector from './components/OrderSelector'
+import FilterHeading from './components/FilterHeading'
+import { Genre, allGenre } from './hooks/useGenres'
 
 function App() {
-  const [query, setQuery] = useState<Query>({genre: 0, platform: allPlatforms, gameMode: allGameModes, order: 'asc'} as Query)
+  const [query, setQuery] = useState<Query>({genre: allGenre, platform: allPlatforms, gameMode: allGameModes, order: 'asc'} as Query)
   const { toggleColorMode } = useColorMode()
 
   const handleSearchSubmit = (searchQuery: string) => {
     if (searchQuery != query.search && searchQuery)
-      setQuery({...query, search: searchQuery, genre: 0, platform: allPlatforms, sort: undefined})
+      setQuery({...query, search: searchQuery, genre: allGenre, platform: allPlatforms, sort: undefined})
   }
 
-  const handleGenreSelect = (genreID: number) => {
-    if (query.genre != genreID)
-        setQuery({...query, genre:genreID, search: ''})
+  const handleGenreSelect = (genre: Genre) => {
+    if (query.genre.id != genre.id)
+        setQuery({...query, genre:genre, search: ''})
   }
 
   const handlePlatformSelect = (selectedPlatform: Platform) => {
@@ -62,6 +64,8 @@ function App() {
         <SideBar onGenreSelect={handleGenreSelect} currentGenre={query.genre}/>
       </GridItem>
       <GridItem pl='2'area={'main'}>
+        {(query.genre.id != 0 || query.platform.id != 0 || query.gameMode.id != 0) && 
+        <FilterHeading genre={query.genre} platform={query.platform} gameMode={query.gameMode}/>}
         <HStack>
           <GameModeSelector onGameModeSelect={handleGameModeSelect} currentGameMode={query.gameMode}/>
           <PlatformSelector onPlatformSelect={handlePlatformSelect} currentPlatform={query.platform}/>

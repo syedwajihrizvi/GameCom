@@ -4,7 +4,11 @@ import apiClient from "../utils/apiService"
 export interface Genre {
     id: number
     name: string,
-    slug: string
+}
+
+const allGenre = {
+    id: 0,
+    name: 'All Genres'
 }
 
 const useGenres = () => {
@@ -18,3 +22,4 @@ const useGenres = () => {
 }
 
 export default useGenres
+export {allGenre}
