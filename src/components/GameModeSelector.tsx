@@ -1,19 +1,16 @@
 /* eslint-disable react-refresh/only-export-components */
 import { ChevronDownIcon } from "@chakra-ui/icons"
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react"
-import { GameMode, useGameModes } from "../hooks/useGameModes"
+import { useGameModes } from "../hooks/useGameModes"
+import useQueryStore from "../stores/useQueryStore"
 
 const allGameModes = {
     name: "All Game Modes",
     id: 0
 }
 
-interface Props {
-    onGameModeSelect : (gameMode: GameMode) => void
-    currentGameMode: GameMode
-}
-
-function GameModeSelector({onGameModeSelect, currentGameMode}: Props) {
+function GameModeSelector() {
+    const {gameMode: currentGameMode, handleGameMode} = useQueryStore()
     let {data:gameModes} = useGameModes()
 
     gameModes = [allGameModes, ...(gameModes ? gameModes:[])]
@@ -26,7 +23,7 @@ function GameModeSelector({onGameModeSelect, currentGameMode}: Props) {
             <MenuList>
                 {gameModes.map(gameMode => 
                     gameMode.id != currentGameMode.id && 
-                    <MenuItem onClick={() => onGameModeSelect(gameMode)} key={gameMode.id}>{gameMode.name}</MenuItem>)}
+                    <MenuItem onClick={() => handleGameMode(gameMode)} key={gameMode.id}>{gameMode.name}</MenuItem>)}
             </MenuList>
         </Menu>
     </div>       

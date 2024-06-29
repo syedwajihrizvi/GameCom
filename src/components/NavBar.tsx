@@ -1,19 +1,18 @@
 import { HStack, Image, Input, InputGroup, InputLeftElement, Switch} from "@chakra-ui/react"
 import logo from "../assets/logo.webp"
 import { SearchIcon } from "@chakra-ui/icons"
-import { useState } from "react"
+import useQueryStore from "../stores/useQueryStore"
 
 interface Props {
     handleSwitchChange: () => void
-    handleSearchSubmit: (keyName: string) => void
-    currentSearch: string | undefined
 }
 
-function NavBar({handleSwitchChange, handleSearchSubmit, currentSearch}: Props){
-    const [search, setSearch] = useState(currentSearch)
-    const handleSearchInput = (event: string) => {
-        if (event == "Enter")
-            handleSearchSubmit(search ? search : '')
+function NavBar({handleSwitchChange}: Props){
+    const {handleSearch} = useQueryStore()
+    const handleSearchInput = (event: string, value: string) => {
+        if (event == "Enter") {
+            handleSearch(value ? value : '')
+        }
     }
 
     return (
@@ -23,7 +22,7 @@ function NavBar({handleSwitchChange, handleSearchSubmit, currentSearch}: Props){
                 <InputLeftElement>
                     <SearchIcon/>
                 </InputLeftElement>
-                <Input value={search} onKeyDown={(event) => handleSearchInput(event.key)} onChange={(event) => setSearch(event.target.value)} borderRadius={10} placeholder="Search For Games"/>
+                <Input id="searchInput" onKeyDown={(event) => handleSearchInput(event.key, event.currentTarget.value)} borderRadius={10} placeholder="Search For Games"/>
             </InputGroup>
             <Switch colorScheme='red' size='lg' onChange={handleSwitchChange}/>
         </HStack>

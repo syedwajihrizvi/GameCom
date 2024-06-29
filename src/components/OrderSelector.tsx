@@ -1,23 +1,19 @@
 import { TriangleUpIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import { ButtonGroup, IconButton } from "@chakra-ui/react";
+import useQueryStore from '../stores/useQueryStore';
 
-interface Props {
-    onOrderSelector :(order: string) => void
-    currentOrder: string
-}
-
-function OrderSelector({onOrderSelector, currentOrder}: Props) {
-
+function OrderSelector() {
+    const {order: currentOrder, handleOrderSelect} = useQueryStore()
     return (
         <div className="menuList">
             <ButtonGroup size='md' isAttached variant='outline'>
                 <IconButton aria-label='Ascending' 
                             icon={<TriangleUpIcon />} 
-                            onClick={() => onOrderSelector('asc')}
+                            onClick={() => handleOrderSelect('asc')}
                             backgroundColor={currentOrder == 'asc'? 'green': ''}/>
                 <IconButton aria-label='Descending' 
                             icon={<TriangleDownIcon/>} 
-                            onClick={() => onOrderSelector('desc')}
+                            onClick={() => handleOrderSelect('desc')}
                             backgroundColor={currentOrder == 'desc'? 'red': ''}/>
             </ButtonGroup>
         </div>

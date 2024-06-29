@@ -1,5 +1,6 @@
 import { ChevronDownIcon } from "@chakra-ui/icons"
 import { Menu, MenuButton, Button, MenuList, MenuItem } from "@chakra-ui/react"
+import useQueryStore from '../stores/useQueryStore';
 
 export interface SortOption {
     name: string
@@ -7,17 +8,14 @@ export interface SortOption {
 
 }
 
-interface Props {
-    onSortSelector: (sortOption: SortOption) => void
-    currentSortOption: SortOption | undefined
-}
-
 const sortOptions = [
     {name: "Rating", queryString: "rating"} as SortOption,
     {name: "Release Date", queryString: "first_release_date"} as SortOption,
     {name: "Hypes", queryString: "hypes"} as SortOption
 ]
-function SortSelector({onSortSelector, currentSortOption}: Props) {
+
+function SortSelector() {
+    const {sort: currentSortOption, handleSortSelect} = useQueryStore()
     return (
         <div className='menuList'>
             <Menu>
@@ -26,7 +24,7 @@ function SortSelector({onSortSelector, currentSortOption}: Props) {
                 </MenuButton>
                 <MenuList>
                     {sortOptions.map(option =>
-                    <MenuItem key={option.name} onClick={() => onSortSelector(option)} 
+                    <MenuItem key={option.name} onClick={() => handleSortSelect(option)} 
                     backgroundColor={option.queryString == currentSortOption?.queryString ? 'green.300' : ''}>
                         {option.name}
                     </MenuItem>)}

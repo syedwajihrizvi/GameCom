@@ -1,6 +1,7 @@
 import { useInfiniteQuery} from "@tanstack/react-query"
 import apiClient from "../utils/apiService"
-import { Query, generateGameQuery } from "../utils/query_utils"
+import { generateGameQuery } from "../utils/query_utils"
+import useQueryStore from "../stores/useQueryStore"
 
 export interface Game {
     id: number,
@@ -14,7 +15,8 @@ export interface Game {
     game_modes: number[]
 }
 
-const useGames = (query: Query) => {
+const useGames = () => {
+    const query = useQueryStore()
     const fetchGames = (pageParam: number) => {
         const gameQuery = generateGameQuery(query)
         return apiClient.post<Game[]>('/games', `${gameQuery}offset ${pageParam};`)

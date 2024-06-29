@@ -1,16 +1,8 @@
 import { Heading } from "@chakra-ui/react"
-import { GameMode } from "../hooks/useGameModes"
-import { Genre } from "../hooks/useGenres"
-import { Platform } from "../hooks/usePlatforms"
+import useQueryStore from "../stores/useQueryStore"
 
-interface Props {
-    genre: Genre,
-    platform: Platform,
-    gameMode: GameMode
-}
-
-function FilterHeading({genre, platform, gameMode}: Props) {
-
+function FilterHeading() {
+    const {platform, gameMode, genre} = useQueryStore()
     const renderGameHeading = () => {
         let gameHeading = ''
         if (platform.id != 0)
