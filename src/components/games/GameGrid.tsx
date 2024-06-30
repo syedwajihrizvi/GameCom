@@ -1,19 +1,25 @@
+import '../../App.css'
 import React from "react"
 import { Card, CardBody, SimpleGrid, VStack, Image, HStack, Spacer, Skeleton, Container } from "@chakra-ui/react"
 import GameImage from "./GameImage"
-import defaultPlaceHolder from "../assets/no-image-placeholder-6f3882e0.webp"
-import useGames, { Game } from "../hooks/useGames"
-import Platforms from "./Platforms"
+import defaultPlaceHolder from "../../assets/no-image-placeholder-6f3882e0.webp"
+import useGames, { Game } from "../../hooks/useGames"
+import Platforms from "../Platforms"
 import GameRating from "./GameRating"
 import GameModes from "./GameModes"
 import GameName from "./GameName"
 import InfiniteScroll from "react-infinite-scroll-component"
-import InfiniteLoader from "./InfiniteLoader"
+import InfiniteLoader from "../InfiniteLoader"
+import { useNavigate } from 'react-router-dom'
 
 function GameGrid() {
     const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames()
     const cardSkeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     const numberOfGames = games ? games?.pages.reduce((total, currentValue) => total + currentValue.length, 0) : 0
+    const navigate = useNavigate()
+    const toDetails = (gameSlug: string) => {
+        navigate("/games/" + gameSlug)
+    }
     return (
         <>
             <InfiniteScroll dataLength={numberOfGames} next={fetchNextPage} hasMore={!!hasNextPage} loader=<InfiniteLoader/>>
@@ -27,9 +33,9 @@ function GameGrid() {
                     )}
                     {!isLoading && games?.pages.map((page: Game[]) => 
                         <React.Fragment>
-                            {page.map(game => 
+                            {page.map(game =>
                                 <Card _hover={{background:"red.300", cursor: 'pointer', height: '720px', width: '420px'}} 
-                                    borderRadius={10} width='400px' key={game.id} overflow='hidden'>
+                                    borderRadius={10} width='400px' key={game.id} overflow='hidden' onClick={() => toDetails(game.slug)}>
                                     <CardBody>
                                         <VStack>
                                             {game.cover && <GameImage coverId={game.cover}/>}

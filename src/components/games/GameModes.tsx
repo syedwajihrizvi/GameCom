@@ -1,5 +1,5 @@
 import { HStack, Icon } from "@chakra-ui/react";
-import { GameModeIcons } from "../utils/GameModeIcons";
+import { GameModeIcons } from "../../utils/GameModeIcons";
 
 interface Props {
     gameModes: number[]

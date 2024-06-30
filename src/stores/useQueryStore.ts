@@ -4,7 +4,7 @@ import { Platform } from "../hooks/usePlatforms";
 import { GameMode } from "../hooks/useGameModes";
 import { SortOption } from "../components/SortSelector";
 import { allPlatforms } from "../components/PlatformSelector";
-import { allGameModes } from "../components/GameModeSelector";
+import { allGameModes } from "../components/games/GameModeSelector";
 
 const defaultSettings = {
     genre: allGenre,

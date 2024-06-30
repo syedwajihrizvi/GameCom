@@ -1,6 +1,6 @@
 import { Image, Skeleton } from "@chakra-ui/react";
-import { generate_image_url } from "../utils/image_utils";
-import useCovers from "../hooks/useCovers";
+import { generate_image_url } from "../../utils/image_utils";
+import useCovers from "../../hooks/useCovers";
 
 interface Props {
     coverId: number | undefined

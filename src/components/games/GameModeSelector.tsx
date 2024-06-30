@@ -1,8 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import { ChevronDownIcon } from "@chakra-ui/icons"
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react"
-import { useGameModes } from "../hooks/useGameModes"
-import useQueryStore from "../stores/useQueryStore"
+import { useGameModes } from "../../hooks/useGameModes"
+import useQueryStore from "../../stores/useQueryStore"
 
 const allGameModes = {
     name: "All Game Modes",
