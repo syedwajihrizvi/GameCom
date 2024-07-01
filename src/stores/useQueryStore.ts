@@ -11,7 +11,8 @@ const defaultSettings = {
     platform: allPlatforms,
     gameMode: allGameModes,
     sort: undefined,
-    order: 'asc'
+    order: 'asc',
+    search: undefined
 }
 
 interface QueryStore {
@@ -26,7 +27,8 @@ interface QueryStore {
     handlePlatform: (selectedPlatforn: Platform) => void,
     handleGameMode: (selectedGameMode: GameMode) => void,
     handleSortSelect: (selectedSort: SortOption) => void,
-    handleOrderSelect: (selectedOrder: string) => void
+    handleOrderSelect: (selectedOrder: string) => void,
+    resetQueryToDefault: () => void
 }
 
 const useQueryStore =  create<QueryStore>(set => ({
@@ -65,6 +67,10 @@ const useQueryStore =  create<QueryStore>(set => ({
             if (selectedOrder != state.order)
                 return {...state, order:selectedOrder}
             return state
+        }),
+        resetQueryToDefault: () => set(() => {
+            console.log("Called Reset")
+            return defaultSettings
         })
 
     }))
