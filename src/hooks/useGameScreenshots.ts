@@ -1,10 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import apiService from "../utils/apiService"
 import { generateImageQuery } from "../utils/query_utils"
-
-interface GameScreenShots {
-    image_id: string
-}
+import { GameScreenShots } from "../entities/GameScreenShots"
 
 const useGameScreenshots = (image_ids: [number]) => {
     const fetchScreenshots = () => {

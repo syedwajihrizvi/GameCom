@@ -2,19 +2,7 @@ import { useInfiniteQuery} from "@tanstack/react-query"
 import apiClient from "../utils/apiService"
 import { generateGameQuery } from "../utils/query_utils"
 import useQueryStore from "../stores/useQueryStore"
-
-export interface Game {
-    id: number,
-    name: string,
-    slug: string,
-    cover: number | undefined
-    image_url: string | undefined,
-    platforms: number[],
-    aggregated_rating: number
-    rating: number
-    total_rating: number
-    game_modes: number[]
-}
+import { Game } from "../entities/Game"
 
 const useGames = () => {
     const query = useQueryStore()

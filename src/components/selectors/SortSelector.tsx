@@ -1,12 +1,7 @@
 import { ChevronDownIcon } from "@chakra-ui/icons"
 import { Menu, MenuButton, Button, MenuList, MenuItem } from "@chakra-ui/react"
-import useQueryStore from '../stores/useQueryStore';
-
-export interface SortOption {
-    name: string
-    queryString: string
-
-}
+import useQueryStore from '../../stores/useQueryStore';
+import { SortOption } from "../../entities/SortOption";
 
 const sortOptions = [
     {name: "Rating", queryString: "rating"} as SortOption,

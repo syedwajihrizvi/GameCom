@@ -1,14 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import apiService from '../utils/apiService'
-import GameDetails from '../components/games/GameDetails';
-
-interface GameDetails {
-    name: string,
-    id: number
-    summary: string,
-    videos: [number],
-    screenshots: [number]
-}
+import { GameDetails } from "../entities/GameDetails";
 
 const useGameDetails = (gameName: string) => {
     const fetchGameDetails = () => {

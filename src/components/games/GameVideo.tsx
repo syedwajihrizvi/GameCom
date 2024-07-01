@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react"
+import { Container, Skeleton } from "@chakra-ui/react"
 import useGameVideo from "../../hooks/useGameVideo"
 
 interface Props {
@@ -6,10 +6,11 @@ interface Props {
 }
 
 function GameVideo({videos}: Props) {
-    const {data:video} = useGameVideo(videos)
+    const {data:video, isLoading} = useGameVideo(videos)
     return (
         <Container>
-            <iframe src={`https://www.youtube.com/embed/${video?.video_id}`} className="gameVideo"></iframe>
+            {isLoading && <Skeleton className="gameVideo"/>}
+            {!isLoading && <iframe src={`https://www.youtube.com/embed/${video?.video_id}`} className="gameVideo"></iframe>}
         </Container>
     )
 }

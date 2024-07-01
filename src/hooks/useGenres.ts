@@ -1,10 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import apiClient from "../utils/apiService"
-
-export interface Genre {
-    id: number
-    name: string,
-}
+import { Genre } from "../entities/Genre"
 
 const allGenre = {
     id: 0,

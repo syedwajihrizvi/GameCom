@@ -8,10 +8,10 @@ interface Props {
 function GameImage({coverId}: Props) {
     const {data:cover, isLoading} = useCovers(coverId)
     if (isLoading)
-        return <Skeleton width='400px' height='450px'/>
+        return <Skeleton width={350} height={450}/>
     else
         return (
-            <Image borderRadius={10} objectFit='cover' src={generate_image_url(cover ? cover.image_id : '')}/>
+            <Image height={450} width={350} border={10} objectFit='cover' src={generate_image_url(cover ? cover.image_id : '')}/>
         )
 }
 

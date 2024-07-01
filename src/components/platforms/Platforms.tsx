@@ -1,5 +1,5 @@
 import { HStack, Icon } from "@chakra-ui/react"
-import { PlatformIcons } from "../utils/PlatformIcons"
+import { PlatformIcons } from "../../utils/PlatformIcons"
 
 
 interface Props {

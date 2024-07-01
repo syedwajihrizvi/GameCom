@@ -1,6 +1,6 @@
 import { TriangleUpIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import { ButtonGroup, IconButton } from "@chakra-ui/react";
-import useQueryStore from '../stores/useQueryStore';
+import useQueryStore from '../../stores/useQueryStore';
 
 function OrderSelector() {
     const {order: currentOrder, handleOrderSelect} = useQueryStore()

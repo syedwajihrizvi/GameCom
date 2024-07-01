@@ -1,16 +1,4 @@
-import { SortOption } from "../components/SortSelector"
-import { GameMode } from "../hooks/useGameModes"
-import { Genre } from "../hooks/useGenres"
-import { Platform } from "../hooks/usePlatforms"
-
-export interface Query {
-    search: string | undefined,
-    genre: Genre,
-    platform: Platform,
-    gameMode: GameMode,
-    sort: SortOption | undefined,
-    order: string
-}
+import { Query } from "../entities/Query"
 
 export const generateGameQuery = (params: Query) => {
     const {genre, search, platform, gameMode, sort, order} = params

@@ -2,10 +2,10 @@ import { Grid, GridItem, HStack} from "@chakra-ui/react"
 import FilterHeading from "./FilterHeading"
 import GameGrid from "./games/GameGrid"
 import GameModeSelector from "./games/GameModeSelector"
-import OrderSelector from "./OrderSelector"
-import PlatformSelector from "./PlatformSelector"
+import OrderSelector from "./selectors/OrderSelector"
+import PlatformSelector from "./platforms/PlatformSelector"
 import SideBar from "./SideBar"
-import SortSelector from "./SortSelector"
+import SortSelector from "./selectors/SortSelector"
 import useQueryStore from "../stores/useQueryStore"
 
 function Home() {

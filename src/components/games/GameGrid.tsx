@@ -3,8 +3,9 @@ import React from "react"
 import { Card, CardBody, SimpleGrid, VStack, Image, HStack, Spacer, Skeleton, Container } from "@chakra-ui/react"
 import GameImage from "./GameImage"
 import defaultPlaceHolder from "../../assets/no-image-placeholder-6f3882e0.webp"
-import useGames, { Game } from "../../hooks/useGames"
-import Platforms from "../Platforms"
+import useGames from "../../hooks/useGames"
+import { Game } from "../../entities/Game"
+import Platforms from "../platforms/Platforms"
 import GameRating from "./GameRating"
 import GameModes from "./GameModes"
 import GameName from "./GameName"
@@ -23,9 +24,9 @@ function GameGrid() {
     return (
         <>
             <InfiniteScroll dataLength={numberOfGames} next={fetchNextPage} hasMore={!!hasNextPage} loader=<InfiniteLoader/>>
-                <SimpleGrid paddingBottom={5} paddingLeft={4} spacing={4} templateColumns='repeat(auto-fill, minmax(400px, 1fr))'>
+                <SimpleGrid paddingBottom={5} paddingLeft={4} spacing={6} templateColumns='repeat(auto-fill, minmax(300px, 1fr))'>
                     {isLoading && cardSkeletons.map(skeleton =>
-                        <Card borderRadius={10} width='400px' height='600px' key={skeleton}>
+                        <Card borderRadius={10} width={350} height={650} key={skeleton}>
                             <CardBody key={skeleton+1}>
                                 <Skeleton key={skeleton+2}/>
                             </CardBody>
@@ -34,9 +35,8 @@ function GameGrid() {
                     {!isLoading && games?.pages.map((page: Game[]) => 
                         <React.Fragment>
                             {page.map(game =>
-                                <Card _hover={{background:"red.300", cursor: 'pointer', height: '720px', width: '420px'}} 
-                                    borderRadius={10} width='400px' key={game.id} overflow='hidden' onClick={() => toDetails(game.slug)}>
-                                    <CardBody>
+                                <Card height={650} _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in', cursor: 'pointer'}} 
+                                   key={game.id} onClick={() => toDetails(game.slug)}>
                                         <VStack>
                                             {game.cover && <GameImage coverId={game.cover}/>}
                                             {!game.cover && <Image objectFit='cover' src={defaultPlaceHolder} height='500px'/>}
@@ -54,7 +54,6 @@ function GameGrid() {
                                                 </HStack>
                                             </Container>
                                         </VStack>
-                                    </CardBody>
                                 </Card>
                             )}
                         </React.Fragment>

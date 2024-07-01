@@ -1,9 +1,10 @@
 import { create } from "zustand";
-import { Genre, allGenre } from "../hooks/useGenres";
-import { Platform } from "../hooks/usePlatforms";
-import { GameMode } from "../hooks/useGameModes";
-import { SortOption } from "../components/SortSelector";
-import { allPlatforms } from "../components/PlatformSelector";
+import { allGenre } from "../hooks/useGenres";
+import { Genre } from "../entities/Genre";
+import { Platform } from "../entities/Platform";
+import { GameMode } from "../entities/GameMode";
+import { SortOption } from "../entities/SortOption";
+import { allPlatforms } from "../components/platforms/PlatformSelector";
 import { allGameModes } from "../components/games/GameModeSelector";
 
 const defaultSettings = {

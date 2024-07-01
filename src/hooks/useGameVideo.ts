@@ -1,9 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import apiService from "../utils/apiService"
-
-interface GameVideo {
-    video_id: string
-}
+import { GameVideo } from "../entities/GameVideo"
 
 const useGameVideo = (videoIds: [number]) => {
     const videoId = videoIds[0]

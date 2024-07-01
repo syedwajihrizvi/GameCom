@@ -1,10 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import apiClient from "../utils/apiService"
-
-export interface GameMode {
-    name: string,
-    id: number
-}
+import { GameMode } from "../entities/GameMode"
 
 export const useGameModes = () => {
 

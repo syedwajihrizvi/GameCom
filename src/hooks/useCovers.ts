@@ -1,9 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import apiClient from '../utils/apiService'
-
-interface Cover {
-    image_id: string
-}
+import { Cover } from '../entities/Cover';
 
 const useCovers = (coverID : number | undefined) => {
     const fetchCovers = () => {
