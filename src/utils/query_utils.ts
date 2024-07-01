@@ -60,3 +60,16 @@ export const generatePlatformsQuery = (platforms: number[]) => {
     queryString += "limit 100; sort name asc;"
     return queryString
 }
+
+export const generateImageQuery = (images: number[]) => {
+    let queryString = "("
+    images.forEach((imageID, index) => {
+        if (index == images.length - 1)
+            queryString += `${imageID.toString()});`
+        else
+            queryString += `${imageID.toString()},`
+    })
+    queryString += "limit 100;"
+    console.log("Query String: " + queryString)
+    return queryString
+}

@@ -6,12 +6,13 @@ interface GameDetails {
     name: string,
     id: number
     summary: string,
-    videos: [number]
+    videos: [number],
+    screenshots: [number]
 }
 
 const useGameDetails = (gameName: string) => {
     const fetchGameDetails = () => {
-        return apiService.post<GameDetails[]>('/games', `fields name,summary,videos;where slug="${gameName}";`).then(res => res.data[0])
+        return apiService.post<GameDetails[]>('/games', `fields name,summary,videos,screenshots;where slug="${gameName}";`).then(res => res.data[0])
     }
     return useQuery<GameDetails>({
         queryKey: ['games', gameName],
