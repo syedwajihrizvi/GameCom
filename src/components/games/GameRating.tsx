@@ -17,7 +17,7 @@ function GameRating({game}: Props) {
             return 'orange'
         return 'red'
     }
-    return <Badge fontSize='1.2em' borderRadius={10} variant="solid" colorScheme={renderRatingColor()}>{gameRating}</Badge>
+    return <Badge fontSize='1.2em' borderRadius={5} variant="solid" colorScheme={renderRatingColor()}>{gameRating}</Badge>
 }
 
 export default GameRating

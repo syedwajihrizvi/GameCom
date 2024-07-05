@@ -10,4 +10,6 @@ export interface Game {
     rating: number;
     total_rating: number;
     game_modes: number[];
+    involved_companies: number[],
+    themes: number[]
 }

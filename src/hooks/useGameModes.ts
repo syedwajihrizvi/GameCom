@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query"
 import apiClient from "../utils/apiService"
 import { GameMode } from "../entities/GameMode"
+import { generateGameModeQuery } from "../utils/query_utils"
 
-export const useGameModes = () => {
+export const useGameModes = (gameModeIds: number[] = []) => {
 
     const fetchGameModes = () => {
-        return apiClient.post<GameMode[]>('/game_modes', `fields name; limit 9;`).then(res => res.data)
+        return apiClient.post<GameMode[]>('/game_modes', `fields name; ${generateGameModeQuery(gameModeIds)}`)
+        .then(res => res.data)
     }
     return useQuery<GameMode[]>({
         queryKey: ["gameModes"],

@@ -11,8 +11,8 @@ import { RouterProvider } from 'react-router-dom'
 const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ChakraProvider>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+    <ChakraProvider  theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode}/>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router}/>
         <ReactQueryDevtools initialIsOpen={false} />

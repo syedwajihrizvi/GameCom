@@ -1,15 +1,16 @@
 import { useQuery } from "@tanstack/react-query"
 import apiService from "../utils/apiService"
 import { GameVideo } from "../entities/GameVideo"
+import { generateVideoQuery } from "../utils/query_utils"
 
 const useGameVideo = (videoIds: [number]) => {
     const videoId = videoIds[0]
     console.log("VIDEO ID: " + videoId)
     const fetchGameVideo = () => {
-        return apiService.post<GameVideo[]>('/game_videos', `fields video_id;where id=${videoId};`)
-        .then(res => res.data[0])
+        return apiService.post<GameVideo[]>('/game_videos', `fields video_id;where id=${generateVideoQuery(videoIds)}`)
+        .then(res => res.data)
     }
-    return useQuery<GameVideo>({
+    return useQuery<GameVideo[]>({
         queryKey: ['video', videoId],
         queryFn: fetchGameVideo
     })

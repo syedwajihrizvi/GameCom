@@ -2,7 +2,6 @@
 import { ChevronDownIcon } from "@chakra-ui/icons"
 import { Menu, MenuButton, Button, MenuList, MenuItem} from "@chakra-ui/react"
 import { usePlatforms } from "../../hooks/usePlatforms"
-import { generatePlatformsQuery } from "../../utils/query_utils"
 import { PlatformIcons } from "../../utils/PlatformIcons"
 import useQueryStore from "../../stores/useQueryStore"
 
@@ -14,7 +13,7 @@ const allPlatforms = {
 
 function PlatformSelector() {
     const {platform: currentPlatform, handlePlatform} = useQueryStore()
-    let {data:platforms} = usePlatforms(generatePlatformsQuery(PlatformIcons.getAllPlatformIds()))
+    let {data:platforms} = usePlatforms(PlatformIcons.getAllPlatformIds())
     platforms = [{id: 0, name: "All Platforms"},...(platforms? platforms : [])]
     return (
         <div className='menuList'>
