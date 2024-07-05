@@ -1,6 +1,7 @@
 import { Box, Button, ButtonGroup, Container, Spinner, Text } from "@chakra-ui/react"
 import useGameVideo from "../../hooks/useGameVideo"
 import { useState } from "react"
+import {ArrowRightIcon, ArrowLeftIcon} from "@chakra-ui/icons"
 
 interface Props {
     videos: [number]
@@ -37,9 +38,9 @@ function GameVideo({videos}: Props) {
             {isLoading && <Box height="600px" width="800px" alignContent='center'><Spinner size='xl'/></Box>}
             {!isLoading && <iframe src={videoUrl} className="gameVideo"></iframe>}
             {gameVideos && 
-            <ButtonGroup paddingLeft="320px" paddingTop={1}>
-                <Button backgroundColor='red.500' onClick={() => handlePreviousVideo()}>Back</Button>
-                <Button backgroundColor='red.500' onClick={() => handleNextVideo()}>Next</Button>
+            <ButtonGroup paddingLeft="320px" paddingTop={2} gap={10}>
+                <Button><ArrowLeftIcon boxSize={6} onClick={() => handlePreviousVideo()}/></Button>
+                <Button><ArrowRightIcon boxSize={6} onClick={() => handleNextVideo()}/></Button>
             </ButtonGroup> }
         </Container>
     )

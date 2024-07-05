@@ -4,6 +4,7 @@ import { generateCompanyQuery } from "../utils/query_utils"
 
 interface InvolvedCompany {
     id: number
+    company: number
 }
 
 interface Company {
@@ -14,7 +15,9 @@ const useCompanies = (involvedCompanies: number[]) => {
     const fetchCompanies = () => {
         return apiClient.post<InvolvedCompany[]>('/involved_companies', `fields company; where id=${generateCompanyQuery(involvedCompanies)}`)
         .then(res => {
-            const involvedCompanies = res.data.map(involvedCompany=> involvedCompany.id)
+            const involvedCompanies = res.data.map(involvedCompany=> involvedCompany.company)
+            const query = `fields name; where id=${generateCompanyQuery(involvedCompanies)}`
+            console.log("Query: " + query)
             return apiClient.post<Company[]>('/companies', `fields name; where id=${generateCompanyQuery(involvedCompanies)}`).then(res => res.data)
         })
     }

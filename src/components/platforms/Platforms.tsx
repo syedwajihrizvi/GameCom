@@ -7,7 +7,6 @@ interface Props {
 }
 
 function Platforms({platforms}: Props) {
-
     return (
         <HStack>
             {platforms.map(platform => 

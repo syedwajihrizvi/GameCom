@@ -8,5 +8,8 @@ export interface GameDetails {
     game_modes: [number],
     platforms: [number],
     themes: [number],
-    storyline: string
+    storyline: string,
+    aggregated_rating: number;
+    rating: number;
+    total_rating: number;
 }

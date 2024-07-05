@@ -8,6 +8,7 @@ import PlatformsList from "./PlatformsList"
 import GameModesList from "./GameModesList"
 import DevelopersList from "./DevelopersList"
 import ThemesList from "./ThemesList"
+import GameRating from "../GameRating"
 
 function GameDetails() {
     const {id: gameName} = useParams()
@@ -21,10 +22,11 @@ function GameDetails() {
             }}>
                 <GridItem paddingLeft={3}>
                     {!isLoading &&
-                    <>
-                        <Heading as='h2' size='3xl' fontFamily='sans-serif'>{gameDetails?.name}</Heading>
+                    <Box>
+                        <Heading as='h2' size='3xl' fontFamily='sans-serif' paddingBottom={2}>{gameDetails?.name}</Heading>
+                        {gameDetails && <GameRating fontSize="2.0em" game={gameDetails}/>}
                         {gameDetails && <ExpandableText summary={gameDetails.summary}/>}
-                    </>
+                    </Box>
                     }
                     {isLoading && 
                     <Stack>
@@ -34,10 +36,14 @@ function GameDetails() {
                     </Stack>
                     }
                     <SimpleGrid columns={2} spacingX={80} spacingY={5} paddingTop={5}>
-                        <PlatformsList platformIds={gameDetails ? gameDetails.platforms : []}/>
-                        <GameModesList gameModeIds={gameDetails ? gameDetails.platforms : []}/>
-                        <DevelopersList involvedCompanyIds={gameDetails ? gameDetails.involved_companies : []}/>
-                        <ThemesList themeIds={gameDetails ? gameDetails.themes : []}/>
+                        <GridItem>
+                            <PlatformsList platformIds={gameDetails ? gameDetails.platforms : []}/>
+                            <GameModesList gameModeIds={gameDetails ? gameDetails.platforms : []}/>
+                        </GridItem>
+                        <GridItem>
+                            <DevelopersList involvedCompanyIds={gameDetails ? gameDetails.involved_companies : []}/>
+                            <ThemesList themeIds={gameDetails ? gameDetails.themes : []}/>
+                        </GridItem>
                     </SimpleGrid>
                     {!isLoading &&
                     <Box paddingTop={2}>

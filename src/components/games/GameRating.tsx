@@ -1,10 +1,12 @@
 import { Badge } from "@chakra-ui/react"
 import { Game } from "../../entities/Game"
+import { GameDetails } from "../../entities/GameDetails"
 
 interface Props {
-    game: Game
+    game: Game | GameDetails
+    fontSize?:string
 }
-function GameRating({game}: Props) {
+function GameRating({game, fontSize}: Props) {
     const gameRating = Math.round(game.rating) || Math.round(game.total_rating) || Math.round(game.aggregated_rating) || '--'
     const renderRatingColor = () => {
         if (gameRating == '--')
@@ -17,7 +19,7 @@ function GameRating({game}: Props) {
             return 'orange'
         return 'red'
     }
-    return <Badge fontSize='1.2em' borderRadius={5} variant="solid" colorScheme={renderRatingColor()}>{gameRating}</Badge>
+    return <Badge fontSize={fontSize ? fontSize : '1.2em'} borderRadius={5} variant="solid" colorScheme={renderRatingColor()}>{gameRating}</Badge>
 }
 
 export default GameRating

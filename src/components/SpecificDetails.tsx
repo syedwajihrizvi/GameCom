@@ -1,4 +1,5 @@
-import { Box, Heading, ListItem, UnorderedList } from "@chakra-ui/react"
+import { Box, Heading, List, ListIcon, ListItem} from "@chakra-ui/react"
+import { MdCheckCircle } from "react-icons/md";
 
 export interface Detail {
     name: string;
@@ -11,14 +12,15 @@ interface Props {
 
 function SpecificDetails({heading, details}: Props) {
     return (
-        <Box paddingStart={0}>
+        <Box paddingStart={0} marginBottom={3}>
             <Heading as="h4" size='md' color='gray.600'>{heading}</Heading>
-            <UnorderedList spacing={1}>
+            <List spacing={1}>
                 {details.map(detail => 
                 <ListItem>
+                    <ListIcon as={MdCheckCircle} color='green.500' />
                     {detail.name}
                 </ListItem>)}
-            </UnorderedList>
+            </List>
         </Box>
     )
 }
