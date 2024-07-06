@@ -5,8 +5,24 @@
 }
 
 .menuList {
-    margin-left: 16px;
-    margin-bottom: 16px;
+    margin-left: 1px;
+    margin-bottom: 5px;
+}
+
+.display {
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.singleGameCard {
+    height: 830px;
+    width: 450px;
+    margin-left:30%
+}
+
+.singleGameImage {
+    height: 590px;
+    width: 450px;
 }
 
 /* Use a media query to add a breakpoint at 800px: */
@@ -20,6 +36,16 @@
         height: 480px;
         width: 280px;
     }
+    .singleGameCard {
+        height: 480px;
+        width: 280px;
+        margin-left: 0%;
+    }
+    
+    .singleGameImage {
+        height: 300px;
+        width: 280px;
+    }   
 }
 
 @media screen and (min-width: 581px) {
@@ -27,11 +53,20 @@
         height: 300px;
         width: 280px;
     }
-
     .gameCard {
         height: 480px;
         width: 280px;
     }
+    .singleGameCard {
+        height: 480px;
+        width: 280px;
+        margin-left: 0%;
+    }
+    
+    .singleGameImage {
+        height: 300px;
+        width: 280px;
+    }  
 }
 
 @media screen and (min-width: 980px) {
@@ -44,6 +79,16 @@
         height: 530px;
         width: 320px;
     }
+    .singleGameCard {
+        height: 830px;
+        width: 450px;
+        margin-left:30%
+    }
+    
+    .singleGameImage {
+        height: 590px;
+        width: 450px;
+    }
 }
 
 @media screen and (min-width: 981px) and (max-width: 1280px) {
@@ -55,5 +100,15 @@
     .gameCard {
         height: 590px;
         width: 360px;
+    }
+    .singleGameCard {
+        height: 830px;
+        width: 450px;
+        margin-left:30%
+    }
+    
+    .singleGameImage {
+        height: 590px;
+        width: 450px;
     }
 }

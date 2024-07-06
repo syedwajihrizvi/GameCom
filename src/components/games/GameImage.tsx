@@ -2,6 +2,7 @@ import { Box, Image, Skeleton } from "@chakra-ui/react";
 import { generate_image_url } from "../../utils/image_utils";
 import useCovers from "../../hooks/useCovers";
 import useGameVideo from "../../hooks/useGameVideo";
+import useQueryStore from "../../stores/useQueryStore";
 
 interface Props {
     coverId: number | undefined,
@@ -11,6 +12,9 @@ interface Props {
 function GameImage({coverId, isPreview, videos}: Props) {
     const {data:cover, isLoading} = useCovers(coverId)
     const {data:previews} = useGameVideo(videos)
+    const {verticalLayout} = useQueryStore()
+
+    const gameImageClass = verticalLayout ? "singleGameImage":"gameImage"
     if (isLoading) {
         return <Skeleton className="gameImage"/>
     }
@@ -18,12 +22,12 @@ function GameImage({coverId, isPreview, videos}: Props) {
         const preview = `https://www.youtube.com/embed/${previews[0].video_id}?controls=0&modestbranding=1&disablekb=1&rel=0&autoplay=1&mute=1&iv_load_policy=3&show_info=0&start=30&end=45&loop=1&playlist=${previews[0].video_id}`
         return  (
             <Box overflow='hidden'>
-                <iframe src={preview} allow='autoplay' className="gameImage"></iframe> 
+                <iframe src={preview} allow='autoplay' className={gameImageClass}></iframe> 
             </Box>
         )
     }
     return (
-        <Image className="gameImage" border={10} objectFit='cover' src={generate_image_url(cover ? cover.image_id : '')}/>
+        <Image className={gameImageClass} border={10} objectFit='cover' src={generate_image_url(cover ? cover.image_id : '')}/>
     )
 }
 

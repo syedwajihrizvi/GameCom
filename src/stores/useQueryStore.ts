@@ -13,7 +13,8 @@ const defaultSettings = {
     gameMode: allGameModes,
     sort: undefined,
     order: 'asc',
-    search: undefined
+    search: undefined,
+    verticalLayout: false
 }
 
 interface QueryStore {
@@ -21,15 +22,17 @@ interface QueryStore {
     genre: Genre,
     platform: Platform,
     gameMode: GameMode,
-    sort: SortOption | undefined
+    sort: SortOption | undefined,
     order: string,
+    verticalLayout: boolean,
     handleSearch: (searchQuery: string) => void,
     handleGenre: (selectedGenre: Genre) => void,
     handlePlatform: (selectedPlatforn: Platform) => void,
     handleGameMode: (selectedGameMode: GameMode) => void,
     handleSortSelect: (selectedSort: SortOption) => void,
     handleOrderSelect: (selectedOrder: string) => void,
-    resetQueryToDefault: () => void
+    resetQueryToDefault: () => void,
+    handleLayoutToggle: (useVerticalLayout: boolean) => void
 }
 
 const useQueryStore =  create<QueryStore>(set => ({
@@ -39,6 +42,7 @@ const useQueryStore =  create<QueryStore>(set => ({
         gameMode: allGameModes,
         sort: undefined,
         order: 'asc',
+        verticalLayout: false,
         handleSearch: (searchQuery: string) => set(state => {
             if (searchQuery && searchQuery != state.search)
                 return {...state, ...defaultSettings, search: searchQuery, }
@@ -70,10 +74,11 @@ const useQueryStore =  create<QueryStore>(set => ({
             return state
         }),
         resetQueryToDefault: () => set(() => {
-            console.log("Called Reset")
             return defaultSettings
+        }),
+        handleLayoutToggle: (useVerticalLayout: boolean) => set((state) => {
+            return {...state, verticalLayout:useVerticalLayout}
         })
-
     }))
 
 export default useQueryStore

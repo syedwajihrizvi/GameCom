@@ -1,4 +1,4 @@
-import { Text, Grid, GridItem, HStack, SimpleGrid, Button} from "@chakra-ui/react"
+import { Text, Grid, GridItem, HStack, SimpleGrid, Button, ButtonGroup} from "@chakra-ui/react"
 import FilterHeading from "./FilterHeading"
 import GameGrid from "./games/GameGrid"
 import GameModeSelector from "./games/GameModeSelector"
@@ -10,7 +10,7 @@ import { CiGrid41, CiGrid2H } from "react-icons/ci";
 import useQueryStore from "../stores/useQueryStore"
 
 function Home() {
-    const {genre, platform, gameMode, sort} = useQueryStore()
+    const {genre, platform, gameMode, sort, handleLayoutToggle} = useQueryStore()
     return (
         <Grid
         templateAreas={`"nav main"`}
@@ -24,7 +24,7 @@ function Home() {
             <GridItem pl='2'area={'main'}>
               {(genre.id != 0 || platform.id != 0 || gameMode.id != 0) && 
               <FilterHeading />}
-              <SimpleGrid columns={2} spacing="60%">
+              <SimpleGrid columns={{sm:1, md:1, lg:2, xl: 2, '2xl': 2}} spacingX="60%">
                 <GridItem>
                   <HStack>
                       <GameModeSelector/>
@@ -34,10 +34,12 @@ function Home() {
                   </HStack>
                 </GridItem>
                 <GridItem>
-                  <HStack>
-                    <Text>Display Options: </Text>
-                    <Button><CiGrid41/></Button>
-                    <Button><CiGrid2H/></Button>
+                  <HStack className="display">
+                    <Text as='b'>Display Options</Text>
+                    <ButtonGroup spacing={1}>
+                      <Button onClick={() => handleLayoutToggle(false)}><CiGrid41/></Button>
+                      <Button onClick={() => handleLayoutToggle(true)}><CiGrid2H/></Button>
+                    </ButtonGroup>
                   </HStack>
                 </GridItem>
               </SimpleGrid>

@@ -12,8 +12,10 @@ import GameName from "./GameName"
 import InfiniteScroll from "react-infinite-scroll-component"
 import InfiniteLoader from "../InfiniteLoader"
 import { useNavigate } from 'react-router-dom'
+import useQueryStore from '../../stores/useQueryStore'
 
 function GameGrid() {
+    const {verticalLayout} = useQueryStore()
     const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames()
     const [previewVideo, setPreviewVideo] = useState(0)
     const cardSkeletons = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -25,9 +27,9 @@ function GameGrid() {
     return (
         <>
             <InfiniteScroll dataLength={numberOfGames} next={fetchNextPage} hasMore={!!hasNextPage} loader=<InfiniteLoader/>>
-                <SimpleGrid columns={{sm:1, md:1, lg:2, xl: 3, '2xl': 4}} spacingX={2} spacingY={6} padding={10}>
+                <SimpleGrid columns={verticalLayout ? 1 : {sm:1, md:1, lg:2, xl: 3, '2xl': 4}} spacingX={2} spacingY={6} padding={10}>
                     {isLoading && cardSkeletons.map(skeleton =>
-                        <Card className='gameCard' key={skeleton}>
+                        <Card className={verticalLayout ? 'singleGameCard':'gameCard'}  key={skeleton}>
                             <CardBody key={skeleton+1}>
                                 <Skeleton key={skeleton+2}/>
                             </CardBody>
@@ -36,7 +38,7 @@ function GameGrid() {
                     {!isLoading && games?.pages.map((page: Game[]) => 
                         <React.Fragment>
                             {page.map(game =>
-                                <Card className='gameCard' _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} 
+                                <Card className={verticalLayout ? 'singleGameCard':'gameCard'} _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} 
                                    key={game.id} onMouseEnter={() => setPreviewVideo(game.id)} onMouseLeave={() => setPreviewVideo(0)} overflow='hidden'>
                                         <VStack>
                                             {game.cover && <GameImage coverId={game.cover} isPreview={game.id == previewVideo} videos={game.videos}/>}
