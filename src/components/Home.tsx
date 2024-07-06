@@ -14,6 +14,7 @@ function Home() {
         <Grid
         templateAreas={`"nav main"`}
         templateColumns={{base: '1fr',
+                          md: '300px 1fr',
                           lg: '200px 1fr'
                         }}>
             <GridItem area={'nav'}>

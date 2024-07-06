@@ -6,7 +6,7 @@ interface Props {
 function GameName({gameName}: Props) {
     return (
         <Container textAlign='center'>
-            <Heading>{gameName}</Heading>
+            <Heading size='lg'>{gameName}</Heading>
         </Container> 
     )
 }

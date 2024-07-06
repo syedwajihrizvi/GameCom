@@ -14,3 +14,52 @@
     height: 600px;
     border-radius: 10px;
 }
+
+/* Use a media query to add a breakpoint at 800px: */
+@media screen and (max-width: 580px) {
+    .gameImage {
+        height: 300px;
+        width: 280px;
+    }
+
+    .gameCard {
+        height: 480px;
+        width: 280px;
+    }
+}
+
+@media screen and (min-width: 581px) {
+    .gameImage {
+        height: 300px;
+        width: 280px;
+    }
+
+    .gameCard {
+        height: 480px;
+        width: 280px;
+    }
+}
+
+@media screen and (min-width: 980px) {
+    .gameImage {
+        height: 360px;
+        width: 320px;
+    }
+
+    .gameCard {
+        height: 530px;
+        width: 320px;
+    }
+}
+
+@media screen and (min-width: 981px) and (max-width: 1280px) {
+    .gameImage {
+        height: 400px;
+        width: 360px;
+    }
+
+    .gameCard {
+        height: 590px;
+        width: 360px;
+    }
+}

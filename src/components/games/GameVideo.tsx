@@ -34,6 +34,7 @@ function GameVideo({videos}: Props) {
     }
     const videoUrl = `https://www.youtube.com/embed/${gameVideos[currentVideo].video_id}`
     return (
+        videos &&
         <Container>
             {isLoading && <Box height="600px" width="800px" alignContent='center'><Spinner size='xl'/></Box>}
             {!isLoading && <iframe src={videoUrl} className="gameVideo"></iframe>}

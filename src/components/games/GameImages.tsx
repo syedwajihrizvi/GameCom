@@ -15,7 +15,7 @@ function GameImages({images}: Props) {
             skeletonImages.map(() => <Skeleton width="450" height="500px"/>)}
             {screenshots?.map(screenshot => 
             <Card>
-                <Image width="450" height="500px" objectFit='cover' borderRadius={10} src={generate_image_url(screenshot.image_id)}/>
+                <Image width="450px" height="500px" objectFit='cover' borderRadius={10} src={generate_image_url(screenshot.image_id, "1080p")}/>
             </Card>
             )}
         </SimpleGrid>

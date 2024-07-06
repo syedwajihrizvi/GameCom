@@ -2,7 +2,7 @@ import { Query } from "../entities/Query"
 
 export const generateGameQuery = (params: Query) => {
     const {genre, search, platform, gameMode, sort, order} = params
-    let queryString = `fields genres,platforms,name,cover,aggregated_rating,rating,total_rating,game_modes,slug,involved_companies,themes;`
+    let queryString = `fields genres,platforms,name,cover,aggregated_rating,rating,total_rating,game_modes,slug,involved_companies,themes,videos;`
     if (platform.id > 0 || genre.id > 0 || gameMode.id > 0) {
         queryString += "where "
         if (platform.id > 0) {
@@ -34,6 +34,7 @@ export const generateGameQuery = (params: Query) => {
         queryString += `sort hypes desc;`
         queryString += `limit 8;`
     }
+    console.log("Query String: " + queryString)
     return queryString
 }
 

@@ -1,5 +1,5 @@
 import '../../App.css'
-import React from "react"
+import React, { useState } from "react"
 import { Card, CardBody, SimpleGrid, VStack, Image, HStack, Spacer, Skeleton, Container } from "@chakra-ui/react"
 import GameImage from "./GameImage"
 import defaultPlaceHolder from "../../assets/no-image-placeholder-6f3882e0.webp"
@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom'
 
 function GameGrid() {
     const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames()
+    const [previewVideo, setPreviewVideo] = useState(0)
     const cardSkeletons = [1, 2, 3, 4, 5, 6, 7, 8]
     const numberOfGames = games ? games?.pages.reduce((total, currentValue) => total + currentValue.length, 0) : 0
     const navigate = useNavigate()
@@ -24,9 +25,9 @@ function GameGrid() {
     return (
         <>
             <InfiniteScroll dataLength={numberOfGames} next={fetchNextPage} hasMore={!!hasNextPage} loader=<InfiniteLoader/>>
-                <SimpleGrid paddingBottom={5} paddingLeft={4} spacing={6} templateColumns='repeat(auto-fill, minmax(300px, 1fr))'>
+                <SimpleGrid columns={{sm:1, md:1, lg:2, xl: 3, '2xl': 4}} spacing={2} spacingY={4}>
                     {isLoading && cardSkeletons.map(skeleton =>
-                        <Card borderRadius={10} width={350} height={650} key={skeleton}>
+                        <Card borderRadius={10} width={350} height={500} key={skeleton}>
                             <CardBody key={skeleton+1}>
                                 <Skeleton key={skeleton+2}/>
                             </CardBody>
@@ -35,10 +36,10 @@ function GameGrid() {
                     {!isLoading && games?.pages.map((page: Game[]) => 
                         <React.Fragment>
                             {page.map(game =>
-                                <Card height={650} _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in', cursor: 'pointer'}} 
-                                   key={game.id} onClick={() => toDetails(game.slug)}>
+                                <Card className='gameCard' _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in', cursor: 'pointer'}} 
+                                   key={game.id} onClick={() => toDetails(game.slug)} onMouseEnter={() => setPreviewVideo(game.id)} onMouseLeave={() => setPreviewVideo(0)}>
                                         <VStack>
-                                            {game.cover && <GameImage coverId={game.cover}/>}
+                                            {game.cover && <GameImage coverId={game.cover} isPreview={game.id == previewVideo} videos={game.videos}/>}
                                             {!game.cover && <Image objectFit='cover' src={defaultPlaceHolder} height='500px'/>}
                                             <GameName gameName={game.name}/>  
                                             <Container>
