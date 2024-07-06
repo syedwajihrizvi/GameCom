@@ -1,6 +1,6 @@
 import '../../App.css'
 import React, { useState } from "react"
-import { Card, CardBody, SimpleGrid, VStack, Image, HStack, Spacer, Skeleton, Container } from "@chakra-ui/react"
+import { Card, CardBody, SimpleGrid, VStack, Image, HStack, Spacer, Skeleton, Container, Button } from "@chakra-ui/react"
 import GameImage from "./GameImage"
 import defaultPlaceHolder from "../../assets/no-image-placeholder-6f3882e0.webp"
 import useGames from "../../hooks/useGames"
@@ -25,9 +25,9 @@ function GameGrid() {
     return (
         <>
             <InfiniteScroll dataLength={numberOfGames} next={fetchNextPage} hasMore={!!hasNextPage} loader=<InfiniteLoader/>>
-                <SimpleGrid columns={{sm:1, md:1, lg:2, xl: 3, '2xl': 4}} spacing={2} spacingY={4}>
+                <SimpleGrid columns={{sm:1, md:1, lg:2, xl: 3, '2xl': 4}} spacingX={2} spacingY={6} padding={10}>
                     {isLoading && cardSkeletons.map(skeleton =>
-                        <Card borderRadius={10} width={350} height={500} key={skeleton}>
+                        <Card className='gameCard' key={skeleton}>
                             <CardBody key={skeleton+1}>
                                 <Skeleton key={skeleton+2}/>
                             </CardBody>
@@ -36,12 +36,13 @@ function GameGrid() {
                     {!isLoading && games?.pages.map((page: Game[]) => 
                         <React.Fragment>
                             {page.map(game =>
-                                <Card className='gameCard' _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in', cursor: 'pointer'}} 
-                                   key={game.id} onClick={() => toDetails(game.slug)} onMouseEnter={() => setPreviewVideo(game.id)} onMouseLeave={() => setPreviewVideo(0)}>
+                                <Card className='gameCard' _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} 
+                                   key={game.id} onMouseEnter={() => setPreviewVideo(game.id)} onMouseLeave={() => setPreviewVideo(0)} overflow='hidden'>
                                         <VStack>
                                             {game.cover && <GameImage coverId={game.cover} isPreview={game.id == previewVideo} videos={game.videos}/>}
-                                            {!game.cover && <Image objectFit='cover' src={defaultPlaceHolder} height='500px'/>}
-                                            <GameName gameName={game.name}/>  
+                                            {!game.cover && <Image className="gameImage" src={defaultPlaceHolder} />}
+                                            {previewVideo != game.id && <GameName gameName={game.name}/>}
+                                            {previewVideo == game.id && <Button width="90%" backgroundColor='red.500' onClick={() => toDetails(game.slug)}>View More</Button>}
                                             <Container>
                                                 <HStack>
                                                     <VStack paddingTop={5}>

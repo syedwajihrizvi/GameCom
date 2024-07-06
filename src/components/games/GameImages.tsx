@@ -10,12 +10,12 @@ function GameImages({images}: Props) {
     const {data:screenshots, isLoading} = useGameScreenshots(images)
     const skeletonImages = [1, 2, 3, 4]
     return (
-        <SimpleGrid columns={{sm: 1, md: 3, lg: 4, xl: 4}} spacing={5} padding={5}>
+        <SimpleGrid columns={{sm: 1, md: 3, lg: 3, xl: 4}} spacing={5} padding={5}>
             {isLoading && 
             skeletonImages.map(() => <Skeleton width="450" height="500px"/>)}
             {screenshots?.map(screenshot => 
             <Card>
-                <Image width="450px" height="500px" objectFit='cover' borderRadius={10} src={generate_image_url(screenshot.image_id, "1080p")}/>
+                <Image width="450px" height="500px" objectFit='cover' borderRadius={5} src={generate_image_url(screenshot.image_id, "1080p")}/>
             </Card>
             )}
         </SimpleGrid>

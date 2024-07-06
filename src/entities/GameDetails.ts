@@ -12,4 +12,5 @@ export interface GameDetails {
     aggregated_rating: number;
     rating: number;
     total_rating: number;
+    first_release_date: number;
 }

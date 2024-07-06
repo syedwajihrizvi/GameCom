@@ -1,4 +1,4 @@
-import { Box, Heading, List, ListIcon, ListItem} from "@chakra-ui/react"
+import { Heading, List, ListIcon, ListItem} from "@chakra-ui/react"
 import { MdCheckCircle } from "react-icons/md";
 
 export interface Detail {
@@ -12,16 +12,16 @@ interface Props {
 
 function SpecificDetails({heading, details}: Props) {
     return (
-        <Box paddingStart={0} marginBottom={3}>
-            <Heading as="h4" size='md' color='gray.600'>{heading}</Heading>
+        <>
+            <Heading fontSize={{md:22}} color='gray.600'>{heading}</Heading>
             { details && <List spacing={1}>
                 {details.map(detail => 
-                <ListItem>
-                    <ListIcon as={MdCheckCircle} color='green.500' />
+                <ListItem fontSize={{md:16}}>
+                    <ListIcon as={MdCheckCircle} color='red.500'/>
                     {detail.name}
                 </ListItem>)}
             </List>}
-        </Box>
+        </>
     )
 }
 

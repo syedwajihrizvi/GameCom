@@ -12,10 +12,10 @@ function GameImage({coverId, isPreview, videos}: Props) {
     const {data:cover, isLoading} = useCovers(coverId)
     const {data:previews} = useGameVideo(videos)
     if (isLoading) {
-        return <Skeleton width={350} height={450}/>
+        return <Skeleton className="gameImage"/>
     }
     else if (isPreview && previews) {
-        const preview = `https://www.youtube.com/embed/${previews[0].video_id}?controls=0&modestbranding=1&disablekb=1&rel=0&autoplay=1&mute=1&iv_load_policy=3&show_info=0&start=30&end=45&loop=1`
+        const preview = `https://www.youtube.com/embed/${previews[0].video_id}?controls=0&modestbranding=1&disablekb=1&rel=0&autoplay=1&mute=1&iv_load_policy=3&show_info=0&start=30&end=45&loop=1&playlist=${previews[0].video_id}`
         return  (
             <Box overflow='hidden'>
                 <iframe src={preview} allow='autoplay' className="gameImage"></iframe> 

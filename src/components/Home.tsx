@@ -1,4 +1,4 @@
-import { Grid, GridItem, HStack} from "@chakra-ui/react"
+import { Text, Grid, GridItem, HStack, SimpleGrid, Button} from "@chakra-ui/react"
 import FilterHeading from "./FilterHeading"
 import GameGrid from "./games/GameGrid"
 import GameModeSelector from "./games/GameModeSelector"
@@ -6,6 +6,7 @@ import OrderSelector from "./selectors/OrderSelector"
 import PlatformSelector from "./platforms/PlatformSelector"
 import SideBar from "./SideBar"
 import SortSelector from "./selectors/SortSelector"
+import { CiGrid41, CiGrid2H } from "react-icons/ci";
 import useQueryStore from "../stores/useQueryStore"
 
 function Home() {
@@ -23,12 +24,23 @@ function Home() {
             <GridItem pl='2'area={'main'}>
               {(genre.id != 0 || platform.id != 0 || gameMode.id != 0) && 
               <FilterHeading />}
-              <HStack>
-                <GameModeSelector/>
-                <PlatformSelector/>
-                <SortSelector/>
-                {sort && <OrderSelector/>}
-              </HStack>
+              <SimpleGrid columns={2} spacing="60%">
+                <GridItem>
+                  <HStack>
+                      <GameModeSelector/>
+                      <PlatformSelector/>
+                      <SortSelector/>
+                      {sort && <OrderSelector/>}
+                  </HStack>
+                </GridItem>
+                <GridItem>
+                  <HStack>
+                    <Text>Display Options: </Text>
+                    <Button><CiGrid41/></Button>
+                    <Button><CiGrid2H/></Button>
+                  </HStack>
+                </GridItem>
+              </SimpleGrid>
               <GameGrid/>
             </GridItem>
           </Grid>

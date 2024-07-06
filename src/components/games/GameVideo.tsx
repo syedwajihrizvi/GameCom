@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Container, Spinner, Text } from "@chakra-ui/react"
+import { Box, Button, ButtonGroup, Spinner, Text } from "@chakra-ui/react"
 import useGameVideo from "../../hooks/useGameVideo"
 import { useState } from "react"
 import {ArrowRightIcon, ArrowLeftIcon} from "@chakra-ui/icons"
@@ -35,15 +35,15 @@ function GameVideo({videos}: Props) {
     const videoUrl = `https://www.youtube.com/embed/${gameVideos[currentVideo].video_id}`
     return (
         videos &&
-        <Container>
+        <Box overflow='hidden' textAlign='center'>
             {isLoading && <Box height="600px" width="800px" alignContent='center'><Spinner size='xl'/></Box>}
-            {!isLoading && <iframe src={videoUrl} className="gameVideo"></iframe>}
+            {!isLoading && <iframe src={videoUrl} width={750} height={600}></iframe>}
             {gameVideos && 
-            <ButtonGroup paddingLeft="320px" paddingTop={2} gap={10}>
+            <ButtonGroup paddingLeft={290} paddingTop={2} gap={10}>
                 <Button><ArrowLeftIcon boxSize={6} onClick={() => handlePreviousVideo()}/></Button>
                 <Button><ArrowRightIcon boxSize={6} onClick={() => handleNextVideo()}/></Button>
             </ButtonGroup> }
-        </Container>
+        </Box>
     )
 }
 

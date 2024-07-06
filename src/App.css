@@ -9,12 +9,6 @@
     margin-bottom: 16px;
 }
 
-.gameVideo {
-    width: 800px;
-    height: 600px;
-    border-radius: 10px;
-}
-
 /* Use a media query to add a breakpoint at 800px: */
 @media screen and (max-width: 580px) {
     .gameImage {

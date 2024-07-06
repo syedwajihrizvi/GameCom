@@ -8,7 +8,7 @@ function SideBar() {
     const {data:genres} = useGenres()
 
     const setGenreBackgroundColor = (genreID: number) => {
-        return currentGenre.id == genreID ? 'red.300' : undefined
+        return currentGenre.id == genreID ? 'red.500' : undefined
     }
 
     const allGenres = (
