@@ -6,7 +6,7 @@ import { generateGameModeQuery } from "../utils/query_utils"
 export const useGameModes = (gameModeIds: number[] = []) => {
 
     const fetchGameModes = () => {
-        return apiClient.post<GameMode[]>('/game_modes', `fields name; ${generateGameModeQuery(gameModeIds)}`)
+        return apiClient.post<GameMode[]>('/game_modes', `fields name; ${generateGameModeQuery(gameModeIds)} limit 100;`)
         .then(res => res.data)
     }
     return useQuery<GameMode[]>({

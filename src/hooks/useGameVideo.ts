@@ -7,7 +7,7 @@ const useGameVideo = (videoIds: [number]) => {
     const videoId = videoIds[0]
     console.log("VIDEO ID: " + videoId)
     const fetchGameVideo = () => {
-        return apiService.post<GameVideo[]>('/game_videos', `fields video_id;where id=${generateVideoQuery(videoIds)}`)
+        return apiService.post<GameVideo[]>('/game_videos', `fields video_id;${generateVideoQuery(videoIds)} limit 100;`)
         .then(res => res.data)
     }
     return useQuery<GameVideo[]>({

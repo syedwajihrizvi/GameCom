@@ -8,14 +8,13 @@ interface Theme {
 }
 
 export const useThemes = (themes: number[]) => {
-    const themeQuery = generateThemeQuery(themes)
 
     const fetchThemes = () => {
-        return apiClient.post<Theme[]>('/themes', `fields name; where id=${themeQuery}`).then(res => res.data)
+        return apiClient.post<Theme[]>('/themes', `fields name; ${generateThemeQuery(themes)} limit 100;`).then(res => res.data)
     }
 
     return useQuery<Theme[]>({
-        queryKey: ["themes", themeQuery],
+        queryKey: ["themes", themes],
         queryFn: fetchThemes
     })
 }

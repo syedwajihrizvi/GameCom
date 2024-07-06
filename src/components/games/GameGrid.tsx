@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 
 function GameGrid() {
     const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames()
-    const cardSkeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    const cardSkeletons = [1, 2, 3, 4, 5, 6, 7, 8]
     const numberOfGames = games ? games?.pages.reduce((total, currentValue) => total + currentValue.length, 0) : 0
     const navigate = useNavigate()
     const toDetails = (gameSlug: string) => {

@@ -4,10 +4,12 @@ import { GameDetails } from "../entities/GameDetails";
 
 const useGameDetails = (gameName: string) => {
     const fetchGameDetails = () => {
-        return apiService.post<GameDetails[]>('/games', `fields name,summary,videos,screenshots,involved_companies,platforms,game_modes,themes,storyline,aggregated_rating,rating,total_rating;where slug="${gameName}";`).then(res => res.data[0])
+        return apiService.post<GameDetails[]>(
+            '/games', 
+            `fields name,summary,videos,screenshots,involved_companies,platforms,game_modes,themes,storyline,aggregated_rating,rating,total_rating;where slug="${gameName}";`).then(res => res.data[0])
     }
-    return useQuery<GameDetails>({
-        queryKey: ['games', gameName],
+    return useQuery<GameDetails, Error>({
+        queryKey: ['gameDetails', gameName],
         queryFn: fetchGameDetails
     })
 }

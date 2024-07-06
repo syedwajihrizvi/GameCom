@@ -32,21 +32,22 @@ export const generateGameQuery = (params: Query) => {
             queryString += `sort rating_count desc;`
         else
         queryString += `sort hypes desc;`
-        queryString += `limit 9;`
+        queryString += `limit 8;`
     }
     return queryString
 }
 
 export const generatePlatformsQuery = (platforms: number[]) => {
-    let queryString = "("
-    platforms.forEach((platformID, index) => {
-        if (index == platforms.length - 1)
-            queryString += `${platformID.toString()});`
-        else
-            queryString += `${platformID.toString()},`
-    })
-    queryString += "limit 100; sort name asc;"
-    return queryString
+    if (platforms.length > 0) {
+        let queryString = "where id=("
+        platforms.forEach((platformID, index) => {
+            if (index == platforms.length - 1)
+                queryString += `${platformID.toString()});`
+            else
+                queryString += `${platformID.toString()},`
+        })
+        return queryString
+    }
 }
 
 export const generateImageQuery = (images: number[]) => {
@@ -77,43 +78,41 @@ export const generateGameModeQuery = (gameModes: number[]) => {
 }
 
 export const generateCompanyQuery = (involvedCompanies: number[]) => {
-    let queryString = ""
-    if (involvedCompanies.length > 0)
-        queryString += "("
+    if (involvedCompanies.length > 0) {
+        let queryString = "where id=("
         involvedCompanies.forEach((involvedCompany, index) => {
             if (index == involvedCompanies.length - 1)
                 queryString += `${involvedCompany.toString()});`
             else
                 queryString += `${involvedCompany.toString()},`
         })
-    queryString += "limit 100;"
-    return queryString
+        return queryString
+    }
 }
 
 export const generateThemeQuery = (themes: number[]) => {
-    let queryString = ""
-    if (themes.length > 0)
-        queryString += "("
+    if (themes.length > 0) {
+        let queryString = "where id=("
         themes.forEach((theme, index) => {
             if (index == themes.length - 1)
                 queryString += `${theme.toString()});`
             else
                 queryString += `${theme.toString()},`
         })
-    queryString += "limit 100;"
-    return queryString
+        return queryString
+    }
 }
 
 export const generateVideoQuery = (videos: number[]) => {
-    let queryString = ""
-    if (videos.length > 0)
-        queryString += "("
-        videos.forEach((video, index) => {
-            if (index == videos.length - 1)
-                queryString += `${video.toString()});`
-            else
-                queryString += `${video.toString()},`
-        })
-    queryString += "limit 100;"
-    return queryString   
+    if (videos.length > 0) {
+        let queryString = "where id=("
+        if (videos.length > 0)
+            videos.forEach((video, index) => {
+                if (index == videos.length - 1)
+                    queryString += `${video.toString()});`
+                else
+                    queryString += `${video.toString()},`
+            })
+        return queryString 
+    }  
 }

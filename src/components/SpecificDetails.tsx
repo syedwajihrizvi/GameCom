@@ -14,13 +14,13 @@ function SpecificDetails({heading, details}: Props) {
     return (
         <Box paddingStart={0} marginBottom={3}>
             <Heading as="h4" size='md' color='gray.600'>{heading}</Heading>
-            <List spacing={1}>
+            { details && <List spacing={1}>
                 {details.map(detail => 
                 <ListItem>
                     <ListIcon as={MdCheckCircle} color='green.500' />
                     {detail.name}
                 </ListItem>)}
-            </List>
+            </List>}
         </Box>
     )
 }

@@ -14,14 +14,14 @@ function ExpandableText({summary}: Props) {
             if (!viewMore)
                 return <React.Fragment>
                         <Text fontSize='lg'>
-                            {summary.slice(0,300)}...<Button onClick={() => setViewMore(true)} marginLeft={3} backgroundColor='red.500' size='xs'><Text as='b'>View More</Text></Button>
+                            {summary.slice(0,300)}...<Button onClick={() => setViewMore(true)} marginLeft={3} backgroundColor='red.500' size='sm'><Text as='b'>View More</Text></Button>
                         </Text>
                     </React.Fragment>
             else
                 return <React.Fragment>
                     <Text fontSize='lg'>
                         {summary}
-                        <Button onClick={() => setViewMore(false)} marginLeft={3} backgroundColor='red.500' size='xs'>
+                        <Button onClick={() => setViewMore(false)} marginLeft={3} backgroundColor='red.500' size='sm'>
                             <Text as='b'>View Less</Text>
                         </Button>
                     </Text>
@@ -29,7 +29,9 @@ function ExpandableText({summary}: Props) {
         return <Text fontSize='2xl'>{summary}</Text>
     }
 
-    return renderGameDetails(summary)
+    return <>
+        {summary && renderGameDetails(summary)}
+    </>
     
 }
 

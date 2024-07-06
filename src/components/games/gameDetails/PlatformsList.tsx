@@ -1,20 +1,14 @@
-import { Skeleton } from "@chakra-ui/react"
 import { usePlatforms } from "../../../hooks/usePlatforms"
 import SpecificDetails, { Detail } from "../../SpecificDetails"
 
 interface Props {
-    platformIds: number[]
+    platformIds: number[] | undefined
 }
 
 function PlatformsList({platformIds}: Props) {
-    const {data, isLoading} = usePlatforms(platformIds)
+    const {data} = usePlatforms(platformIds ? platformIds : [])
     
-    return (
-        <>
-            {isLoading && <Skeleton height='40px'/>}
-            {!isLoading && <SpecificDetails heading="Platforms" details={data as Detail[]}/>}
-        </>
-    )
+    return <SpecificDetails heading="Platforms" details={data as Detail[]}/>
 }
 
 export default PlatformsList

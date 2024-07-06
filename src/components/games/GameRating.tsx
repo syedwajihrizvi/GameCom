@@ -8,6 +8,7 @@ interface Props {
 }
 function GameRating({game, fontSize}: Props) {
     const gameRating = Math.round(game.rating) || Math.round(game.total_rating) || Math.round(game.aggregated_rating) || '--'
+
     const renderRatingColor = () => {
         if (gameRating == '--')
             return 'blue'
@@ -19,6 +20,7 @@ function GameRating({game, fontSize}: Props) {
             return 'orange'
         return 'red'
     }
+
     return <Badge fontSize={fontSize ? fontSize : '1.2em'} borderRadius={5} variant="solid" colorScheme={renderRatingColor()}>{gameRating}</Badge>
 }
 
