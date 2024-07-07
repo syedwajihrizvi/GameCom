@@ -15,7 +15,7 @@
 }
 
 .singleGameCard {
-    height: 740px;
+    height: 680px;
     width: 450px;
     margin-left:30%
 }
@@ -33,11 +33,11 @@
     }
 
     .gameCard {
-        height: 480px;
+        height: 410px;
         width: 280px;
     }
     .singleGameCard {
-        height: 480px;
+        height: 410px;
         width: 280px;
         margin-left: 0%;
     }
@@ -54,11 +54,11 @@
         width: 280px;
     }
     .gameCard {
-        height: 480px;
+        height: 410px;
         width: 280px;
     }
     .singleGameCard {
-        height: 480px;
+        height: 410px;
         width: 280px;
         margin-left: 0%;
     }
@@ -76,11 +76,11 @@
     }
 
     .gameCard {
-        height: 530px;
+        height: 510px;
         width: 320px;
     }
     .singleGameCard {
-        height: 750px;
+        height: 680px;
         width: 450px;
         margin-left:30%
     }
@@ -98,11 +98,11 @@
     }
 
     .gameCard {
-        height: 590px;
+        height: 510px;
         width: 360px;
     }
     .singleGameCard {
-        height: 750px;
+        height: 680px;
         width: 450px;
         margin-left:30%
     }

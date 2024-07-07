@@ -47,7 +47,7 @@ function GameGrid() {
                                             {previewVideo == game.id && <Button width="90%" backgroundColor='red.500' onClick={() => toDetails(game.slug)}>View More</Button>}
                                             <Container>
                                                 <HStack>
-                                                    <VStack paddingTop={5}>
+                                                    <VStack>
                                                         <Container>
                                                             {game.platforms && <Platforms platforms={game.platforms}/>}
                                                             {game.game_modes && <GameModes gameModes={game.game_modes}/>}  
