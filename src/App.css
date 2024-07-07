@@ -1,3 +1,21 @@
+.background {
+    background: linear-gradient(rgba(0, 39, 11, 0.595), rgba(22, 0, 0, 0.8)), url('./assets/home-wallpaper.jpg');
+    width: 100vh;
+    height: 750px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.main-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+}
+
 .loader {
     margin-top: 5px;
     width: 100%;
