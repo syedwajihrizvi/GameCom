@@ -36,10 +36,10 @@ function GameVideo({videos}: Props) {
     return (
         videos &&
         <Box overflow='hidden' textAlign='center'>
-            {isLoading && <Box height="600px" width="800px" alignContent='center'><Spinner size='xl'/></Box>}
+            {isLoading && <Box height={600} width={750} alignContent='center'><Spinner size='xl'/></Box>}
             {!isLoading && <iframe src={videoUrl} width={750} height={600}></iframe>}
             {gameVideos && 
-            <ButtonGroup paddingLeft={290} paddingTop={2} gap={10}>
+            <ButtonGroup paddingLeft="5%" paddingTop={2} gap={10}>
                 <Button><ArrowLeftIcon boxSize={6} onClick={() => handlePreviousVideo()}/></Button>
                 <Button><ArrowRightIcon boxSize={6} onClick={() => handleNextVideo()}/></Button>
             </ButtonGroup> }

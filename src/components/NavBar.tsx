@@ -17,19 +17,19 @@ function NavBar({handleSwitchChange}: Props){
     const handleSearchInput = (event: string, value: string) => {
         if (event == "Enter") {
             handleSearch(value ? value : '')
-            navigate('/')
+            navigate('/games')
         }
     }
 
     const handleCloseIcon = () => {
         setSearch('')
         resetQueryToDefault()
-        navigate('/')
+        navigate('/games')
     }
 
     return (
         <HStack padding={2}>
-            <Image boxSize="100px" src={logo} cursor='pointer' onClick={() => navigate('/')}/>
+            <Image boxSize="100px" src={logo} cursor='pointer' onClick={() => navigate('/games')}/>
             <InputGroup>
                 <InputLeftElement>
                     <SearchIcon/>

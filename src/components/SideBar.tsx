@@ -12,7 +12,7 @@ function SideBar() {
     }
 
     const allGenres = (
-        <Text backgroundColor={setGenreBackgroundColor(0)} key={0} fontSize='lg' as='b' borderRadius={5} padding={3}>
+        <Text backgroundColor={setGenreBackgroundColor(0)} key={0} fontSize='lg' as='b' borderRadius={5} padding={1}>
             <Link onClick={() => handleGenre(allGenre)} key='allGenres'>All Genres</Link>
         </Text>
     )
@@ -20,7 +20,7 @@ function SideBar() {
         <VStack align='start' paddingStart={4}>
             {allGenres}
             {genres?.map(genre => 
-                <Text backgroundColor={setGenreBackgroundColor(genre.id)} key={`${genre.id}_${genre.name}`} fontSize='lg' as='b' borderRadius={5} padding={3}>
+                <Text backgroundColor={setGenreBackgroundColor(genre.id)} key={`${genre.id}_${genre.name}`} fontSize='lg' as='b' borderRadius={5} padding={1}>
                     <Link _hover='none' onClick={() => handleGenre(genre)} key={genre.id}>{genre.name}</Link>
                 </Text>)}
         </VStack>

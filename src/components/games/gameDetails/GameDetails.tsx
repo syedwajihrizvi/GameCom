@@ -26,7 +26,7 @@ function GameDetails() {
                     <Box paddingBottom={5}><ExpandableText summary={gameDetails.summary}/></Box>
                     <SimpleGrid columns={{sm:1, md:2}}>
                         <GridItem>
-                            <SimpleGrid columns={{sm: 1, md: 2}} spacingX={20} spacingY={5}>
+                            <SimpleGrid columns={{sm: 2, md: 2}} spacingX={20} spacingY={5}>
                                 <GridItem>
                                     <PlatformsList platformIds={gameDetails.platforms}/>
                                 </GridItem>
