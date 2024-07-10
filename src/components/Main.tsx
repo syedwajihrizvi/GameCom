@@ -1,14 +1,19 @@
-import { Box, Button, Center, Image, Input, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react"
+import { Box, Button, Center, Image, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react"
 import { HStack, Heading, VStack } from "@chakra-ui/react"
+import logo from "../assets/logo.png"
 import sectionOneImage from "../assets/image-1.png"
 import sectionTwoImage from "../assets/image-2.png"
-import { ChevronRightIcon, ChevronDownIcon } from "@chakra-ui/icons"
+import sectionThreeImage from "../assets/image-3.png"
+
+import { ChevronDownIcon } from "@chakra-ui/icons"
+import Faq from "./Faq"
+import SignUp from "./SignUp"
 function Main() {
     return (
         <VStack backgroundColor='black'>
             <Box className="background" w='100%'>
                 <Box className="logo">
-                    <Heading>TITLE</Heading>
+                    <Image src={logo}/>
                 </Box>
                 <Box className="header-buttons">
                     <HStack>
@@ -30,13 +35,7 @@ function Main() {
                     <VStack>
                         <Heading color="white" as='h2' size='3xl'>Unlimited Games, streams, and more.</Heading>
                         <Heading color="white" as='h4' size='lg'>Play Anywhere. Cancel Anytime</Heading>
-                        <Text color="white" as="b" fontSize='lg'>Ready to watch? Enter your email to create or restart your membership.</Text>
-                        <HStack>
-                            <Input placeholder='Enter Email Address' height={55} borderRadius={1} backgroundColor='rgba(22, 0, 0, 0.2)'/>
-                            <Button backgroundColor='red' color="white" width={340} height={55} borderRadius={2} rightIcon={<ChevronRightIcon boxSize={8}/>}>
-                                <Text as='b' fontSize='2xl'>Get Started</Text>
-                            </Button>
-                        </HStack>
+                        <SignUp/>
                     </VStack>
                 </Center>
             </Box>
@@ -44,20 +43,44 @@ function Main() {
                 <HStack>
                     <VStack color='white'>
                         <Heading as='h1' size='2xl'>Enjoy Anywhere. Enjoy Anytime</Heading>
-                        <Heading as='h5' size='lg'>Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.</Heading>
+                        <Heading as='h6' size='md' width={600}>Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.</Heading>
                     </VStack>
                     <Image src={sectionOneImage} height={300}/>
                 </HStack>
-            </Center>   
-            <Center backgroundColor='black' w='100%' paddingTop={20}>
+            </Center>
+            <Box backgroundColor='gray.800' width='100%' height='10px'/>
+            <Center backgroundColor='black' w='100%' paddingTop={20} paddingBottom={20}>
                 <HStack spacing={60}>
                 <Image src={sectionTwoImage} height={350}/>
                     <VStack color='white'>
-                        <Heading as='h1' size='2xl'>Play Anywhere.</Heading>
-                        <Heading as='h5' size='lg'>Stream your favorite games anywhere you want. View our current plants.</Heading>
+                        <Heading as='h1' size='2xl'>Play Anywhere. Play Anytime</Heading>
+                        <Heading as='h6' size='md'>Stream your favorite games anywhere you want. View our current plants.</Heading>
                     </VStack>
                 </HStack>
-            </Center>  
+            </Center>
+            <Box backgroundColor='gray.800' width='100%' height='10px'/>
+            <Center backgroundColor='black' w='100%' paddingTop={20} paddingBottom={20}>
+                <HStack spacing={60}>
+                    <VStack color='white'>
+                        <Heading as='h1' size='2xl'>Download your games offline.</Heading>
+                        <Heading as='h6' size='md'>Play on a plane, train, or submarine...</Heading>
+                    </VStack>
+                </HStack>
+                <Image src={sectionThreeImage} height={350}/>
+            </Center>
+            <Box backgroundColor='gray.800' width='100%' height='10px'/>
+            <Center backgroundColor='black' w='100%' paddingTop={10} paddingBottom={10}>
+                <VStack>
+                    <Heading size='2xl' color='white' paddingBottom={5}>Frequently Asked Questions</Heading>
+                    <Faq/>
+                    <Faq/>
+                    <Faq/>
+                    <Faq/>
+                    <Faq/>
+                    <SignUp/>
+                </VStack>
+            </Center>
+
         </VStack>
     )
 }

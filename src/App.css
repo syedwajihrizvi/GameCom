@@ -25,6 +25,12 @@
     left: 25%;
 }
 
+.section {
+    border-bottom: 100px;
+    border-color: blueviolet;
+    border-radius: 20px;
+}
+
 .loader {
     margin-top: 5px;
     width: 100%;
