@@ -1,10 +1,10 @@
-import { Box, Button, Center, Image, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react"
+import { Box, Button, Center, Image, Menu, MenuButton, MenuItem, MenuList, SimpleGrid, GridItem, List, ListItem, Link} from "@chakra-ui/react"
 import { HStack, Heading, VStack } from "@chakra-ui/react"
 import logo from "../assets/logo.png"
 import sectionOneImage from "../assets/image-1.png"
 import sectionTwoImage from "../assets/image-2.png"
 import sectionThreeImage from "../assets/image-3.png"
-
+import {Faqs, faqs} from "../utils/faqs"
 import { ChevronDownIcon } from "@chakra-ui/icons"
 import Faq from "./Faq"
 import SignUp from "./SignUp"
@@ -72,15 +72,55 @@ function Main() {
             <Center backgroundColor='black' w='100%' paddingTop={10} paddingBottom={10}>
                 <VStack>
                     <Heading size='2xl' color='white' paddingBottom={5}>Frequently Asked Questions</Heading>
-                    <Faq/>
-                    <Faq/>
-                    <Faq/>
-                    <Faq/>
-                    <Faq/>
+                    {faqs.map((faq:Faqs) => <Faq question={faq.question} answer={faq.answer}/>)}
                     <SignUp/>
                 </VStack>
             </Center>
-
+            <Box backgroundColor='gray.800' width='100%' height='10px'/>
+            <Center backgroundColor='black' w='100%' paddingTop={10} paddingBottom={10}>
+                <VStack>
+                    <Heading color='white' as='h5' size='md' paddingBottom={10}>Questions? Call 1-844-542-4813</Heading>
+                    <SimpleGrid columns={4} spacing={40}>
+                        <GridItem>
+                            <List spacing={2}>
+                                <ListItem><Link color='white'>FAQ</Link></ListItem>
+                                <ListItem><Link color='white'>Account</Link></ListItem>
+                                <ListItem><Link color='white'>Investor Relations</Link></ListItem>
+                                <ListItem><Link color='white'>GameCom Shop</Link></ListItem>
+                                <ListItem><Link color='white'>Buy Gift Cards</Link></ListItem>
+                            </List>
+                        </GridItem>
+                        <GridItem>
+                            <List spacing={2}>
+                                <ListItem><Link color='white'>Terms of Use</Link></ListItem>
+                                <ListItem><Link color='white'>Cookie Preferences</Link></ListItem>
+                                <ListItem><Link color='white'>Contact Us</Link></ListItem>
+                                <ListItem><Link color='white'>Legal Notices</Link></ListItem>
+                                <ListItem><Link color='white'>Ad Choices</Link></ListItem>
+                            </List>
+                        </GridItem>
+                        <GridItem>
+                            <List spacing={2}>
+                                <ListItem><Link color='white'>Help Center</Link></ListItem>
+                                <ListItem><Link color='white'>Media Center</Link></ListItem>
+                                <ListItem><Link color='white'>Jobs</Link></ListItem>
+                                <ListItem><Link color='white'>Redeem Gift Cards</Link></ListItem>
+                                <ListItem><Link color='white'>Ways to watch</Link></ListItem>
+                            </List>
+                        </GridItem>
+                        <GridItem>                            
+                            <List spacing={2}>
+                                <ListItem><Link color='white'>Privacy</Link></ListItem>
+                                <ListItem><Link color='white'>Corporate Information</Link></ListItem>
+                                <ListItem><Link color='white'>Speed Test</Link></ListItem>
+                                <ListItem><Link color='white'>Only on GameCom</Link></ListItem>
+                                <ListItem><Link color='white'>Careers</Link></ListItem>
+                            </List>
+                        </GridItem>
+                    </SimpleGrid>
+                    <Image src={logo} marginTop={10}/>
+                </VStack>
+            </Center>
         </VStack>
     )
 }

@@ -2,7 +2,12 @@ import { Box, Flex, Text, VStack, Heading, Button, HStack, Spacer} from "@chakra
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
-function Faq() {
+interface Props {
+    question: string,
+    answer: string
+}
+
+function Faq({question, answer}: Props) {
     const [open, setOpen] = useState(false)
 
     const renderIcon = () => {
@@ -17,7 +22,7 @@ function Faq() {
             <VStack paddingTop="20px" paddingBottom="20px">
                 <HStack className='accordian-head'>
                     <Box padding={2} className="accordian-question" width="100vh">
-                        <Heading as='h2' size='lg'>How much does GameCom cost?</Heading>
+                        <Heading as='h2' size='lg'>{question}</Heading>
                     </Box>
                     <Spacer/>
                     <Spacer/>
@@ -28,8 +33,8 @@ function Faq() {
                     </Box>
                 </HStack>
                 {open && 
-                <Flex padding={2} width="100%">
-                    <Text>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis eius perspiciatis adipisci temporibus molestiae illum voluptas rerum itaque ipsa quasi officia optio numquam expedita facere, atque, labore dolorum tempora vero!</Text>
+                <Flex padding={2} width="100%" borderColor='black' borderTopWidth={2}>
+                    <Text fontSize='xl' as='b'>{answer}</Text>
                 </Flex>}
             </VStack>
         </Flex>
