@@ -5,18 +5,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     position:relative;
-}
-
-.logo {
-    position: absolute;
-    top: 5%;
-    left: 15%;
-}
-
-.header-buttons {
-    position: absolute;
-    top: 5%;
-    left: 75%
+    overflow-x: hidden;
 }
 
 .register-main {

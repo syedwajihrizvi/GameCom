@@ -18,15 +18,15 @@ function Faq({question, answer}: Props) {
     }
 
     return (
-        <Flex width="110vh" backgroundColor='gray.800' color='white'>
+        <Flex width="70vh" backgroundColor='gray.800' color='white'>
             <VStack paddingTop="20px" paddingBottom="20px">
                 <HStack className='accordian-head'>
-                    <Box padding={2} className="accordian-question" width="100vh">
+                    <Box padding={2} className="accordian-question" width="55vh">
                         <Heading as='h2' size='lg'>{question}</Heading>
                     </Box>
                     <Spacer/>
                     <Spacer/>
-                    <Box padding={2} className="accordian-icon">
+                    <Box padding={2} className="accordian-icon" width="15vh">
                         <Button backgroundColor='transparent'>
                             {renderIcon()}
                         </Button>
