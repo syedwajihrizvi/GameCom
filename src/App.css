@@ -8,6 +8,16 @@
     overflow-x: hidden;
 }
 
+.login-background {
+  background: linear-gradient(rgba(0, 39, 11, 0.595), rgba(22, 0, 0, 0.8)), url('./assets/home-wallpaper.jpg');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow-y: hidden;
+}
+
 .register-main {
     position: absolute;
     top: 40%;

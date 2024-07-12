@@ -4,6 +4,7 @@ import GameDetails from "../components/games/gameDetails/GameDetails";
 import Layout from "../components/Layout";
 import ErrorPage from "../components/ErrorPage";
 import Main from "../components/Main";
+import Login from "../components/Login";
 
 const router = createBrowserRouter([
     {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
         ]
     },
     {path: '/home', element: <Main/>},
+    {path: '/login', element: <Login/>}
 ])
 
 export default router
