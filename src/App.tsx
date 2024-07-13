@@ -1,6 +1,6 @@
 import { Grid, GridItem, HStack, useColorMode } from '@chakra-ui/react'
 import './App.css'
-import NavBar from './components/NavBar'
+import GameNavBar from './components/navbars/GameNavBar'
 import SideBar from './components/SideBar'
 import GameGrid from './components/games/GameGrid'
 import PlatformSelector from './components/platforms/PlatformSelector'
@@ -22,7 +22,7 @@ function App() {
                     lg: '200px 1fr'
                   }}>
       <GridItem pl='2' area={'header'}>
-        <NavBar handleSwitchChange={toggleColorMode}/>
+        <GameNavBar handleSwitchChange={toggleColorMode}/>
       </GridItem>
       <GridItem area={'nav'}>
         <SideBar/>

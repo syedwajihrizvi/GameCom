@@ -1,7 +1,7 @@
 import { HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Switch} from "@chakra-ui/react"
-import logo from "../assets/logo.webp"
+import logo from "../../assets/logo.png"
 import { SearchIcon, CloseIcon } from "@chakra-ui/icons"
-import useQueryStore from "../stores/useQueryStore"
+import useQueryStore from "../../stores/useQueryStore"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
@@ -9,7 +9,7 @@ interface Props {
     handleSwitchChange: () => void
 }
 
-function NavBar({handleSwitchChange}: Props){
+function GameNavBar({handleSwitchChange}: Props){
     const {handleSearch, resetQueryToDefault} = useQueryStore()
     const navigate = useNavigate()
     const [search, setSearch] = useState('')
@@ -29,7 +29,7 @@ function NavBar({handleSwitchChange}: Props){
 
     return (
         <HStack padding={2}>
-            <Image boxSize="100px" src={logo} cursor='pointer' onClick={() => navigate('/games')}/>
+            <Image src={logo} cursor='pointer' onClick={() => navigate('/games')}/>
             <InputGroup>
                 <InputLeftElement>
                     <SearchIcon/>
@@ -44,4 +44,4 @@ function NavBar({handleSwitchChange}: Props){
     )
 }
 
-export default NavBar
+export default GameNavBar

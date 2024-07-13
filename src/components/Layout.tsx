@@ -1,12 +1,12 @@
 import { useColorMode } from "@chakra-ui/react"
-import NavBar from "./NavBar"
+import GameNavBar from "./navbars/GameNavBar"
 import { Outlet } from "react-router-dom"
 
 function Layout() {
     const { toggleColorMode } = useColorMode()
     return (
         <>
-            <NavBar handleSwitchChange={toggleColorMode}/>
+            <GameNavBar handleSwitchChange={toggleColorMode}/>
             <Outlet/>
         </>
     )
