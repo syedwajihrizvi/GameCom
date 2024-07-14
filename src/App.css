@@ -41,6 +41,10 @@
     margin-bottom: 5px;
 }
 
+.plan-header {
+    background-image: linear-gradient(rgb(6, 36, 184), rgb(201, 12, 12));
+}
+
 .display {
     margin-left: 5px;
     margin-bottom: 5px;
