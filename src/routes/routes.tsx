@@ -9,6 +9,8 @@ import SetupAccount from "../components/SetupAccount";
 import Register from "../components/Register";
 import ChoosePlan from "../components/ChoosePlan";
 import PlanGrid from "../components/PlanGrid";
+import PaymentOptions from "../components/PaymentOptions";
+import CreditDetails from "../components/CreditDetails";
 
 const router = createBrowserRouter([
     {
@@ -25,7 +27,9 @@ const router = createBrowserRouter([
     {path: '/setup', element: <SetupAccount/>},
     {path: '/register', element: <Register/>},
     {path: '/choose-plan', element: <ChoosePlan/>},
-    {path: '/plans', element: <PlanGrid/>}
+    {path: '/plans', element: <PlanGrid/>},
+    {path: '/payment', element: <PaymentOptions/>},
+    {path: '/creditoption', element: <CreditDetails/>}
 ])
 
 export default router
