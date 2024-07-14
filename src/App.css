@@ -21,7 +21,6 @@
 .register-main {
     position: absolute;
     top: 40%;
-    left: 25%;
 }
 
 .section {
@@ -39,6 +38,11 @@
 .menuList {
     margin-left: 1px;
     margin-bottom: 5px;
+}
+
+.footer {
+    position:relative;
+    bottom: 0;
 }
 
 .plan-header {

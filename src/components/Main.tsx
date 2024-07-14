@@ -1,4 +1,4 @@
-import { Box, Center, Image,SimpleGrid, GridItem, List, ListItem, Link} from "@chakra-ui/react"
+import { Box, Center, Image,SimpleGrid, GridItem, List, ListItem, Link, Stack} from "@chakra-ui/react"
 import { Heading, VStack } from "@chakra-ui/react"
 import logo from "../assets/logo.png"
 import sectionOneImage from "../assets/image-1.png"
@@ -10,60 +10,60 @@ import SignUp from "./SignUp"
 import NavBar from "./navbars/NavBar"
 function Main() {
     return (
-            <VStack backgroundColor='black' width="100%">
+            <VStack backgroundColor='black' width="100%" overflow='hidden'>
                 <Box className="background" width='100%'>
                     <NavBar/>
-                    <Center className="register-main">
-                        <VStack>
+                    <Center className="register-main" width="100%">
+                        <VStack textAlign='center'>
                             <Heading color="white" as='h1' size='3xl'>Unlimited Games, streams, and more.</Heading>
                             <Heading color="white" as='h6' size='lg'>Play Anywhere. Cancel Anytime</Heading>
                             <SignUp/>
                         </VStack>
                     </Center>
                 </Box>
-                <Center backgroundColor='black' w='100%' paddingTop={20}>
-                    <SimpleGrid columns={{lg: 2, md:1}}>
-                        <Center>
-                            <VStack color='white' paddingTop={20}>
-                                <Heading as='h1' size='3xl'>Enjoy Anywhere. Enjoy Anytime</Heading>
-                                <Heading as='h6' size='md' width={600}>Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.</Heading>
-                            </VStack>
+                <Center padding={20}>
+                    <SimpleGrid columns={{lg: 2, md:1}} spacingX={5}>
+                        <Center width="100%">
+                            <Stack color="white" textAlign='center'>
+                                <Heading as='h1' size='3xl'>Enjoy Anywhere. Enjoy Anytime.</Heading>
+                                <Heading as='h6' size='sm'>Play on Smart TVs, tablets, laptops, phones, and more.</Heading>
+                            </Stack>
                         </Center>
                         <Center>
                             <Image src={sectionOneImage} height={300}/>
-                        </Center>
+                        </Center> 
                     </SimpleGrid>
                 </Center>
                 <Box backgroundColor='gray.800' width='100%' height='10px'/>
-                <Center backgroundColor='black' w='100%' paddingTop={20} paddingBottom={20}>
+                <Center padding={20}>
                     <SimpleGrid columns={{lg: 2, md:1}}>
-                        <Center>
-                            <Image src={sectionTwoImage} height={350}/>
-                        </Center>
-                        <Center>
-                            <VStack color='white' paddingTop={20}>
-                                <Heading as='h1' size='3xl'>Play Anywhere. Play Anytime</Heading>
-                                <Heading as='h6' size='md'>Stream your favorite games anywhere you want. View our current plants.</Heading>
-                            </VStack>
-                        </Center>
-                    </SimpleGrid>
-                </Center>
-                <Box backgroundColor='gray.800' width='100%' height='10px'/>
-                <Center backgroundColor='black' w='100%' paddingTop={20} paddingBottom={20}>
-                    <SimpleGrid columns={{lg: 2, md:1}}>
-                        <Center>
-                            <VStack color='white' paddingTop={20}>
-                                <Heading as='h1' size='2xl'>Download your games offline.</Heading>
-                                <Heading as='h6' size='md'>Play on a plane, train, or submarine...</Heading>
-                            </VStack>
-                        </Center>
-                        <Center>
-                            <Image src={sectionThreeImage} height={350}/>
+                        <Center overflowX='hidden'>
+                            <Image src={sectionTwoImage} height={300}/>
+                        </Center> 
+                        <Center width='100%'>
+                            <Stack color="white" textAlign='center'>
+                                <Heading as='h1' size='3xl'>Play Anywhere. Play Anytime.</Heading>
+                                <Heading as='h6' size='sm'>Stream your favorite games anywhere you want.</Heading>
+                            </Stack>
                         </Center>
                     </SimpleGrid>
                 </Center>
                 <Box backgroundColor='gray.800' width='100%' height='10px'/>
-                <Center backgroundColor='black' w='100%' paddingTop={10} paddingBottom={10}>
+                <Center padding={20}>
+                    <SimpleGrid columns={{lg: 2, md:1}}> 
+                        <Center width="100%">
+                            <Stack color="white" textAlign='center'>
+                                <Heading as='h1' size='3xl'>Download your games offline.</Heading>
+                                <Heading as='h6' size='sm'>Play on a plane, train, or even a submarine...</Heading>
+                            </Stack>
+                        </Center>
+                        <Center>
+                            <Image src={sectionThreeImage} height={300}/>
+                        </Center>
+                    </SimpleGrid>
+                </Center>
+                <Box backgroundColor='gray.800' width='100%' height='10px'/>
+                <Center backgroundColor='black' width='100%' paddingTop={10} paddingBottom={10}>
                     <VStack>
                         <Heading size={{lg:'2xl', md:'lg'}} color='white' paddingBottom={5}>Frequently Asked Questions</Heading>
                         {faqs.map((faq:Faqs) => <Faq question={faq.question} answer={faq.answer}/>)}

@@ -11,25 +11,32 @@ import ChoosePlan from "../components/ChoosePlan";
 import PlanGrid from "../components/PlanGrid";
 import PaymentOptions from "../components/PaymentOptions";
 import CreditDetails from "../components/CreditDetails";
+import Setup from "../components/Setup";
 
 const router = createBrowserRouter([
+    {path: '/home', element: <Main/>},
+    {path: '/login', element: <Login/>},
     {
-        path: '/', 
+        path: '/setup',
+        element: <Setup/>,
+        children: [
+            {path: '', element: <SetupAccount/>},
+            {path: 'register', element: <Register/>},
+            {path: 'choose-plan', element: <ChoosePlan/>},
+            {path: 'plans', element: <PlanGrid/>},
+            {path: 'payment', element: <PaymentOptions/>},
+            {path: 'creditoption', element: <CreditDetails/>}
+        ]
+    },
+    {
+        path: '/games', 
         element: <Layout/>,
         errorElement: <ErrorPage/>,
         children: [
-            {path: 'games', element: <Home/>},
-            {path: 'games/:id', element: <GameDetails/>}
+            {path: '', element: <Home/>},
+            {path: ':id', element: <GameDetails/>}
         ]
     },
-    {path: '/home', element: <Main/>},
-    {path: '/login', element: <Login/>},
-    {path: '/setup', element: <SetupAccount/>},
-    {path: '/register', element: <Register/>},
-    {path: '/choose-plan', element: <ChoosePlan/>},
-    {path: '/plans', element: <PlanGrid/>},
-    {path: '/payment', element: <PaymentOptions/>},
-    {path: '/creditoption', element: <CreditDetails/>}
 ])
 
 export default router

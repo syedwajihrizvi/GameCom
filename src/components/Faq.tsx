@@ -1,4 +1,4 @@
-import { Box, Flex, Text, VStack, Heading, Button, HStack, Spacer} from "@chakra-ui/react";
+import { Box, Flex, Text, Heading, Button, Spacer, Stack} from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
@@ -18,26 +18,21 @@ function Faq({question, answer}: Props) {
     }
 
     return (
-        <Flex width="70vh" backgroundColor='gray.800' color='white'>
-            <VStack paddingTop="20px" paddingBottom="20px">
-                <HStack className='accordian-head'>
-                    <Box padding={2} className="accordian-question" width="55vh">
-                        <Heading as='h2' size='lg'>{question}</Heading>
-                    </Box>
-                    <Spacer/>
-                    <Spacer/>
-                    <Box padding={2} className="accordian-icon" width="15vh">
-                        <Button backgroundColor='transparent'>
-                            {renderIcon()}
-                        </Button>
-                    </Box>
-                </HStack>
-                {open && 
-                <Flex padding={2} width="100%" borderColor='black' borderTopWidth={2}>
-                    <Text fontSize='xl' as='b'>{answer}</Text>
-                </Flex>}
-            </VStack>
-        </Flex>
+        <Stack width={{sm: "400px", md: "600px", lg: "650px"}} backgroundColor='gray.800' color="white" padding={5}>
+            <Flex>
+                
+                <Box padding={2}>
+                    <Heading as='h2' size='lg'>{question}</Heading>
+                </Box>
+                <Spacer/>
+                <Box padding={2}>
+                    <Button backgroundColor='transparent' onClick={() => setOpen(!open)}>
+                        {renderIcon()}
+                    </Button>
+                </Box>
+            </Flex>
+            {open && <Text width="100%">{answer}</Text>}
+        </Stack>
     )
 }
 

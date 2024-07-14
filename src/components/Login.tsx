@@ -1,5 +1,6 @@
 import { Box, Card, Center, CardBody, Heading, Image, Stack, StackDivider, VStack, Text, Input, Button, Link } from "@chakra-ui/react"
 import logo from "../assets/logo.png"
+import { Link as ReactRouterLink} from "react-router-dom"
 function Login() {
     return (
         <Box className="login-background" width="100%">
@@ -27,7 +28,7 @@ function Login() {
                         </Box>
                         <Box>
                             <Heading size='xs' color='white'>
-                            New to Netflix? <Link color='grey'>Sign Up Now</Link>
+                            New to Netflix? <ReactRouterLink to='/setup'>Sign Up Now</ReactRouterLink>
                             </Heading>
                         </Box>
                         <Box>
