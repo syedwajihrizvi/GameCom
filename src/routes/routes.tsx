@@ -14,7 +14,7 @@ import CreditDetails from "../components/CreditDetails";
 import Setup from "../components/Setup";
 
 const router = createBrowserRouter([
-    {path: '/home', element: <Main/>},
+    {path: '/', element: <Main/>},
     {path: '/login', element: <Login/>},
     {
         path: '/setup',

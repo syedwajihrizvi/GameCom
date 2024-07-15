@@ -1,7 +1,14 @@
 import { Box, Card, Center, CardBody, Heading, Image, Stack, StackDivider, VStack, Text, Input, Button, Link } from "@chakra-ui/react"
 import logo from "../assets/logo.png"
-import { Link as ReactRouterLink} from "react-router-dom"
+import { Link as RouterLink, useNavigate} from "react-router-dom"
+
 function Login() {
+    const navigate = useNavigate()
+
+    const handleSignIn = () => {
+        navigate('/games')
+    }
+
     return (
         <Box className="login-background" width="100%">
             <VStack overflowY='hidden'>
@@ -11,24 +18,22 @@ function Login() {
                         <Heading color='white'>Sign In</Heading>
                         <Stack divider={<StackDivider />} spacing='4'>
                         <Box>
-                            <form>
-                                <VStack>
-                                    <Input placeholder="Email" height="50px" borderRadius={1} m={2}/>
-                                    <Input placeholder="Password" height="50px" borderRadius={1} m={2}/>
-                                    <Button backgroundColor='red' color='white' width="75%">
-                                        Sign In
-                                    </Button>
-                                    <Text color="grey">OR</Text>
-                                    <Button backgroundColor='grey' color='white' width='75%'>
-                                        Use a Sign-In Code
-                                    </Button>
-                                    <Link color='white'>Forgot Your Password?</Link>
-                                </VStack>
-                            </form>
+                            <VStack>
+                                <Input placeholder="Email" height="50px" borderRadius={1} m={2}/>
+                                <Input placeholder="Password" height="50px" borderRadius={1} m={2}/>
+                                <Text color="grey">OR</Text>
+                                <Button backgroundColor='red' color='white' width="75%" onClick={handleSignIn}>
+                                    Sign In
+                                </Button>
+                                <Button backgroundColor='grey' color='white' width='75%'>
+                                    Use a Sign-In Code
+                                </Button>
+                                <Link color='white'>Forgot Your Password?</Link>
+                            </VStack>
                         </Box>
                         <Box>
                             <Heading size='xs' color='white'>
-                            New to Netflix? <ReactRouterLink to='/setup'>Sign Up Now</ReactRouterLink>
+                            New to Netflix? <RouterLink to='/setup'>Sign Up Now</RouterLink>
                             </Heading>
                         </Box>
                         <Box>
