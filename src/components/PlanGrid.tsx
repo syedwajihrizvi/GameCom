@@ -1,7 +1,7 @@
 import { Text, GridItem, Box, Heading, VStack, SimpleGrid, Card, Stack, StackDivider, CardBody, Flex, Spacer, Center, Button, Link } from "@chakra-ui/react"
-import {Link as RouterLink} from "react-router-dom"
 import PlanHeader from "./PlanHeader"
 import { useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const plans = [
     {
@@ -48,10 +48,17 @@ const plans = [
 ]
 
 function PlanGrid() {
+    const navigate = useNavigate()
     const [currentPlan, setCurrentPlan] =  useState(0)
+    const {state: {data}} = useLocation()
 
     const handlePlanSelect = (index: number) => {
         setCurrentPlan(index)
+    }
+
+    const handleSubmit = () => {
+        data["selectedPlan"] = plans[currentPlan].title
+        navigate("/setup/payment", {state: {data}})
     }
 
     return (
@@ -117,7 +124,7 @@ function PlanGrid() {
                         <Link color="blue">Learn more</Link>. Watch on 4 different devices at the same time with Premium and 2 with Standard or Standard with ads.
                         </Text>
                         <Center>
-                            <RouterLink to="/setup/payment"><Button backgroundColor='red' color='white' width="350px" height="55px" borderRadius={1} fontSize={28}>Next</Button></RouterLink>
+                            <Button backgroundColor='red' color='white' width="350px" height="55px" borderRadius={1} fontSize={28} onClick={handleSubmit}>Next</Button>
                         </Center>
                     </Stack>
                 </GridItem>
