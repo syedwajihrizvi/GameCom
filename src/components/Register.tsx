@@ -4,16 +4,10 @@ import { useState } from "react"
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import {registerSchema} from "../utils/schema/userSchema"
 import { useNavigate } from "react-router-dom";
 
-const schema = z.object({
-    email: z.string().email({message: "Must be a valid email"}),
-    firstName: z.string().min(2, {message: "Name must be atleast 2 characters"}),
-    lastName: z.string().min(2, {message: "Name must be atleast 2 characters"}),
-    password: z.string().refine(val => {
-        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(val)
-    }, {message: "Password is not valid"})
-}).required()
+const schema = z.object(registerSchema).required()
 
 type ValidationSchemaType = z.infer<typeof schema>
 

@@ -1,6 +1,6 @@
 import { Center, VStack, Heading, Button, Text, Icon, HStack } from "@chakra-ui/react"
 import { IoCheckmark } from "react-icons/io5"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 function ChoosePlan() {
     const navigate = useNavigate()
