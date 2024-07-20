@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { Link as RouterLink, useNavigate} from "react-router-dom"
 import { Box, Card, Center, CardBody, Heading, Image, Stack, StackDivider, VStack, Text, Input, Button, Link } from "@chakra-ui/react"
 import logo from "../assets/logo.png"
+import { useState } from "react"
 
 interface LoginForm {
     email: string,
@@ -11,13 +12,18 @@ interface LoginForm {
 
 function Login() {
     const { register, handleSubmit } = useForm<LoginForm>()
+    const [loginError, setLoginError] = useState<string>()
     const navigate = useNavigate()
 
     const handleSignIn = (data:LoginForm) => {
         apiClient.post('/', data)
-        .then(res => {console.log(`Res: ${res}`)})
-        .catch(err => console.log("Error: " + err))
-        navigate('/games')
+        .then(res => {
+            localStorage.setItem('userJWT', res.data)
+            navigate('/games')
+        })
+        .catch(err => {
+            setLoginError(err.response.data) 
+        })
     }
 
     return (
@@ -29,13 +35,14 @@ function Login() {
                         <Heading color='white'>Sign In</Heading>
                         <Stack divider={<StackDivider />} spacing='4'>
                         <Box>
-                            <VStack>
+                            <VStack onClick={() => setLoginError('')}>
                                 <Input {...register('email')} color="white" placeholder="Email" height="50px" borderRadius={1} m={2}/>
                                 <Input {...register('password')} color="white" type="password" placeholder="Password" height="50px" borderRadius={1} m={2}/>
-                                <Text color="grey">OR</Text>
+                                {loginError && <Text color="red">{loginError}</Text>}
                                 <Button backgroundColor='red' color='white' width="75%" onClick={handleSubmit(handleSignIn)}>
                                     Sign In
                                 </Button>
+                                <Text color="grey">OR</Text>
                                 <Button backgroundColor='grey' color='white' width='75%'>
                                     Use a Sign-In Code
                                 </Button>

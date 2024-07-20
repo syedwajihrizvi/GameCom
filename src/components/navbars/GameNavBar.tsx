@@ -1,4 +1,4 @@
-import { HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Switch} from "@chakra-ui/react"
+import { Button, HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Switch} from "@chakra-ui/react"
 import logo from "../../assets/logo.png"
 import { SearchIcon, CloseIcon } from "@chakra-ui/icons"
 import useQueryStore from "../../stores/useQueryStore"
@@ -27,6 +27,11 @@ function GameNavBar({handleSwitchChange}: Props){
         navigate('/games')
     }
 
+    const signOut = () => {
+        localStorage.removeItem('userJWT')
+        navigate('/login')
+    }
+
     return (
         <HStack padding={2}>
             <Image src={logo} cursor='pointer' onClick={() => navigate('/games')}/>
@@ -39,6 +44,7 @@ function GameNavBar({handleSwitchChange}: Props){
                 {search && <CloseIcon cursor='pointer' color='red.500' onClick={() => handleCloseIcon()}/>}
                 </InputRightElement>
             </InputGroup>
+            <Button backgroundColor='red' color='white' onClick={() => signOut()} >Sign Out</Button>
             <Switch colorScheme='red' size='lg' onChange={handleSwitchChange}/>
         </HStack>
     )
