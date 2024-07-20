@@ -1,11 +1,22 @@
+import apiClient from "../utils/loginService"
+import { useForm } from "react-hook-form"
+import { Link as RouterLink, useNavigate} from "react-router-dom"
 import { Box, Card, Center, CardBody, Heading, Image, Stack, StackDivider, VStack, Text, Input, Button, Link } from "@chakra-ui/react"
 import logo from "../assets/logo.png"
-import { Link as RouterLink, useNavigate} from "react-router-dom"
+
+interface LoginForm {
+    email: string,
+    password: string
+}
 
 function Login() {
+    const { register, handleSubmit } = useForm<LoginForm>()
     const navigate = useNavigate()
 
-    const handleSignIn = () => {
+    const handleSignIn = (data:LoginForm) => {
+        apiClient.post('/', data)
+        .then(res => {console.log(`Res: ${res}`)})
+        .catch(err => console.log("Error: " + err))
         navigate('/games')
     }
 
@@ -19,10 +30,10 @@ function Login() {
                         <Stack divider={<StackDivider />} spacing='4'>
                         <Box>
                             <VStack>
-                                <Input placeholder="Email" height="50px" borderRadius={1} m={2}/>
-                                <Input placeholder="Password" height="50px" borderRadius={1} m={2}/>
+                                <Input {...register('email')} color="white" placeholder="Email" height="50px" borderRadius={1} m={2}/>
+                                <Input {...register('password')} color="white" type="password" placeholder="Password" height="50px" borderRadius={1} m={2}/>
                                 <Text color="grey">OR</Text>
-                                <Button backgroundColor='red' color='white' width="75%" onClick={handleSignIn}>
+                                <Button backgroundColor='red' color='white' width="75%" onClick={handleSubmit(handleSignIn)}>
                                     Sign In
                                 </Button>
                                 <Button backgroundColor='grey' color='white' width='75%'>

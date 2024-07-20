@@ -13,6 +13,12 @@ const paymentSchema = {
     cardNumber: z.string().refine(val => /^[0-9]*$/.test(val) && val.length == 16, {message: "Invalid card number"}),
     expirationDate: z.string().refine(val => /^(0[1-9]|1[0-2])\/\d{2}$/.test(val), {message: "Invalid date"}),
     cvv: z.string().refine(val => /^\d{3}$/.test(val), {message: "Invalid CVV"}),
-    name: z.string().min(2, {message: "Name must be atleast 2 characters"}).max(255, {message: "Name is too large"})
+    nameOnCard: z.string().min(2, {message: "Name must be atleast 2 characters"}).max(255, {message: "Name is too large"})
 }
-export {registerSchema, paymentSchema}
+
+const loginSchema = {
+    email: z.string(),
+    password: z.string()
+}
+
+export {registerSchema, paymentSchema, loginSchema}

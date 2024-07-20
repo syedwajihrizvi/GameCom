@@ -1,6 +1,7 @@
 import { Center, Heading, HStack, VStack, Text, Image, Input, Flex, InputGroup, Link, Spacer, InputRightElement, Icon, Button, Stack } from "@chakra-ui/react"
 import { CiCircleQuestion, CiCreditCard1 } from "react-icons/ci"
 import { useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useForm, SubmitHandler} from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -17,6 +18,7 @@ const schema = z.object({
 type ValidationSchemaType = z.infer<typeof schema>
 
 function CreditDetails() {
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: {errors} } = useForm<ValidationSchemaType>({
         resolver: zodResolver(schema)
     })
@@ -24,7 +26,12 @@ function CreditDetails() {
 
     const onFormSubmit:SubmitHandler<ValidationSchemaType> = (paymentData) => {
         console.log({...paymentData, ...state.data})
-        userService.post('', state.data).then(res => console.log(res)).catch(err => console.log("Error: " + err))
+        userService.post('', {...paymentData,...state.data}).
+        then((res) => {
+            console.log(`Response: ${res}`)
+            navigate('/login')
+        })
+        .catch(err => console.log("Error: " + err))
     }
 
     return (
@@ -63,8 +70,8 @@ function CreditDetails() {
                         </Stack>
                     </InputGroup>
                 </Flex>
-                <Input {...register('name')} placeholder="Name on card" height="55px" borderRadius={1} border='1px solid black'/>
-                {errors.name && <Text color="red" width="100%">{errors.name.message}</Text>}
+                <Input {...register('nameOnCard')} placeholder="Name on card" height="55px" borderRadius={1} border='1px solid black'/>
+                {errors.nameOnCard && <Text color="red" width="100%">{errors.nameOnCard.message}</Text>}
                 <Flex width="100%" borderRadius={5} backgroundColor="gray.100" height="75px" padding={3}>
                     <Center height="100%">
                         <VStack spacing={0}>
