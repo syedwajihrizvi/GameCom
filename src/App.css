@@ -31,8 +31,6 @@
 
 .loader {
     margin-top: 5px;
-    width: 100%;
-    padding-left: 48%;
 }
 
 .menuList {
@@ -55,9 +53,9 @@
 }
 
 .singleGameCard {
-    height: 680px;
+    height: fit-content;
     width: 450px;
-    margin-left:30%
+    padding-bottom: 5px;
 }
 
 .singleGameImage {
@@ -73,13 +71,14 @@
     }
 
     .gameCard {
-        height: 410px;
+        height: fit-content;
         width: 280px;
+        padding-bottom: 5px;
     }
     .singleGameCard {
-        height: 410px;
+        height: fit-content;
         width: 280px;
-        margin-left: 0%;
+        padding-bottom: 5px;
     }
     
     .singleGameImage {
@@ -94,13 +93,14 @@
         width: 280px;
     }
     .gameCard {
-        height: 410px;
+        height: fit-content;
         width: 280px;
+        padding-bottom: 5px;
     }
     .singleGameCard {
-        height: 410px;
+        height: fit-content;
         width: 280px;
-        margin-left: 0%;
+        padding-bottom: 5px;
     }
     
     .singleGameImage {
@@ -118,12 +118,12 @@
     .gameCard {
         height: fit-content;
         width: 320px;
-        padding-bottom: 10px;
+        padding-bottom: 5px;
     }
     .singleGameCard {
-        height: 680px;
+        height: fit-content;
         width: 450px;
-        margin-left:30%
+        padding-bottom: 5px;
     }
     
     .singleGameImage {
@@ -139,13 +139,14 @@
     }
 
     .gameCard {
-        height: 510px;
+        height: fit-content;
         width: 360px;
+        padding-bottom: 5px;
     }
     .singleGameCard {
-        height: 680px;
+        height: fit-content;
         width: 450px;
-        margin-left:30%
+        padding-bottom: 5px;
     }
     
     .singleGameImage {

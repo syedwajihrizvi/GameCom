@@ -2,8 +2,8 @@ import { Flex, GridItem, Link, List, ListItem, SimpleGrid, Text, Button, VStack 
 
 function Footer() {
     return (
-        <Flex className="footer" width="100%" backgroundColor='gray.100' justifyContent={{md:'start', sm:'center'}}>
-            <VStack color="gray.800" alignItems={{md:'start', sm:'center'}} padding={10}>
+        <Flex backgroundColor="#F7F7F7" className="footer" width="100%" justifyContent='center' marginTop={5}>
+            <VStack alignItems={{md:'start', sm:'center'}} padding={10}>
                 <Text>Questions? Call 1-844-542-4813</Text>
                 <SimpleGrid columns={{lg: 4, md: 2}} spacingX={40} >
                     <GridItem>
@@ -31,7 +31,7 @@ function Footer() {
                         </List>
                     </GridItem>
                 </SimpleGrid>
-                <Button backgroundColor="white" padding={5} height="55px" width="150px">English</Button>
+                <Button color="black" padding={5} height="55px" width="150px">English</Button>
             </VStack>
         </Flex>
     )

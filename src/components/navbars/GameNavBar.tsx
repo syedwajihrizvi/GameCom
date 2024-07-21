@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 interface Props {
-    handleSwitchChange: () => void
+    handleSwitchChange: () => void,
+    mode: string
 }
 
-function GameNavBar({handleSwitchChange}: Props){
+function GameNavBar({handleSwitchChange, mode}: Props){
     const {handleSearch, resetQueryToDefault} = useQueryStore()
     const navigate = useNavigate()
     const [search, setSearch] = useState('')
@@ -46,7 +47,7 @@ function GameNavBar({handleSwitchChange}: Props){
                     {search && <CloseIcon cursor='pointer' color='red.500' onClick={() => handleCloseIcon()}/>}
                 </InputRightElement>
             </InputGroup>
-            <Switch colorScheme='red' size='lg' onChange={handleSwitchChange}/>
+            <Switch isChecked={mode=="dark"} colorScheme='red' size='lg' onChange={handleSwitchChange}/>
             <Menu>
                 <MenuButton>
                     <Button backgroundColor="red" borderRadius="100%" fontSize={18} color="white">

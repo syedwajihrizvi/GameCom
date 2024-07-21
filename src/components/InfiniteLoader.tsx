@@ -1,8 +1,10 @@
-import { Spinner } from "@chakra-ui/react"
+import { Center, Spinner } from "@chakra-ui/react"
 
 function InfiniteLoader() {
     return (
-        <div className="loader"><Spinner size='md' color='red.500'/></div>
+        <Center>
+            <div className="loader"><Spinner size='md' color='red.500'/></div>
+        </Center>
     )
 }
 

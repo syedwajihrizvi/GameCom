@@ -8,7 +8,7 @@ function SideBar() {
     const {data:genres} = useGenres()
 
     const setGenreBackgroundColor = (genreID: number) => {
-        return currentGenre.id == genreID ? 'red.500' : undefined
+        return currentGenre.id == genreID ? 'red' : undefined
     }
 
     const allGenres = (
@@ -17,7 +17,7 @@ function SideBar() {
         </Text>
     )
     return (
-        <VStack align='start' paddingStart={4}>
+        <VStack height="95vh" overflowY="scroll" align='start' paddingStart={4} width="100%">
             {allGenres}
             {genres?.map(genre => 
                 <Text backgroundColor={setGenreBackgroundColor(genre.id)} key={`${genre.id}_${genre.name}`} fontSize='lg' as='b' borderRadius={5} padding={1}>

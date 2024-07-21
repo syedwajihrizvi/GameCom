@@ -1,6 +1,6 @@
 import '../../App.css'
 import React, { useState } from "react"
-import { Card, CardBody, SimpleGrid, VStack, Image, HStack, Spacer, Skeleton, Container, Button } from "@chakra-ui/react"
+import { Card, CardBody, SimpleGrid, VStack, Image, HStack, Spacer, Skeleton, Container, Button, Center, Box } from "@chakra-ui/react"
 import GameImage from "./GameImage"
 import defaultPlaceHolder from "../../assets/no-image-placeholder-6f3882e0.webp"
 import useGames from "../../hooks/useGames"
@@ -40,19 +40,22 @@ function GameGrid() {
     }
 
     return (
-        <>
+        <Box height="90vh" overflowY='scroll'>
             <InfiniteScroll dataLength={numberOfGames} next={fetchNextPage} hasMore={!!hasNextPage} loader=<InfiniteLoader/>>
-                <SimpleGrid columns={verticalLayout ? 1 : {sm:1, md:1, lg:2, xl: 3, '2xl': 4}} spacingX={2} spacingY={6} paddingRight={10} paddingLeft="5px" marginTop={5} onMouseLeave={() => setPreviewVideo(0)}>
-                    {isLoading && cardSkeletons.map(skeleton =>
+                <SimpleGrid columns={verticalLayout ? 1 : {sm:1, md:1, lg:2, xl: 3, '2xl': 4}} spacingX={2} spacingY={6} marginTop={5} onMouseLeave={() => setPreviewVideo(0)}>
+                    {isLoading && !verticalLayout && cardSkeletons.map(skeleton =>
+                    <Center>
                         <Card className={verticalLayout ? 'singleGameCard':'gameCard'}  key={skeleton}>
                             <CardBody key={skeleton+1}>
-                                <Skeleton key={skeleton+2}/>
+                                <Skeleton key={skeleton+2} height="400px"/>
                             </CardBody>
                         </Card>
+                    </Center>
                     )}
                     {!isLoading && games?.pages.map((page: Game[]) => 
                         <React.Fragment>
                             {page.map(game =>
+                            <Center>
                                 <Card className={verticalLayout ? 'singleGameCard':'gameCard'} _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} 
                                    key={game.id} onMouseEnter={() => setPreviewVideo(game.id)} onMouseLeave={() => setPreviewVideo(0)} overflow='hidden'>
                                         <VStack>
@@ -77,12 +80,13 @@ function GameGrid() {
                                             </Container>
                                         </VStack>
                                 </Card>
+                            </Center>
                             )}
                         </React.Fragment>
                     )}
                 </SimpleGrid>
             </InfiniteScroll>
-        </>
+        </Box>
     )
 }
 
