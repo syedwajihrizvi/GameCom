@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import useGameDetails from "../../../hooks/useGameDetails"
-import { Box, Grid, GridItem, Heading, SimpleGrid} from "@chakra-ui/react"
+import { Box, Grid, GridItem, Heading, SimpleGrid, Skeleton} from "@chakra-ui/react"
 import GameVideo from "../GameVideo"
 import GameImages from "../GameImages"
 import ExpandableText from "../../ExpandableText"
@@ -13,8 +13,10 @@ import GameReleaseDate from "./GameReleaseDate"
 
 function GameDetails() {
     const {id: gameName} = useParams()
-    const {data:gameDetails} = useGameDetails(gameName as string)
+    const {data:gameDetails, isLoading} = useGameDetails(gameName as string)
 
+    if (isLoading)
+        return <Skeleton height="90vh"/>
     return (
         gameDetails &&
         <>
