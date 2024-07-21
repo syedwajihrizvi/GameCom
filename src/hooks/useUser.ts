@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query"
 import apiClient from "../utils/userService"
 
 interface User {
-    id: string
+    id: string,
+    favoriteGames: string[]
 }
 
 const useUser = () => {

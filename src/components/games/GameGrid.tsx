@@ -31,6 +31,10 @@ function GameGrid() {
     }
 
     const handleFavoriteGame = async (id: number, current_state: boolean) => {
+        if (current_state == true) {
+            const result = await apiClient.put(`/${user?.id}`, {"-favoriteGames": [String(id)]})
+            return result.status
+        }
         const result = await apiClient.put(`/${user?.id}`, {"favoriteGames": [String(id)]})
         return result.status
     }
@@ -67,7 +71,7 @@ function GameGrid() {
                                                     <Spacer />
                                                     <HStack>
                                                         <GameRating game={game}/>
-                                                        <FavoriteIcon likeFor={game.id} isActive={false} onFavoriteClick={handleFavoriteGame}/>
+                                                        <FavoriteIcon likeFor={game.id} isActive={user ? user.favoriteGames.includes(String(game.id)):false} onFavoriteClick={handleFavoriteGame}/>
                                                     </HStack>
                                                 </HStack>
                                             </Container>
