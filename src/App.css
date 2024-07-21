@@ -116,8 +116,9 @@
     }
 
     .gameCard {
-        height: 510px;
+        height: fit-content;
         width: 320px;
+        padding-bottom: 10px;
     }
     .singleGameCard {
         height: 680px;

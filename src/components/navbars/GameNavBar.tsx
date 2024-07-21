@@ -1,4 +1,4 @@
-import { Button, HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Switch} from "@chakra-ui/react"
+import { Button, HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Switch, MenuButton, Menu, MenuItem, MenuList} from "@chakra-ui/react"
 import logo from "../../assets/logo.png"
 import { SearchIcon, CloseIcon } from "@chakra-ui/icons"
 import useQueryStore from "../../stores/useQueryStore"
@@ -39,13 +39,25 @@ function GameNavBar({handleSwitchChange}: Props){
                 <InputLeftElement>
                     <SearchIcon/>
                 </InputLeftElement>
-                <Input value={search} onKeyDown={(event) => handleSearchInput(event.key, event.currentTarget.value)} onChange={(event) => setSearch(event.target.value)} borderRadius={10} placeholder="Search For Games"/>
+                    <Input value={search} onKeyDown={(event) => handleSearchInput(event.key, event.currentTarget.value)} 
+                    onChange={(event) => setSearch(event.target.value)} borderRadius={10} 
+                    placeholder="Search For Games"/>
                 <InputRightElement>
-                {search && <CloseIcon cursor='pointer' color='red.500' onClick={() => handleCloseIcon()}/>}
+                    {search && <CloseIcon cursor='pointer' color='red.500' onClick={() => handleCloseIcon()}/>}
                 </InputRightElement>
             </InputGroup>
-            <Button backgroundColor='red' color='white' onClick={() => signOut()} >Sign Out</Button>
             <Switch colorScheme='red' size='lg' onChange={handleSwitchChange}/>
+            <Menu>
+                <MenuButton>
+                    <Button backgroundColor="red" borderRadius="100%" fontSize={18} color="white">
+                        H
+                    </Button>
+                </MenuButton>
+                <MenuList>
+                    <MenuItem>Settings</MenuItem>
+                    <MenuItem onClick={signOut}>Sign Out</MenuItem>
+                </MenuList>
+            </Menu>
         </HStack>
     )
 }

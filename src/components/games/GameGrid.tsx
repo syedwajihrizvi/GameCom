@@ -13,17 +13,28 @@ import InfiniteScroll from "react-infinite-scroll-component"
 import InfiniteLoader from "../InfiniteLoader"
 import { useNavigate } from 'react-router-dom'
 import useQueryStore from '../../stores/useQueryStore'
+import FavoriteIcon from './Favorite'
+import useUser from '../../hooks/useUser'
+import apiClient from '../../utils/userService'
 
 function GameGrid() {
     const {verticalLayout} = useQueryStore()
     const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames()
+    const {data: user} = useUser()
     const [previewVideo, setPreviewVideo] = useState(0)
     const cardSkeletons = [1, 2, 3, 4, 5, 6, 7, 8]
     const numberOfGames = games ? games?.pages.reduce((total, currentValue) => total + currentValue.length, 0) : 0
     const navigate = useNavigate()
+
     const toDetails = (gameSlug: string) => {
         navigate("/games/" + gameSlug)
     }
+
+    const handleFavoriteGame = async (id: number, current_state: boolean) => {
+        const result = await apiClient.put(`/${user?.id}`, {"favoriteGames": [String(id)]})
+        return result.status
+    }
+
     return (
         <>
             <InfiniteScroll dataLength={numberOfGames} next={fetchNextPage} hasMore={!!hasNextPage} loader=<InfiniteLoader/>>
@@ -54,7 +65,10 @@ function GameGrid() {
                                                         </Container>
                                                     </VStack>
                                                     <Spacer />
-                                                    <GameRating game={game}/>
+                                                    <HStack>
+                                                        <GameRating game={game}/>
+                                                        <FavoriteIcon likeFor={game.id} isActive={false} onFavoriteClick={handleFavoriteGame}/>
+                                                    </HStack>
                                                 </HStack>
                                             </Container>
                                         </VStack>
