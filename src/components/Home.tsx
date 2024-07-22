@@ -8,6 +8,7 @@ import SideBar from "./SideBar"
 import SortSelector from "./selectors/SortSelector"
 import { CiGrid41, CiGrid2H } from "react-icons/ci";
 import useQueryStore from "../stores/useQueryStore"
+import ShowOnlySelector from "./games/ShowOnlySelector"
 
 function Home() {
     const {genre, platform, gameMode, sort, handleLayoutToggle} = useQueryStore()
@@ -31,6 +32,7 @@ function Home() {
                       <PlatformSelector/>
                       <SortSelector/>
                       {sort && <OrderSelector/>}
+                      <ShowOnlySelector/>
                   </HStack>
                 </GridItem>
                 <GridItem>

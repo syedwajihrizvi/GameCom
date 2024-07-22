@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { Card, CardBody, SimpleGrid, VStack, Image, HStack, Spacer, Skeleton, Container, Button, Center, Box } from "@chakra-ui/react"
 import GameImage from "./GameImage"
 import defaultPlaceHolder from "../../assets/no-image-placeholder-6f3882e0.webp"
-import useGames from "../../hooks/useGames"
+import useGames, { InfiniteQueryData } from "../../hooks/useGames"
 import { Game } from "../../entities/Game"
 import Platforms from "../platforms/Platforms"
 import GameRating from "./GameRating"
@@ -16,14 +16,16 @@ import useQueryStore from '../../stores/useQueryStore'
 import FavoriteIcon from './Favorite'
 import useUser from '../../hooks/useUser'
 import apiClient from '../../utils/userService'
+import { useQueryClient } from '@tanstack/react-query'
 
 function GameGrid() {
+    const queryClient = useQueryClient()
     const {verticalLayout} = useQueryStore()
-    const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames()
     const {data: user} = useUser()
+    const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames()
     const [previewVideo, setPreviewVideo] = useState(0)
     const cardSkeletons = [1, 2, 3, 4, 5, 6, 7, 8]
-    const numberOfGames = games ? games?.pages.reduce((total, currentValue) => total + currentValue.length, 0) : 0
+    const numberOfGames = games ? games?.pages.reduce((total, currentValue) => total + currentValue.data.length, 0) : 0
     const navigate = useNavigate()
 
     const toDetails = (gameSlug: string) => {
@@ -33,9 +35,17 @@ function GameGrid() {
     const handleFavoriteGame = async (id: number, current_state: boolean) => {
         if (current_state == true) {
             const result = await apiClient.put(`/${user?.id}`, {"-favoriteGames": [String(id)]})
+            if (result.status == 200) {
+                console.log("Invalidated Queries")
+                queryClient.invalidateQueries(["me"])
+            }
             return result.status
         }
         const result = await apiClient.put(`/${user?.id}`, {"favoriteGames": [String(id)]})
+        if (result.status == 200) {
+            console.log("Invalidated Queries")
+            queryClient.invalidateQueries(["me"])
+        }
         return result.status
     }
 
@@ -52,9 +62,9 @@ function GameGrid() {
                         </Card>
                     </Center>
                     )}
-                    {!isLoading && games?.pages.map((page: Game[]) => 
+                    {!isLoading && games?.pages.map((page: InfiniteQueryData<Game>) => 
                         <React.Fragment>
-                            {page.map(game =>
+                            {page.data.map(game =>
                             <Center>
                                 <Card className={verticalLayout ? 'singleGameCard':'gameCard'} _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} 
                                    key={game.id} onMouseEnter={() => setPreviewVideo(game.id)} onMouseLeave={() => setPreviewVideo(0)} overflow='hidden'>

@@ -1,40 +1,62 @@
 import { Query } from "../entities/Query"
+import { User } from "../entities/User"
 
-export const generateGameQuery = (params: Query) => {
-    const {genre, search, platform, gameMode, sort, order} = params
+export const generateGameQuery = (params: Query, user: User | undefined, pageParam: number) => {
+    const {genre, search, platform, gameMode, sort, order, showOnlyFavorites} = params
     let queryString = `fields genres,platforms,name,cover,aggregated_rating,rating,total_rating,game_modes,slug,involved_companies,themes,videos;`
-    if (platform.id > 0 || genre.id > 0 || gameMode.id > 0) {
-        queryString += "where "
-        if (platform.id > 0) {
-            queryString += `platforms != n & platforms = (${platform.id})`  
-            if (genre.id > 0 || gameMode.id > 0)
-                queryString += ' & '   
+    if (showOnlyFavorites) {
+        if (user) {
+            const favoriteGameLength = user.favoriteGames.length
+            if (favoriteGameLength > 0) {
+                queryString += "where id = ("
+                user.favoriteGames.forEach((gameID, index) => {
+                    if (index == favoriteGameLength-1) {
+                        queryString += `${gameID});`
+                    } else {
+                        queryString += `${gameID},`
+                    }
+                })
+                queryString += `limit 9;`
+                queryString += `offset ${pageParam};`
+            }
+            else {
+                queryString += 'limit 0;'
+            }
         }
-        if (genre.id > 0) {
-            queryString += `genres != n & genres = (${genre.id})`
-            if (gameMode.id > 0)
-                queryString += ' & '
+    } else {
+        if (platform.id > 0 || genre.id > 0 || gameMode.id > 0) {
+            queryString += "where "
+            if (platform.id > 0) {
+                queryString += `platforms != n & platforms = (${platform.id})`  
+                if (genre.id > 0 || gameMode.id > 0)
+                    queryString += ' & '   
+            }
+            if (genre.id > 0) {
+                queryString += `genres != n & genres = (${genre.id})`
+                if (gameMode.id > 0)
+                    queryString += ' & '
+            }
+            if (gameMode.id > 0) {
+                queryString += `game_modes != n & game_modes = (${gameMode.id})`
+            }
+            queryString += ';'
         }
-        if (gameMode.id > 0) {
-            queryString += `game_modes != n & game_modes = (${gameMode.id})`
+    
+        if (search) {
+            queryString += `search "${params.search}";`
         }
-        queryString += ';'
+        else if (sort) {
+            queryString += `sort ${sort.queryString} ${order}; limit 9;`
+        }
+        else {
+            if (platform.id == 0 && genre.id == 0 && gameMode.id == 0)
+                queryString += `sort rating_count desc;`
+            else
+            queryString += `sort hypes desc;`
+            queryString += `limit 9;`
+        }
+        queryString += `offset ${pageParam};`
     }
-
-    if (search) {
-        queryString += `search "${params.search}";`
-    }
-    else if (sort) {
-        queryString += `sort ${sort.queryString} ${order}; limit 9;`
-    }
-    else {
-        if (platform.id == 0 && genre.id == 0 && gameMode.id == 0)
-            queryString += `sort rating_count desc;`
-        else
-        queryString += `sort hypes desc;`
-        queryString += `limit 8;`
-    }
-    console.log("Query String: " + queryString)
     return queryString
 }
 

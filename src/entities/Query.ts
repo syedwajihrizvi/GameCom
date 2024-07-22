@@ -11,4 +11,5 @@ export interface Query {
     gameMode: GameMode;
     sort: SortOption | undefined;
     order: string;
+    showOnlyFavorites: boolean
 }

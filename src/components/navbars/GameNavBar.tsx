@@ -1,9 +1,10 @@
 import { Button, HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Switch, MenuButton, Menu, MenuItem, MenuList} from "@chakra-ui/react"
 import logo from "../../assets/logo.png"
-import { SearchIcon, CloseIcon } from "@chakra-ui/icons"
+import { CloseIcon } from "@chakra-ui/icons"
 import useQueryStore from "../../stores/useQueryStore"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
+import { IoSearchCircleSharp } from "react-icons/io5"
 
 interface Props {
     handleSwitchChange: () => void,
@@ -38,10 +39,10 @@ function GameNavBar({handleSwitchChange, mode}: Props){
             <Image src={logo} cursor='pointer' onClick={() => navigate('/games')}/>
             <InputGroup>
                 <InputLeftElement>
-                    <SearchIcon/>
+                    <IoSearchCircleSharp size={46} color="red"/>
                 </InputLeftElement>
                     <Input value={search} onKeyDown={(event) => handleSearchInput(event.key, event.currentTarget.value)} 
-                    onChange={(event) => setSearch(event.target.value)} borderRadius={10} 
+                    onChange={(event) => setSearch(event.target.value)} borderRadius={20}
                     placeholder="Search For Games"/>
                 <InputRightElement>
                     {search && <CloseIcon cursor='pointer' color='red.500' onClick={() => handleCloseIcon()}/>}

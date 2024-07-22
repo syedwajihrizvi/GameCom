@@ -14,7 +14,8 @@ const defaultSettings = {
     sort: undefined,
     order: 'asc',
     search: undefined,
-    verticalLayout: false
+    verticalLayout: false,
+    showOnlyFavorites: false
 }
 
 interface QueryStore {
@@ -25,6 +26,7 @@ interface QueryStore {
     sort: SortOption | undefined,
     order: string,
     verticalLayout: boolean,
+    showOnlyFavorites: boolean,
     handleSearch: (searchQuery: string) => void,
     handleGenre: (selectedGenre: Genre) => void,
     handlePlatform: (selectedPlatforn: Platform) => void,
@@ -32,7 +34,8 @@ interface QueryStore {
     handleSortSelect: (selectedSort: SortOption) => void,
     handleOrderSelect: (selectedOrder: string) => void,
     resetQueryToDefault: () => void,
-    handleLayoutToggle: (useVerticalLayout: boolean) => void
+    handleLayoutToggle: (useVerticalLayout: boolean) => void,
+    handleFavoriteSelect: () => void
 }
 
 const useQueryStore =  create<QueryStore>(set => ({
@@ -43,6 +46,7 @@ const useQueryStore =  create<QueryStore>(set => ({
         sort: undefined,
         order: 'asc',
         verticalLayout: false,
+        showOnlyFavorites: false,
         handleSearch: (searchQuery: string) => set(state => {
             if (searchQuery && searchQuery != state.search)
                 return {...state, ...defaultSettings, search: searchQuery, }
@@ -78,6 +82,12 @@ const useQueryStore =  create<QueryStore>(set => ({
         }),
         handleLayoutToggle: (useVerticalLayout: boolean) => set((state) => {
             return {...state, verticalLayout:useVerticalLayout}
+        }),
+        handleFavoriteSelect: () => set((state) => {
+            if (state.showOnlyFavorites) {
+                return {...state, showOnlyFavorites: false}
+            }
+            return {...state, ...defaultSettings, showOnlyFavorites: true}
         })
     }))
 

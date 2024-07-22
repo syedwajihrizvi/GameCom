@@ -16,17 +16,17 @@ function GameModeSelector() {
     gameModes = [allGameModes, ...(gameModes ? gameModes:[])]
     return (
         <div className='menuList'>
-        <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                {currentGameMode.name}
-            </MenuButton>
-            <MenuList>
-                {gameModes.map(gameMode => 
-                    gameMode.id != currentGameMode.id && 
-                    <MenuItem onClick={() => handleGameMode(gameMode)} key={gameMode.id}>{gameMode.name}</MenuItem>)}
-            </MenuList>
-        </Menu>
-    </div>       
+            <Menu>
+                <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                    {currentGameMode.name}
+                </MenuButton>
+                <MenuList>
+                    {gameModes.map(gameMode => 
+                        gameMode.id != currentGameMode.id && 
+                        <MenuItem onClick={() => handleGameMode(gameMode)} key={gameMode.id}>{gameMode.name}</MenuItem>)}
+                </MenuList>
+            </Menu>
+        </div>       
     )
 }
 
