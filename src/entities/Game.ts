@@ -1,9 +1,11 @@
+import { Cover } from "./Cover";
+import { Video } from "./Video";
 
 export interface Game {
     id: number;
     name: string;
     slug: string;
-    cover: number | undefined;
+    cover: Cover | undefined;
     image_url: string | undefined;
     platforms: number[];
     aggregated_rating: number;
@@ -12,5 +14,5 @@ export interface Game {
     game_modes: number[];
     involved_companies: number[],
     themes: number[],
-    videos: number[]
+    videos: Video[]
 }

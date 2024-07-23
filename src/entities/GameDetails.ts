@@ -1,9 +1,12 @@
+import { Cover } from "./Cover";
+import { Video } from "./Video";
+
 export interface GameDetails {
     name: string;
     id: number;
     summary: string;
-    videos: [number];
-    screenshots: [number];
+    videos: Video[] | undefined;
+    screenshots: Cover[] | undefined;
     involved_companies: [number];
     game_modes: [number],
     platforms: [number],

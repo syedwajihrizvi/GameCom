@@ -55,7 +55,7 @@ function GameDetails() {
                     </SimpleGrid>
                 </GridItem>
             </Grid>
-            <GameImages images={gameDetails.screenshots}/>
+            {gameDetails?.screenshots && <GameImages images={gameDetails.screenshots}/>}
         </>
     )
 }

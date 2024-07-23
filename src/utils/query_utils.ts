@@ -1,26 +1,27 @@
 import { Query } from "../entities/Query"
 import { User } from "../entities/User"
 
-export const generateGameQuery = (params: Query, user: User | undefined, pageParam: number) => {
-    const {genre, search, platform, gameMode, sort, order, showOnlyFavorites} = params
-    let queryString = `fields genres,platforms,name,cover,aggregated_rating,rating,total_rating,game_modes,slug,involved_companies,themes,videos;`
-    if (showOnlyFavorites) {
+export const generateGameQuery = (params: Query, user: User | undefined, pageParam: number, specificIDs?: number[]) => {
+    const {genre, platform, gameMode, sort, order, showOnlyFavorites} = params
+    let queryString = `query games "Games-${pageParam}" {fields name,genres,platforms,aggregated_rating,rating,total_rating,game_modes,slug,involved_companies,themes,cover.image_id,videos.video_id;`
+    if (showOnlyFavorites || specificIDs) {
         if (user) {
-            const favoriteGameLength = user.favoriteGames.length
-            if (favoriteGameLength > 0) {
-                queryString += "where id = ("
-                user.favoriteGames.forEach((gameID, index) => {
-                    if (index == favoriteGameLength-1) {
+            const gameLength = showOnlyFavorites ? user.favoriteGames.length:specificIDs?.length
+            const gameIDs = showOnlyFavorites ? user.favoriteGames : specificIDs
+
+            if (gameLength &&gameLength > 0) {
+                queryString += "where id = (";
+                gameIDs?.forEach((gameID, index) => {
+                    if (index == gameLength-1) {
                         queryString += `${gameID});`
                     } else {
                         queryString += `${gameID},`
                     }
                 })
-                queryString += `limit 9;`
-                queryString += `offset ${pageParam};`
+                queryString += `limit 9;offset ${pageParam};};`
             }
             else {
-                queryString += 'limit 0;'
+                queryString += 'limit 0;};'
             }
         }
     } else {
@@ -42,10 +43,7 @@ export const generateGameQuery = (params: Query, user: User | undefined, pagePar
             queryString += ';'
         }
     
-        if (search) {
-            queryString += `search "${params.search}";`
-        }
-        else if (sort) {
+        if (sort) {
             queryString += `sort ${sort.queryString} ${order}; limit 9;`
         }
         else {
@@ -55,7 +53,7 @@ export const generateGameQuery = (params: Query, user: User | undefined, pagePar
             queryString += `sort hypes desc;`
             queryString += `limit 9;`
         }
-        queryString += `offset ${pageParam};`
+        queryString += `offset ${pageParam};};`
     }
     return queryString
 }
@@ -138,4 +136,8 @@ export const generateVideoQuery = (videos: number[]) => {
             })
         return queryString 
     }  
+}
+
+export const generateSearchQuery = (queryString: string) => {
+    return `search "${queryString}";`
 }

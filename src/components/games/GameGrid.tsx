@@ -69,7 +69,7 @@ function GameGrid() {
                                 <Card className={verticalLayout ? 'singleGameCard':'gameCard'} _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} 
                                    key={game.id} onMouseEnter={() => setPreviewVideo(game.id)} onMouseLeave={() => setPreviewVideo(0)} overflow='hidden'>
                                         <VStack>
-                                            {game.cover && <GameImage coverId={game.cover} isPreview={game.id == previewVideo} videos={game.videos}/>}
+                                            {game.cover && <GameImage cover={game.cover} isPreview={game.id == previewVideo} videos={game.videos}/>}
                                             {!game.cover && <Image className="gameImage" src={defaultPlaceHolder} />}
                                             {previewVideo != game.id && <GameName gameName={game.name}/>}
                                             {previewVideo == game.id && <Button width="90%" backgroundColor='red.500' onClick={() => toDetails(game.slug)}>View More</Button>}

@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query"
 import apiClient from "../utils/apiService"
-import { generateGameQuery } from "../utils/query_utils"
+import { generateGameQuery, generateSearchQuery } from "../utils/query_utils"
 import useQueryStore from "../stores/useQueryStore"
 import { Game } from "../entities/Game"
 import useUser from "./useUser"
@@ -14,8 +14,14 @@ const useGames = () => {
     const query = useQueryStore()
     const {data: user} = useUser()
 
-    const fetchGames = (pageParam: number) => {
-        const gameQuery = generateGameQuery(query, user, pageParam)
+    const fetchGames = async (pageParam: number) => {
+        let gameQuery = generateGameQuery(query, user, pageParam)
+        if (query.search) {
+            const games = await apiClient.post<Game[]>('/games', `${generateSearchQuery(query.search)}`).then(res => res.data)
+            const gameIDs = games.map(game => game.id)
+            gameQuery = generateGameQuery(query, user, pageParam, gameIDs)
+        }
+        console.log(gameQuery)
         return apiClient.post<Game[]>('/games', `${gameQuery}`)
         .then(res => {
             return {data: res.data.slice(0, 8), hasMore: res.data.length > 8}
@@ -32,11 +38,6 @@ const useGames = () => {
         queryKey: ['games', formattedQuery],
         queryFn: ({pageParam = 0}) => fetchGames(pageParam),
         getNextPageParam: (lastPage, allPages) => {
-            if (query.showOnlyFavorites) {
-                console.log(lastPage)
-                console.log(`Has More: ${lastPage.hasMore}`)
-                console.log((allPages.length*8))
-            }
             return lastPage.hasMore ? (allPages.length*8) : undefined
         }
     })

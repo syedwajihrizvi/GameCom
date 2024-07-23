@@ -12,8 +12,8 @@ function GameModes({gameModes}: Props) {
     const modes = filterGameModes(gameModes)
     return (
         <HStack>
-            {modes.map(mode => 
-            <Icon marginTop={1} boxSize={6} as={mode}/>)}
+            {modes.map((mode, index) => 
+            <Icon key={index} marginTop={1} boxSize={6} as={mode}/>)}
         </HStack>
     )
 }

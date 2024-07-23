@@ -50,7 +50,7 @@ function GameNavBar({handleSwitchChange, mode}: Props){
             </InputGroup>
             <Switch isChecked={mode=="dark"} colorScheme='red' size='lg' onChange={handleSwitchChange}/>
             <Menu>
-                <MenuButton>
+                <MenuButton >
                     <Button backgroundColor="red" borderRadius="100%" fontSize={18} color="white">
                         H
                     </Button>
