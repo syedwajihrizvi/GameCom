@@ -1,4 +1,4 @@
-import { Box, Center, Image,SimpleGrid, GridItem, List, ListItem, Link, Stack} from "@chakra-ui/react"
+import { Box, Center, Image,SimpleGrid, GridItem, List, ListItem, Link, Stack, Button} from "@chakra-ui/react"
 import { Heading, VStack } from "@chakra-ui/react"
 import logo from "../assets/logo.png"
 import sectionOneImage from "../assets/image-1.png"
@@ -8,16 +8,25 @@ import {Faqs, faqs} from "../utils/faqs"
 import Faq from "./Faq"
 import SignUp from "./SignUp"
 import NavBar from "./navbars/NavBar"
+import useUser from "../hooks/useUser"
+import { useNavigate } from "react-router-dom"
+
 function Main() {
+    const {data:user} = useUser()
+    const navigate = useNavigate()
     return (
             <VStack backgroundColor='black' width="100%" overflow='hidden'>
                 <Box className="background" width='100%'>
-                    <NavBar/>
+                    <NavBar user={user}/>
                     <Center className="register-main" width="100%">
                         <VStack textAlign='center'>
                             <Heading color="white" as='h1' size='3xl'>Unlimited Games, streams, and more.</Heading>
                             <Heading color="white" as='h6' size='lg'>Play Anywhere. Cancel Anytime</Heading>
-                            <SignUp/>
+                            {!user?.id && <SignUp/>}
+                            {user?.id && 
+                            <Button backgroundColor="red"  height={55} fontSize={32} padding={5} borderRadius={3} onClick={() => navigate('/games')}>
+                                View All Games
+                            </Button>}
                         </VStack>
                     </Center>
                 </Box>
@@ -67,7 +76,11 @@ function Main() {
                     <VStack>
                         <Heading size={{lg:'2xl', md:'lg'}} color='white' paddingBottom={5}>Frequently Asked Questions</Heading>
                         {faqs.map((faq:Faqs) => <Faq question={faq.question} answer={faq.answer}/>)}
-                        <SignUp/>
+                        {!user?.id && <SignUp/>}
+                        {user?.id && 
+                        <Button backgroundColor="red"  height={55} fontSize={32} padding={5} borderRadius={3} onClick={() => navigate('/games')}>
+                            View All Games
+                        </Button>}
                     </VStack>
                 </Center>
                 <Box backgroundColor='gray.800' width='100%' height='10px'/>

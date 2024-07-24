@@ -18,7 +18,7 @@ function Login() {
     const handleSignIn = (data:LoginForm) => {
         apiClient.post('/', data)
         .then(res => {
-            localStorage.setItem('userJWT', res.data)
+            localStorage.setItem('x-auth-token', res.data)
             navigate('/games')
         })
         .catch(err => {

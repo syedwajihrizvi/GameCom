@@ -1,14 +1,15 @@
 import { useColorMode } from "@chakra-ui/react"
 import GameNavBar from "./navbars/GameNavBar"
 import { Outlet } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import Footer from "./Footer"
 
 function Layout() {
-    const navigate = useNavigate()
     const { toggleColorMode, colorMode } = useColorMode()
-    if (!localStorage.getItem('userJWT'))
-        navigate('/')
+    if (!localStorage.getItem('x-auth-token')) {
+        console.log("No X-AUTH-TOKEN")
+        return <Navigate to='/'/>;
+    }
 
     return (
         <>

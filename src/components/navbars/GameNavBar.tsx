@@ -30,7 +30,7 @@ function GameNavBar({handleSwitchChange, mode}: Props){
     }
 
     const signOut = () => {
-        localStorage.removeItem('userJWT')
+        localStorage.removeItem('x-auth-token')
         navigate('/login')
     }
 

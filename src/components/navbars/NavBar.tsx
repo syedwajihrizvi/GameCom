@@ -2,8 +2,13 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { SimpleGrid, Center, HStack, Menu, MenuButton, Button, MenuList, MenuItem, Image } from "@chakra-ui/react";
 import logo from "../../assets/logo.png"
 import { Link } from "react-router-dom";
+import { User } from "../../entities/User";
 
-function NavBar() {
+interface Props {
+    user: User | undefined
+}
+
+function NavBar({user}: Props) {
     return (
         <SimpleGrid columns={{lg:2, md:1}} spacingX="100vh" spacingY={3} paddingBottom={3}>
             <Center>
@@ -21,7 +26,8 @@ function NavBar() {
                         </MenuList>
                     </Menu>
                     <Button backgroundColor='red' color='white'>
-                        <Link to='/login'>Sign In</Link>
+                        {!user?.id && <Link to='/login'>Sign In</Link>}
+                        {user?.id && <Link to='/games'>Games</Link>}
                     </Button>
                 </HStack>
             </Center>
