@@ -24,7 +24,7 @@ const useGames = () => {
         console.log(gameQuery)
         return apiClient.post<Game[]>('/games', `${gameQuery}`)
         .then(res => {
-            return {data: res.data.slice(0, 8), hasMore: res.data.length > 8}
+            return {data: res.data.slice(0, 24), hasMore: res.data.length > 24}
         })
 
     }
@@ -38,7 +38,7 @@ const useGames = () => {
         queryKey: ['games', formattedQuery],
         queryFn: ({pageParam = 0}) => fetchGames(pageParam),
         getNextPageParam: (lastPage, allPages) => {
-            return lastPage.hasMore ? (allPages.length*8) : undefined
+            return lastPage.hasMore ? (allPages.length*24) : undefined
         }
     })
 }

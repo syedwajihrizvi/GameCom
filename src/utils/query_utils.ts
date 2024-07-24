@@ -18,7 +18,7 @@ export const generateGameQuery = (params: Query, user: User | undefined, pagePar
                         queryString += `${gameID},`
                     }
                 })
-                queryString += `limit 9;offset ${pageParam};};`
+                queryString += `limit 25;offset ${pageParam};};`
             }
             else {
                 queryString += 'limit 0;};'
@@ -51,7 +51,7 @@ export const generateGameQuery = (params: Query, user: User | undefined, pagePar
                 queryString += `sort rating_count desc;`
             else
             queryString += `sort hypes desc;`
-            queryString += `limit 9;`
+            queryString += `limit 25;`
         }
         queryString += `offset ${pageParam};};`
     }
