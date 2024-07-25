@@ -12,6 +12,8 @@ import PlanGrid from "../components/PlanGrid";
 import PaymentOptions from "../components/PaymentOptions";
 import CreditDetails from "../components/CreditDetails";
 import Setup from "../components/Setup";
+import AccountSettings from "../components/AccountSettings";
+import AccountCard from "../components/AccountCard";
 
 const router = createBrowserRouter([
     {path: '/', element: <Main/>},
@@ -37,6 +39,16 @@ const router = createBrowserRouter([
             {path: ':id', element: <GameDetails/>}
         ]
     },
+    {
+        path: '/account',
+        element: <Layout/>,
+        errorElement: <ErrorPage/>,
+        children: [
+            {path: '', element: <AccountSettings/>},
+            {path: 'plans', element: <PlanGrid/>},
+            {path: 'payment', element: <AccountCard/>}
+        ]
+    }
 ])
 
 export default router

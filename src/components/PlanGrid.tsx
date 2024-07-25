@@ -1,7 +1,7 @@
 import { Text, GridItem, Box, Heading, VStack, SimpleGrid, Card, Stack, StackDivider, CardBody, Flex, Spacer, Center, Button, Link } from "@chakra-ui/react"
 import PlanHeader from "./PlanHeader"
 import { useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate} from "react-router-dom"
 
 const plans = [
     {
@@ -50,20 +50,27 @@ const plans = [
 function PlanGrid() {
     const navigate = useNavigate()
     const [currentPlan, setCurrentPlan] =  useState(0)
-    const {state: {data}} = useLocation()
+    const {state:userData} = useLocation()
 
+    const isLoggedIn = localStorage.getItem('x-auth-token')
+    console.log(isLoggedIn)
     const handlePlanSelect = (index: number) => {
         setCurrentPlan(index)
     }
 
     const handleSubmit = () => {
-        data["selectedPlan"] = plans[currentPlan].title
-        navigate("/setup/payment", {state: {data}})
+        if (!isLoggedIn) {
+            userData.data["selectedPlan"] = plans[currentPlan].title
+            navigate("/setup/payment", {state: userData.data})
+        } else {
+            console.log("Plan Updated")
+            navigate("/account")
+        }
     }
 
     return (
         <VStack>
-            <Text>Step 2 of 3</Text>
+            {!isLoggedIn && <Text>Step 2 of 3</Text>}
             <Heading mb={2}>Choose the plan that’s right for you</Heading>
             <SimpleGrid templateAreas={ `"partialPlans"
                                             "fullPlans"
@@ -124,7 +131,8 @@ function PlanGrid() {
                         <Link color="blue">Learn more</Link>. Watch on 4 different devices at the same time with Premium and 2 with Standard or Standard with ads.
                         </Text>
                         <Center>
-                            <Button backgroundColor='red' color='white' width="350px" height="55px" borderRadius={1} fontSize={28} onClick={handleSubmit}>Next</Button>
+                            {!isLoggedIn && <Button backgroundColor='red' color='white' width="350px" height="55px" borderRadius={1} fontSize={28} onClick={handleSubmit}>Next</Button>}
+                            {isLoggedIn && <Button backgroundColor='red' color='white' width="350px" height="55px" borderRadius={1} fontSize={28} onClick={handleSubmit}>Update Plan</Button>}
                         </Center>
                     </Stack>
                 </GridItem>
