@@ -2,6 +2,8 @@ import { Text, GridItem, Box, Heading, VStack, SimpleGrid, Card, Stack, StackDiv
 import PlanHeader from "./PlanHeader"
 import { useState } from "react"
 import { useLocation, useNavigate} from "react-router-dom"
+import apiClient from "../utils/userService"
+import useUser from "../hooks/useUser"
 
 const plans = [
     {
@@ -51,9 +53,9 @@ function PlanGrid() {
     const navigate = useNavigate()
     const [currentPlan, setCurrentPlan] =  useState(0)
     const {state:userData} = useLocation()
+    const {data:user} = useUser()
 
     const isLoggedIn = localStorage.getItem('x-auth-token')
-    console.log(isLoggedIn)
     const handlePlanSelect = (index: number) => {
         setCurrentPlan(index)
     }
@@ -63,8 +65,12 @@ function PlanGrid() {
             userData.data["selectedPlan"] = plans[currentPlan].title
             navigate("/setup/payment", {state: userData.data})
         } else {
-            console.log("Plan Updated")
-            navigate("/account")
+            apiClient.put(`/${user?.id}`, {'selectedPlan': plans[currentPlan].title}).then(() => {
+                navigate("/account")
+            })
+            .catch(err => {
+                console.log(`Error: ${err}`)
+            })
         }
     }
 

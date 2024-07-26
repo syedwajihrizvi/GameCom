@@ -3,6 +3,9 @@ import { Container, VStack, Heading, Flex, StackDivider, Icon, Spacer, Button, T
 import { useState } from "react"
 import { IoEyeOutline } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
+import apiClient from '../utils/userService'
+import useUser from "../hooks/useUser"
+import { useQueryClient } from "@tanstack/react-query"
 
 type setting = {
     viewDropdown: boolean,
@@ -16,10 +19,15 @@ const defaultSetting = {
 }
 
 function AccountSettings() {
+    const queryClient = useQueryClient()
+    const {data:user} = useUser()
     const navigate = useNavigate()
     const [emailSetting, setEmailSetting] = useState<setting>({...defaultSetting, type: "email"})
     const [passwordSetting, setPasswordSetting] = useState<setting>({...defaultSetting, type: "password"})
     const [paymentSetting, setPaymentSetting] = useState<setting>({...defaultSetting, type: "payment"})
+    const [showPassword, setShowPassword] = useState(false)
+    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
 
     const renderIcon = (setting: setting) => {
         return <Icon as={setting.viewDropdown ? ChevronUpIcon:ChevronDownIcon} boxSize={8} _hover={{cursor: 'pointer'}} onClick={() => {
@@ -51,6 +59,30 @@ function AccountSettings() {
         }
     }
 
+    const submitEmail = () => {
+        apiClient.put(`/${user?.id}`, {email}).then(res => {
+            // Invalidate the query
+            console.log(res)
+            queryClient.invalidateQueries(["me"])
+            setEmailSetting({...emailSetting, change: !emailSetting.change})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const submitPassword = () => {
+        apiClient.put(`/${user?.id}`, {password}).then(res => {
+            // Invalidate the query
+            console.log(res)
+            queryClient.invalidateQueries(["me"])
+            setPasswordSetting({...passwordSetting, change: !passwordSetting.change})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
     return (
         <Container height="90vh" paddingTop='20vh'>
             <VStack width="500px">
@@ -65,15 +97,15 @@ function AccountSettings() {
                         <Flex width="100%">
                             <VStack>
                                 <Heading fontSize={12} width="100%">Current Email</Heading>
-                                <Text width="100%">email@email.com</Text>
+                                <Text width="100%">{user?.email}</Text>
                             </VStack>
                             <Spacer/>
                             {!emailSetting.change && <Button onClick={() => handleChangeSetting(emailSetting)}>Change Email</Button>}
                             {emailSetting.change &&
                                 <VStack>
-                                    <Input width="100%"placeholder="New Email"/>
+                                    <Input width="100%"placeholder="New Email" onChange={event => setEmail(event.target.value)}/>
                                     <ButtonGroup width="100%">
-                                        <Icon as={CheckIcon} backgroundColor='green.500' color="white" boxSize={6} padding={1} borderRadius={5} _hover={{cursor:"pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}}/>
+                                        <Icon as={CheckIcon} backgroundColor='green.500' color="white" boxSize={6} padding={1} borderRadius={5} _hover={{cursor:"pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} onClick={submitEmail}/>
                                         <Icon as={CloseIcon} backgroundColor='red.500' color="white" boxSize={6} padding={1} borderRadius={5} _hover={{cursor:"pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} onClick={() => handleChangeSetting(emailSetting)}/>
                                     </ButtonGroup>
                                 </VStack>
@@ -100,12 +132,12 @@ function AccountSettings() {
                                 <VStack>
                                     <InputGroup>
                                     <InputRightElement>
-                                        <Icon as={IoEyeOutline} _hover={{cursor: "pointer"}}/>
+                                        <Icon as={IoEyeOutline} _hover={{cursor: "pointer"}} onClick={() => setShowPassword(!showPassword)}/>
                                     </InputRightElement>
-                                    <Input width="100%"placeholder="New Password" type="password"/>
+                                    <Input width="100%"placeholder="New Password" type={showPassword ? "text":"password"} onChange={event => setPassword(event.target.value)}/>
                                     </InputGroup>
                                     <ButtonGroup width="100%">
-                                        <Icon as={CheckIcon} backgroundColor='green.500' color="white" boxSize={6} padding={1} borderRadius={5} _hover={{cursor:"pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}}/>
+                                        <Icon as={CheckIcon} backgroundColor='green.500' color="white" boxSize={6} padding={1} borderRadius={5} _hover={{cursor:"pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} onClick={submitPassword}/>
                                         <Icon as={CloseIcon} backgroundColor='red.500' color="white" boxSize={6} padding={1} borderRadius={5} _hover={{cursor:"pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} onClick={() => handleChangeSetting(passwordSetting)}/>
                                     </ButtonGroup>
                                 </VStack>
@@ -120,7 +152,7 @@ function AccountSettings() {
                     {paymentSetting.viewDropdown &&
                     <Flex width="100%">
                         <VStack>
-                            <Heading fontSize={12} width="100%">Current Plan</Heading>
+                            <Heading fontSize={12} width="100%">{user?.plan} Plan</Heading>
                             <HStack>
                                 <Text width="100%">####-####-####-1234</Text>
                             </HStack>
