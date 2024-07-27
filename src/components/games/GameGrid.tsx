@@ -10,7 +10,7 @@ import GameRating from "./GameRating"
 import GameModes from "./GameModes"
 import GameName from "./GameName"
 import InfiniteScroll from "react-infinite-scroll-component"
-import InfiniteLoader from "../InfiniteLoader"
+import InfiniteLoader from "../common/InfiniteLoader"
 import { useNavigate } from 'react-router-dom'
 import useQueryStore from '../../stores/useQueryStore'
 import FavoriteIcon from './Favorite'

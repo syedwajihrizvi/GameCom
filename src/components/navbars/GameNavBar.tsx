@@ -5,6 +5,7 @@ import useQueryStore from "../../stores/useQueryStore"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { IoSearchCircleSharp } from "react-icons/io5"
+import useUser from "../../hooks/useUser"
 
 interface Props {
     handleSwitchChange: () => void,
@@ -15,7 +16,8 @@ function GameNavBar({handleSwitchChange, mode}: Props){
     const {handleSearch, resetQueryToDefault} = useQueryStore()
     const navigate = useNavigate()
     const [search, setSearch] = useState('')
-
+    const {data:user} = useUser()
+    console.log(user)
     const handleSearchInput = (event: string, value: string) => {
         if (event == "Enter") {
             handleSearch(value ? value : '')
@@ -52,7 +54,7 @@ function GameNavBar({handleSwitchChange, mode}: Props){
             <Menu>
                 <MenuButton >
                     <Button backgroundColor="red" borderRadius="100%" fontSize={18} color="white">
-                        H
+                        {user?.firstName.toUpperCase()}
                     </Button>
                 </MenuButton>
                 <MenuList>

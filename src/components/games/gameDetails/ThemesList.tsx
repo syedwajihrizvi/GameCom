@@ -1,5 +1,5 @@
 import { useThemes } from "../../../hooks/useThemes"
-import SpecificDetails, { Detail } from "../../SpecificDetails"
+import SpecificDetails, { Detail } from "../../common/SpecificDetails"
 
 interface Props {
     themeIds: number[]

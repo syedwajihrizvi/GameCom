@@ -1,8 +1,8 @@
-import apiClient from "../utils/loginService"
+import apiClient from "../../utils/loginService"
 import { useForm } from "react-hook-form"
 import { Link as RouterLink, useNavigate} from "react-router-dom"
 import { Box, Card, Center, CardBody, Heading, Image, Stack, StackDivider, VStack, Text, Input, Button, Link } from "@chakra-ui/react"
-import logo from "../assets/logo.png"
+import logo from "../../assets/logo.png"
 import { useState } from "react"
 
 interface LoginForm {

@@ -3,8 +3,8 @@ import { Container, VStack, Heading, Flex, StackDivider, Icon, Spacer, Button, T
 import { useState } from "react"
 import { IoEyeOutline } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
-import apiClient from '../utils/userService'
-import useUser from "../hooks/useUser"
+import apiClient from '../../utils/userService'
+import useUser from "../../hooks/useUser"
 import { useQueryClient } from "@tanstack/react-query"
 
 type setting = {

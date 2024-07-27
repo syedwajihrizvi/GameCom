@@ -1,13 +1,13 @@
 import { Grid, GridItem, HStack, useColorMode } from '@chakra-ui/react'
 import './App.css'
 import GameNavBar from './components/navbars/GameNavBar'
-import SideBar from './components/SideBar'
+import SideBar from './components/common/SideBar'
 import GameGrid from './components/games/GameGrid'
 import PlatformSelector from './components/platforms/PlatformSelector'
 import GameModeSelector from './components/games/GameModeSelector'
 import SortSelector from './components/selectors/SortSelector'
 import OrderSelector from './components/selectors/OrderSelector'
-import FilterHeading from './components/FilterHeading'
+import FilterHeading from './components/games/FilterHeading'
 import useQueryStore from './stores/useQueryStore'
 
 function App() {

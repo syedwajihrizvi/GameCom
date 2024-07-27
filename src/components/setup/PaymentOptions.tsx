@@ -1,7 +1,7 @@
 import { Center, Flex, Heading, Spacer, Stack, Text, VStack, Image, HStack, Icon } from "@chakra-ui/react"
-import visa from "../assets/Payment/VISA.png"
-import mastercard from "../assets/Payment/MASTERCARD.png"
-import amex from "../assets/Payment/AMEX.png"
+import visa from "../../assets/Payment/VISA.png"
+import mastercard from "../../assets/Payment/MASTERCARD.png"
+import amex from "../../assets/Payment/AMEX.png"
 
 import { IoIosArrowForward } from "react-icons/io"
 import { CiLock } from "react-icons/ci"

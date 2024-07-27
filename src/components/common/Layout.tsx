@@ -1,5 +1,5 @@
 import { useColorMode } from "@chakra-ui/react"
-import GameNavBar from "./navbars/GameNavBar"
+import GameNavBar from "../navbars/GameNavBar"
 import { Outlet } from "react-router-dom"
 import { Navigate } from "react-router-dom"
 import Footer from "./Footer"

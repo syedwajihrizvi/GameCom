@@ -1,5 +1,5 @@
 import { Heading } from "@chakra-ui/react"
-import useQueryStore from "../stores/useQueryStore"
+import useQueryStore from "../../stores/useQueryStore"
 
 function FilterHeading() {
     const {platform, gameMode, genre} = useQueryStore()

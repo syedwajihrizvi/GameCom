@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Center, Flex, Heading, Icon, Input, InputGroup, InputRightElement, Stack, VStack } from "@chakra-ui/react"
 import { CiCircleQuestion } from "react-icons/ci"
-import useUser from "../hooks/useUser"
+import useUser from "../../hooks/useUser"
 function AccountCard() {
     const {data:user} = useUser()
 

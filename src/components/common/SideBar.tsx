@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { VStack, Link, Text } from "@chakra-ui/react";
-import useGenres, { allGenre } from "../hooks/useGenres";
-import useQueryStore from "../stores/useQueryStore";
+import useGenres, { allGenre } from "../../hooks/useGenres";
+import useQueryStore from "../../stores/useQueryStore";
 
 function SideBar() {
     const {genre:currentGenre, handleGenre} = useQueryStore()

@@ -1,4 +1,4 @@
-import NavBar from "./navbars/NavBar"
+import NavBar from "../navbars/NavBar"
 
 function SignUpNavBar() {
     return (

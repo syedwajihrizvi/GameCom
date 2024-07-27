@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import { Outlet } from "react-router-dom"
-import Footer from "./Footer"
-import NavBar from "./navbars/NavBar"
+import Footer from "../common/Footer"
+import NavBar from "../navbars/NavBar"
 
 function SetUp() {
     return (

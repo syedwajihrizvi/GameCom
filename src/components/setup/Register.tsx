@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import {registerSchema} from "../utils/schema/userSchema"
+import {registerSchema} from "../../utils/schema/userSchema"
 import { useNavigate } from "react-router-dom";
 
 const schema = z.object(registerSchema).required()

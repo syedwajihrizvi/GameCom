@@ -9,5 +9,6 @@ export interface User {
     email: string,
     password: string,
     plan: string,
-    cardInfo: CardInfo
+    cardInfo: CardInfo,
+    firstName: string
 }

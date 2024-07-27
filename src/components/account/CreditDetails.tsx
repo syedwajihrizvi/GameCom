@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom"
 import { useForm, SubmitHandler} from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { paymentSchema } from "../utils/schema/userSchema"
-import userService from "../utils/userService"
-import visa from "../assets/Payment/VISA.png"
-import mastercard from "../assets/Payment/MASTERCARD.png"
-import amex from "../assets/Payment/AMEX.png"
+import { paymentSchema } from "../../utils/schema/userSchema"
+import userService from "../../utils/userService"
+import visa from "../../assets/Payment/VISA.png"
+import mastercard from "../../assets/Payment/MASTERCARD.png"
+import amex from "../../assets/Payment/AMEX.png"
 
 const schema = z.object({
     ...paymentSchema

@@ -1,4 +1,4 @@
-import SpecificDetails, { Detail } from "../../SpecificDetails"
+import SpecificDetails, { Detail } from "../../common/SpecificDetails"
 import useCompanies from "../../../hooks/useCompanies"
 
 interface Props {

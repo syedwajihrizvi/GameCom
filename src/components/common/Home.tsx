@@ -1,14 +1,14 @@
 import { Text, Grid, GridItem, HStack, SimpleGrid, Button, ButtonGroup} from "@chakra-ui/react"
-import FilterHeading from "./FilterHeading"
-import GameGrid from "./games/GameGrid"
-import GameModeSelector from "./games/GameModeSelector"
-import OrderSelector from "./selectors/OrderSelector"
-import PlatformSelector from "./platforms/PlatformSelector"
+import FilterHeading from "../games/FilterHeading"
+import GameGrid from "../games/GameGrid"
+import GameModeSelector from "../games/GameModeSelector"
+import OrderSelector from "../selectors/OrderSelector"
+import PlatformSelector from "../platforms/PlatformSelector"
 import SideBar from "./SideBar"
-import SortSelector from "./selectors/SortSelector"
+import SortSelector from "../selectors/SortSelector"
 import { CiGrid41, CiGrid2H } from "react-icons/ci";
-import useQueryStore from "../stores/useQueryStore"
-import ShowOnlySelector from "./games/ShowOnlySelector"
+import useQueryStore from "../../stores/useQueryStore"
+import ShowOnlySelector from "../games/ShowOnlySelector"
 
 function Home() {
     const {genre, platform, gameMode, sort, handleLayoutToggle} = useQueryStore()

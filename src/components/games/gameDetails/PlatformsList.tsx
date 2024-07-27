@@ -1,5 +1,5 @@
 import { usePlatforms } from "../../../hooks/usePlatforms"
-import SpecificDetails, { Detail } from "../../SpecificDetails"
+import SpecificDetails, { Detail } from "../../common/SpecificDetails"
 
 interface Props {
     platformIds: number[] | undefined

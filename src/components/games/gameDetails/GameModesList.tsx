@@ -1,5 +1,5 @@
 import { useGameModes } from "../../../hooks/useGameModes"
-import SpecificDetails, { Detail } from "../../SpecificDetails"
+import SpecificDetails, { Detail } from "../../common/SpecificDetails"
 
 interface Props {
     gameModeIds: number[] | undefined
