@@ -5,13 +5,11 @@ import { useLocation, useNavigate, useOutletContext} from "react-router-dom"
 import apiClient from "../../utils/services/userService"
 import { User } from "../../entities/User"
 import { plans } from "./utils/plans"
-
 function PlanGrid() {
     const navigate = useNavigate()
     const [currentPlan, setCurrentPlan] =  useState(0)
     const {state:userData} = useLocation()
-    const user = useOutletContext<User>()
-
+    const user = useOutletContext<User>()    
     const isLoggedIn = localStorage.getItem('x-auth-token')
 
     const handlePlanSelect = (index: number) => {
@@ -59,7 +57,7 @@ function PlanGrid() {
                 <GridItem area="fullPlans" display={{base: "none", lg:"block"}}>
                     <SimpleGrid columns={3} spacingX={10} width='100%'>
                         {plans.map((plan, index) => 
-                            <Card width={{lg: "250px", xl: "350px"}} onClick={() => handlePlanSelect(index)} height="700px" padding={2} _hover={{cursor: "pointer", transform: 'scale(1.01)', transition: 'transform 0.15s ease-in'}} backgroundColor={index == currentPlan ? 'gray.800': ""}>
+                            <Card width={{lg: "250px", xl: "350px"}} onClick={() => handlePlanSelect(index)} height="700px" padding={2} _hover={{cursor: "pointer", transform: 'scale(1.01)', transition: 'transform 0.15s ease-in'}}>
                                 <VStack>
                                     <PlanHeader title={plan.title} quality={plan.quality} partial={false}/>
                                     <CardBody  width='100%'>
@@ -67,7 +65,7 @@ function PlanGrid() {
                                             {plan.values.map(value => 
                                             <Box>
                                                 <Text color='gray.500' fontSize='sm' as='b' display='block'>{value.name}</Text>
-                                                <Text as='b' fontSize='md' color={index == currentPlan ? 'white' : "black"}>{value.value}</Text>
+                                                <Text as='b' fontSize='md'>{value.value}</Text>
                                             </Box>
                                             )}
                                         </Stack>
