@@ -79,7 +79,7 @@ function UpdateDropDown({title, currentValue, key, userId, type}: Props) {
                 <Heading fontSize={20}>{title}</Heading>
                 <Spacer/>
                 <Icon as={setting.viewDropdown ? MinusIcon:AddIcon} 
-                      boxSize={8} _hover={{cursor: 'pointer'}} onClick={handleIconSelect}/>
+                      boxSize={4} _hover={{cursor: 'pointer'}} onClick={handleIconSelect}/>
             </Flex>  
             {
             setting.viewDropdown &&
@@ -89,7 +89,7 @@ function UpdateDropDown({title, currentValue, key, userId, type}: Props) {
                     <Text width="100%">{type == "password" ?"*********":currentValue}</Text>
                 </VStack>
                 <Spacer/>
-                {!setting.change && <Button onClick={handleChangeSetting}>Change {title}</Button>}
+                {!setting.change && <Button color="white" backgroundColor="red" onClick={handleChangeSetting}>Change {title}</Button>}
                 {setting.change &&
                     <VStack>
                         {renderInput()}

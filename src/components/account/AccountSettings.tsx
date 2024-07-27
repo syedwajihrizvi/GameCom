@@ -18,7 +18,7 @@ function AccountSettings() {
                     <Flex width="100%" justifyContent='start'>
                         <Heading fontSize={20}>Payment Info</Heading>
                         <Spacer/>
-                        <Button onClick={() => navigate('/account/payment', {state: user})}>Change Payment</Button>
+                        <Button color="white" backgroundColor="red" onClick={() => navigate('/account/payment', {state: user})}>Change Payment</Button>
                     </Flex>
                     <Flex width="100%" justifyContent='start' _hover={{cursor: 'pointer'}} onClick={() => navigate('/account/plans')}>
                         <Heading fontSize={20}>View Plans</Heading>
