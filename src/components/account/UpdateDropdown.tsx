@@ -1,6 +1,6 @@
 import { VStack, Flex, Heading, Spacer, Icon, Button, ButtonGroup, Input, Text, InputGroup, InputRightElement } from "@chakra-ui/react"
 import { MinusIcon, AddIcon, CheckIcon, CloseIcon } from "@chakra-ui/icons"
-import apiClient from '../../utils/userService'
+import apiClient from '../../utils/services/userService'
 import { useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { IoEyeOutline } from "react-icons/io5"

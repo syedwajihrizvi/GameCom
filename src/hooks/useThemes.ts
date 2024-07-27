@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import apiClient from "../utils/apiService"
+import dataClient from "../utils/services/dataService"
 import { generateThemeQuery } from "../utils/query_utils"
 
 interface Theme {
@@ -9,10 +9,8 @@ interface Theme {
 
 export const useThemes = (themes: number[]) => {
 
-    const fetchThemes = () => {
-        return apiClient.post<Theme[]>('/themes', generateThemeQuery(themes))
-        .then(res => res.data)
-    }
+    const fetchThemes = () =>
+        dataClient.post<Theme[]>('/themes', {query:generateThemeQuery(themes)}).then(res => res.data)
 
     return useQuery<Theme[]>({
         queryKey: ["themes", themes],

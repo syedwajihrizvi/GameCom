@@ -104,16 +104,18 @@ export const generateGameModeQuery = (gameModes: number[]) => {
 }
 
 export const generateCompanyQuery = (involvedCompanies: number[]) => {
+    let queryString = `query involved_companies "Company" {fields company.name;`
     if (involvedCompanies.length > 0) {
-        let queryString = "where id=("
+        queryString += "where id=("
         involvedCompanies.forEach((involvedCompany, index) => {
             if (index == involvedCompanies.length - 1)
                 queryString += `${involvedCompany.toString()});`
             else
                 queryString += `${involvedCompany.toString()},`
         })
-        return queryString
     }
+    queryString += "limit 100;};"
+    return queryString
 }
 
 export const generateThemeQuery = (themes: number[]) => {

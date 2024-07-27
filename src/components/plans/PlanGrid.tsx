@@ -2,7 +2,7 @@ import { Text, GridItem, Box, Heading, VStack, SimpleGrid, Card, Stack, StackDiv
 import PlanHeader from "./PlanHeader"
 import { useState } from "react"
 import { useLocation, useNavigate, useOutletContext} from "react-router-dom"
-import apiClient from "../../utils/userService"
+import apiClient from "../../utils/services/userService"
 import { User } from "../../entities/User"
 import { plans } from "./utils/plans"
 

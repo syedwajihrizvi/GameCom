@@ -1,19 +1,12 @@
 import { useQuery } from "@tanstack/react-query"
-import apiClient from "../utils/userService"
+import userClient from "../utils/services/userService"
 import { User } from "../entities/User"
 
 const useUser = () => {
     const token = localStorage.getItem('x-auth-token')
-    const fetchUser = () => {
-        return apiClient.get<User>('/me', {
-            headers: {
-                'x-auth-token': token
-            }
-        })
-        .then(res => res.data)
-        .catch(err => err)
-    }
-
+    const headers = {'x-auth-token': token}
+    const fetchUser = () =>
+        userClient.get<User>('/me', {headers}).then(res => res.data).catch(err => err)
     return useQuery<User>({
         queryKey: ["me"],
         queryFn: fetchUser

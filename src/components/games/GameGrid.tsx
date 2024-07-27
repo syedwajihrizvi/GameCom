@@ -14,7 +14,7 @@ import InfiniteLoader from "../common/InfiniteLoader"
 import { useNavigate } from 'react-router-dom'
 import useQueryStore from '../../stores/useQueryStore'
 import FavoriteIcon from './Favorite'
-import apiClient from '../../utils/userService'
+import apiClient from '../../utils/services/userService'
 import { useQueryClient } from '@tanstack/react-query'
 import { User } from '../../entities/User'
 

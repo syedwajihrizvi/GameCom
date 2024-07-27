@@ -7,8 +7,8 @@ interface Props {
 
 function DevelopersList({involvedCompanyIds}:Props) {
     const {data} = useCompanies(involvedCompanyIds)
-
-    return <SpecificDetails heading="Companies Involved" details={data as Detail[]}/>
+    const companies = data?.map(involved_company => involved_company.company)
+    return <SpecificDetails heading="Companies Involved" details={companies as Detail[]}/>
 }
 
 export default DevelopersList
