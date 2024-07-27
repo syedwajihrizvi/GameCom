@@ -15,7 +15,6 @@ function PlanGrid() {
     const isLoggedIn = localStorage.getItem('x-auth-token')
 
     const handlePlanSelect = (index: number) => {
-        console.log("Changed current plan")
         setCurrentPlan(index)
     }
 

@@ -2,13 +2,9 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { SimpleGrid, Center, HStack, Menu, MenuButton, Button, MenuList, MenuItem, Image } from "@chakra-ui/react";
 import logo from "../../assets/logo.png"
 import { Link } from "react-router-dom";
-import { User } from "../../entities/User";
 
-interface Props {
-    user: User | undefined
-}
-
-function NavBar({user}: Props) {
+function NavBar() {
+    const isLoggedIn = localStorage.getItem('x-auth-token')
     return (
         <SimpleGrid columns={{lg:2, md:1}} spacingX="100vh" spacingY={3} paddingBottom={3}>
             <Center>
@@ -26,8 +22,8 @@ function NavBar({user}: Props) {
                         </MenuList>
                     </Menu>
                     <Button backgroundColor='red' color='white'>
-                        {!user?.id && <Link to='/login'>Sign In</Link>}
-                        {user?.id && <Link to='/games'>Games</Link>}
+                        {!isLoggedIn && <Link to='/login'>Sign In</Link>}
+                        {isLoggedIn && <Link to='/games'>Games</Link>}
                     </Button>
                 </HStack>
             </Center>

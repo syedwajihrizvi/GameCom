@@ -12,7 +12,6 @@ function PaymentOptions() {
     const navigate = useNavigate()
     const {state} = useLocation()
 
-    console.log(state)
     const handlePaymentSelection = (type:string) => {
         if (type == "card")
             navigate("/setup/creditoption", {state: state})

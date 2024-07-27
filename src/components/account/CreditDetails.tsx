@@ -24,8 +24,6 @@ function CreditDetails() {
     })
     const {state:userData} = useLocation()
     const onFormSubmit:SubmitHandler<ValidationSchemaType> = (paymentData) => {
-        console.log("Sent Request")
-        console.log({...paymentData,...userData})
         userService.post('', {...paymentData,...userData}).
         then(() => {
             navigate('/login')
