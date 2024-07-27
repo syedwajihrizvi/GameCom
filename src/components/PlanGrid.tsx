@@ -138,7 +138,14 @@ function PlanGrid() {
                         </Text>
                         <Center>
                             {!isLoggedIn && <Button backgroundColor='red' color='white' width="350px" height="55px" borderRadius={1} fontSize={28} onClick={handleSubmit}>Next</Button>}
-                            {isLoggedIn && <Button backgroundColor='red' color='white' width="350px" height="55px" borderRadius={1} fontSize={28} onClick={handleSubmit}>Update Plan</Button>}
+                            {isLoggedIn && 
+                            <>
+                                <VStack>
+                                    <Button backgroundColor='red' color='white' width="350px" height="55px" borderRadius={1} fontSize={28} onClick={handleSubmit}>Update Plan</Button>
+                                    <Button backgroundColor='red' color='white' width="350px" height="55px" borderRadius={1} fontSize={28} onClick={() => navigate('/account')}>Back</Button>
+                                </VStack>
+                            </>
+                            }
                         </Center>
                     </Stack>
                 </GridItem>

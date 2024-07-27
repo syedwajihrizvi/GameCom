@@ -13,9 +13,23 @@ type setting = {
     type: string,
 }
 
+type errors = {
+    email: string,
+    password: string
+}
+
+interface error_details {
+    message: string
+}
+
 const defaultSetting = {
     viewDropdown: false,
     change: false,
+}
+
+const defaultError = {
+    email: "",
+    password: ""
 }
 
 function AccountSettings() {
@@ -28,20 +42,26 @@ function AccountSettings() {
     const [showPassword, setShowPassword] = useState(false)
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
-
+    const [error, setError] = useState<errors>(defaultError)
     const renderIcon = (setting: setting) => {
         return <Icon as={setting.viewDropdown ? ChevronUpIcon:ChevronDownIcon} boxSize={8} _hover={{cursor: 'pointer'}} onClick={() => {
             if (setting.type == "email") {
-                if (emailSetting.change)
+                if (emailSetting.change) {
                     setEmailSetting({...emailSetting, viewDropdown:!emailSetting.viewDropdown, change:false})
-                else
+                    setError(defaultError)
+                }
+                else {
                     setEmailSetting({...emailSetting, viewDropdown:!emailSetting.viewDropdown})
+                }
             }
             if (setting.type == "password") {
-                if (passwordSetting.change)
+                if (passwordSetting.change) {
                     setPasswordSetting({...passwordSetting, viewDropdown:!passwordSetting.viewDropdown, change:false})
-                else
+                    setError(defaultError)
+                }
+                else {
                     setPasswordSetting({...passwordSetting, viewDropdown:!passwordSetting.viewDropdown})
+                }
             }
             if (setting.type == "payment") {
                 setPaymentSetting({...paymentSetting, viewDropdown: !paymentSetting.viewDropdown})
@@ -60,26 +80,24 @@ function AccountSettings() {
     }
 
     const submitEmail = () => {
-        apiClient.put(`/${user?.id}`, {email}).then(res => {
+        apiClient.put(`/${user?.id}`, {email}).then(() => {
             // Invalidate the query
-            console.log(res)
             queryClient.invalidateQueries(["me"])
             setEmailSetting({...emailSetting, change: !emailSetting.change})
         })
-        .catch(err => {
-            console.log(err)
+        .catch((err: error_details) => {
+            setError({...error, email:err.message});
         })
     }
 
     const submitPassword = () => {
-        apiClient.put(`/${user?.id}`, {password}).then(res => {
+        apiClient.put(`/${user?.id}`, {password}).then(() => {
             // Invalidate the query
-            console.log(res)
             queryClient.invalidateQueries(["me"])
             setPasswordSetting({...passwordSetting, change: !passwordSetting.change})
         })
-        .catch(err => {
-            console.log(err)
+        .catch((err: error_details) => {
+            setError({...error, password:err.message});
         })
     }
 
@@ -104,6 +122,7 @@ function AccountSettings() {
                             {emailSetting.change &&
                                 <VStack>
                                     <Input width="100%"placeholder="New Email" onChange={event => setEmail(event.target.value)}/>
+                                    {error.email && <Text color="red" width="100%">Invalid Email</Text>}
                                     <ButtonGroup width="100%">
                                         <Icon as={CheckIcon} backgroundColor='green.500' color="white" boxSize={6} padding={1} borderRadius={5} _hover={{cursor:"pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} onClick={submitEmail}/>
                                         <Icon as={CloseIcon} backgroundColor='red.500' color="white" boxSize={6} padding={1} borderRadius={5} _hover={{cursor:"pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} onClick={() => handleChangeSetting(emailSetting)}/>
@@ -136,6 +155,7 @@ function AccountSettings() {
                                     </InputRightElement>
                                     <Input width="100%"placeholder="New Password" type={showPassword ? "text":"password"} onChange={event => setPassword(event.target.value)}/>
                                     </InputGroup>
+                                    {error.password && <Text color="red" width="100%">Invalid Password</Text>}
                                     <ButtonGroup width="100%">
                                         <Icon as={CheckIcon} backgroundColor='green.500' color="white" boxSize={6} padding={1} borderRadius={5} _hover={{cursor:"pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} onClick={submitPassword}/>
                                         <Icon as={CloseIcon} backgroundColor='red.500' color="white" boxSize={6} padding={1} borderRadius={5} _hover={{cursor:"pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} onClick={() => handleChangeSetting(passwordSetting)}/>
@@ -154,11 +174,11 @@ function AccountSettings() {
                         <VStack>
                             <Heading fontSize={12} width="100%">{user?.plan} Plan</Heading>
                             <HStack>
-                                <Text width="100%">####-####-####-1234</Text>
+                                <Text width="100%">####-####-####-####</Text>
                             </HStack>
                         </VStack>
                         <Spacer/>
-                        <Button onClick={() => navigate('/account/payment')}>Change Payment</Button>
+                        <Button onClick={() => navigate('/account/payment', {state: user})}>Change Payment</Button>
                     </Flex>
                     }
                     <Flex width="100%" justifyContent='start' _hover={{cursor: 'pointer'}} onClick={() => navigate('/account/plans')}>
