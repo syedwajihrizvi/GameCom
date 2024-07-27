@@ -1,9 +1,12 @@
 import { Query } from "../entities/Query"
 import { User } from "../entities/User"
 
-export const generateGameQuery = (params: Query, user: User | undefined, pageParam: number, specificIDs?: number[]) => {
+export const generateGameQuery = (params: Query, user: User | undefined, 
+                                pageParam: number, specificIDs?: number[]) => {
     const {genre, platform, gameMode, sort, order, showOnlyFavorites} = params
-    let queryString = `query games "Games-${pageParam}" {fields name,genres,platforms,aggregated_rating,rating,total_rating,game_modes,slug,involved_companies,themes,cover.image_id,videos.video_id;`
+    let queryString = `query games "Games-${pageParam}" {fields name,genres,platforms,
+                       aggregated_rating,rating,total_rating,game_modes,slug,involved_companies,
+                       themes,cover.image_id,videos.video_id;`
     if (showOnlyFavorites || specificIDs) {
         if (user) {
             const gameLength = showOnlyFavorites ? user.favoriteGames.length:specificIDs?.length
@@ -59,16 +62,18 @@ export const generateGameQuery = (params: Query, user: User | undefined, pagePar
 }
 
 export const generatePlatformsQuery = (platforms: number[]) => {
+    let queryString = "fields name; "
     if (platforms.length > 0) {
-        let queryString = "where id=("
+        queryString += "where id=("
         platforms.forEach((platformID, index) => {
             if (index == platforms.length - 1)
                 queryString += `${platformID.toString()});`
             else
                 queryString += `${platformID.toString()},`
         })
-        return queryString
     }
+    queryString += "limit 100; sort name asc;"
+    return queryString
 }
 
 export const generateImageQuery = (images: number[]) => {
@@ -84,7 +89,7 @@ export const generateImageQuery = (images: number[]) => {
 }
 
 export const generateGameModeQuery = (gameModes: number[]) => {
-    let queryString = ""
+    let queryString = "fields name;"
     if (gameModes.length > 0) {
         queryString += "("
         gameModes.forEach((gameModeID, index) => {
@@ -112,16 +117,18 @@ export const generateCompanyQuery = (involvedCompanies: number[]) => {
 }
 
 export const generateThemeQuery = (themes: number[]) => {
+    let queryString = "fields name;"
     if (themes.length > 0) {
-        let queryString = "where id=("
+        queryString += "where id=("
         themes.forEach((theme, index) => {
             if (index == themes.length - 1)
                 queryString += `${theme.toString()});`
             else
                 queryString += `${theme.toString()},`
         })
-        return queryString
     }
+    queryString += 'limit 100;'
+    return queryString
 }
 
 export const generateVideoQuery = (videos: number[]) => {
@@ -136,6 +143,17 @@ export const generateVideoQuery = (videos: number[]) => {
             })
         return queryString 
     }  
+}
+
+export const generateGenreQuery = () => {
+    return "fields name,slug; limit 30;"
+}
+
+export const generateGameDetailQuery = (gameName: string) => {
+    return `query games "Game" {fields name,summary,involved_companies,
+            platforms,game_modes,themes,storyline,aggregated_rating,rating,
+            total_rating,first_release_date,videos.video_id,screenshots.image_id;
+            where slug="${gameName}";};`
 }
 
 export const generateSearchQuery = (queryString: string) => {

@@ -1,3 +1,4 @@
+import { generateGenreQuery } from "../utils/query_utils"
 import { useQuery } from "@tanstack/react-query"
 import apiClient from "../utils/apiService"
 import { Genre } from "../entities/Genre"
@@ -9,7 +10,7 @@ const allGenre = {
 
 const useGenres = () => {
     const fetchGenres = () => {
-        return apiClient.post<Genre[]>('/genres', "fields name,slug; limit 30;").then(res => res.data)
+        return apiClient.post<Genre[]>('/genres', generateGenreQuery()).then(res => res.data)
     }
     return useQuery<Genre[], Error>({
         queryKey: ['genres'],

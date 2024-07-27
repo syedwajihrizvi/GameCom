@@ -10,9 +10,7 @@ const useUser = () => {
                 'x-auth-token': token
             }
         })
-        .then(res => {
-            return res.data
-        })
+        .then(res => res.data)
         .catch(err => err)
     }
 

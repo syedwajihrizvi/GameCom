@@ -7,7 +7,7 @@ export const usePlatforms = (platforms: number[]) => {
     const fetchPlatforms = () => 
         apiClient.post<Platform[]>(
             "/platforms", 
-            `fields name; ${generatePlatformsQuery(platforms)} "limit 100; sort name asc;"`)
+            generatePlatformsQuery(platforms))
             .then(res => res.data)
     
     return useQuery<Platform[], Error>({

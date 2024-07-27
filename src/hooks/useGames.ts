@@ -16,12 +16,11 @@ const useGames = () => {
 
     const fetchGames = async (pageParam: number) => {
         let gameQuery = generateGameQuery(query, user, pageParam)
+        // Workaround untilt the twerps at IGDB fix their API
         if (query.search) {
             const games = await apiClient.post<Game[]>('/games', `${generateSearchQuery(query.search)}`).then(res => res.data)
-            const gameIDs = games.map(game => game.id)
-            gameQuery = generateGameQuery(query, user, pageParam, gameIDs)
+            gameQuery = generateGameQuery(query, user, pageParam, games.map(game => game.id))
         }
-        console.log(gameQuery)
         return apiClient.post<Game[]>('/games', `${gameQuery}`)
         .then(res => {
             return {data: res.data.slice(0, 24), hasMore: res.data.length > 24}

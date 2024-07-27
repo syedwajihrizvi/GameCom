@@ -13,10 +13,13 @@ interface Company {
 
 const useCompanies = (involvedCompanies: number[]) => {
     const fetchCompanies = () => {
-        return apiClient.post<InvolvedCompany[]>('/involved_companies', `fields company; ${generateCompanyQuery(involvedCompanies)} limit 100;`)
+        return apiClient.post<InvolvedCompany[]>('/involved_companies', `
+        fields company; ${generateCompanyQuery(involvedCompanies)} limit 100;`)
         .then(res => {
             const involvedCompanies = res.data.map(involvedCompany=> involvedCompany.company)
-            return apiClient.post<Company[]>('/companies', `fields name; ${generateCompanyQuery(involvedCompanies)} limit 100;`).then(res => res.data)
+            return apiClient.post<Company[]>('/companies', 
+            `fields name; ${generateCompanyQuery(involvedCompanies)} limit 100;`)
+            .then(res => res.data)
         })
     }
 
