@@ -18,7 +18,6 @@ function PlanGrid() {
         setCurrentPlan(index)
     }
 
-    console.log(userData.data)
     const handleSubmit = () => {
         if (!isLoggedIn) {
             userData.data["selectedPlan"] = plans[currentPlan].title

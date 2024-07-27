@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const url = "http://localhost:3000/gamecom/login"
+const url = "https://protected-chamber-12422-c8b311f333a4.herokuapp.com/gamecom/login"
 const client = axios.create({
     baseURL: url
 })
