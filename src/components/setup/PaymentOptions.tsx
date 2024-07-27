@@ -10,11 +10,12 @@ import { useLocation, useNavigate } from "react-router-dom"
 
 function PaymentOptions() {
     const navigate = useNavigate()
-    const {state: {data}} = useLocation()
+    const {state} = useLocation()
 
+    console.log(state)
     const handlePaymentSelection = (type:string) => {
         if (type == "card")
-            navigate("/setup/creditoption", {state: {data}})
+            navigate("/setup/creditoption", {state: state})
         else
             navigate("/home")
     }

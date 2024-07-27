@@ -15,9 +15,11 @@ function PlanGrid() {
     const isLoggedIn = localStorage.getItem('x-auth-token')
 
     const handlePlanSelect = (index: number) => {
+        console.log("Changed current plan")
         setCurrentPlan(index)
     }
 
+    console.log(userData.data)
     const handleSubmit = () => {
         if (!isLoggedIn) {
             userData.data["selectedPlan"] = plans[currentPlan].title
@@ -33,15 +35,17 @@ function PlanGrid() {
             {!isLoggedIn && <Text>Step 2 of 3</Text>}
             <Heading mb={2}>Choose the plan that’s right for you</Heading>
             <SimpleGrid templateAreas={ `"partialPlans"
-                                            "fullPlans"
-                                            "nextInformation"`}
-                                            width={{lg: "90%", xl: "70%"}}>
+                                          "fullPlans"
+                                          "nextInformation"`}
+                                          width={{lg: "90%", xl: "70%"}}>
                 <GridItem area="partialPlans" display={{md: "block", lg:"none"}} mb={4}>
-                    <SimpleGrid columns={3} spacingX={1}>
-                        {plans.map((plan, index) => 
-                            <Card width="150px" onSelect={() => handlePlanSelect(index)} _hover={{cursor: "pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} borderRadius={10} border={index == currentPlan ? "1px solid black":""}>
+                    <SimpleGrid columns={3} spacingX={1} width="100%">
+                        {plans.map((plan, index) =>
+                        <Center>
+                            <Card width="180px" onClick={() => handlePlanSelect(index)} _hover={{cursor: "pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} borderRadius={10} border={index == currentPlan ? "1px solid black":""}>
                                 <PlanHeader title={plan.title} quality={plan.quality} partial={true}/>
                             </Card>
+                        </Center>
                         )}
                     </SimpleGrid>
                     <Stack divider={<StackDivider />} spacing='4' mt={4}>
@@ -55,9 +59,9 @@ function PlanGrid() {
                     </Stack>
                 </GridItem>
                 <GridItem area="fullPlans" display={{base: "none", lg:"block"}}>
-                    <SimpleGrid columns={3}>
+                    <SimpleGrid columns={3} spacingX={10} width='100%'>
                         {plans.map((plan, index) => 
-                            <Card width={{lg: "270px", xl: "350px"}} onClick={() => handlePlanSelect(index)} height="700px" padding={2} _hover={{cursor: "pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} backgroundColor={index == currentPlan ? 'gray.800': ""}>
+                            <Card width={{lg: "250px", xl: "350px"}} onClick={() => handlePlanSelect(index)} height="700px" padding={2} _hover={{cursor: "pointer", transform: 'scale(1.01)', transition: 'transform 0.15s ease-in'}} backgroundColor={index == currentPlan ? 'gray.800': ""}>
                                 <VStack>
                                     <PlanHeader title={plan.title} quality={plan.quality} partial={false}/>
                                     <CardBody  width='100%'>

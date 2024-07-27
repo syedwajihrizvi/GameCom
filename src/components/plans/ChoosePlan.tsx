@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 function ChoosePlan() {
     const navigate = useNavigate()
     const {state: {data}} = useLocation()
-
+    console.log(data)
     const handleSubmit = () => {
         navigate('/setup/plans', {state: {data}})
     }

@@ -22,14 +22,15 @@ function CreditDetails() {
     const { register, handleSubmit, formState: {errors} } = useForm<ValidationSchemaType>({
         resolver: zodResolver(schema)
     })
-    const {state} = useLocation()
-
+    const {state:userData} = useLocation()
     const onFormSubmit:SubmitHandler<ValidationSchemaType> = (paymentData) => {
-        userService.post('', {...paymentData,...state.data}).
+        console.log("Sent Request")
+        console.log({...paymentData,...userData})
+        userService.post('', {...paymentData,...userData}).
         then(() => {
             navigate('/login')
         })
-        .catch(err => err)
+        .catch(err => console.log(err))
     }
 
     return (
@@ -54,7 +55,7 @@ function CreditDetails() {
                 <Flex justifyContent='start' width="100%">
                     <InputGroup>
                         <Stack mr={2}>
-                            <Input {...register('expirationDate')} placeholder="Expiration date" height="55px" mr={1} borderRadius={1} border='1px solid black'/>
+                            <Input {...register('expirationDate')} placeholder="MM/YY" height="55px" mr={1} borderRadius={1} border='1px solid black'/>
                             {errors.expirationDate && <Text color="red" width="100%">{errors.expirationDate.message}</Text>}
                         </Stack>
                         <Stack>
