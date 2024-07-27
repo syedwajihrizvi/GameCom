@@ -58,7 +58,7 @@ function GameNavBar({handleSwitchChange, mode}: Props){
                     </Button>
                 </MenuButton>
                 <MenuList>
-                    <MenuItem>Settings</MenuItem>
+                    <MenuItem onClick={() => navigate('/account')}>Settings</MenuItem>
                     <MenuItem onClick={signOut}>Sign Out</MenuItem>
                 </MenuList>
             </Menu>

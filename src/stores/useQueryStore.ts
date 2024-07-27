@@ -47,48 +47,31 @@ const useQueryStore =  create<QueryStore>(set => ({
         order: 'asc',
         verticalLayout: false,
         showOnlyFavorites: false,
-        handleSearch: (searchQuery: string) => set(state => {
-            if (searchQuery && searchQuery != state.search)
-                return {...state, ...defaultSettings, search: searchQuery, }
-            return state
-        }),
-        handleGenre: (selectedGenre: Genre) => set(state => {
-            if (state.genre.id != selectedGenre.id)
-                return {...state, genre: selectedGenre, search: undefined}
-            return state
-        }),
-        handlePlatform: (selectedPlatform: Platform) => set(state => {
-            if (state.platform.id != selectedPlatform.id)
-                return {...state, platform: selectedPlatform}
-            return state
-        }),
-        handleGameMode: (selectedGameMode: GameMode) => set(state => {
-            if (selectedGameMode.id != state.gameMode.id)
-                return {...state, gameMode: selectedGameMode}
-            return state
-        }),
-        handleSortSelect: (selectedSort: SortOption) => set(state => {
-            if (state.sort?.name == selectedSort.name)
-                return {...state, sort: undefined}
-            return {...state, sort: selectedSort, order: 'asc', search: ''}
-        }),
-        handleOrderSelect: (selectedOrder: string) => set(state => {
-            if (selectedOrder != state.order)
-                return {...state, order:selectedOrder}
-            return state
-        }),
-        resetQueryToDefault: () => set(() => {
-            return defaultSettings
-        }),
-        handleLayoutToggle: (useVerticalLayout: boolean) => set((state) => {
+        handleSearch: (searchQuery: string) => set(state =>
+            searchQuery && searchQuery != state.search ? {...state, ...defaultSettings, search: searchQuery, }:state
+        ),
+        handleGenre: (selectedGenre: Genre) => set(state =>
+            state.genre.id != selectedGenre.id ? {...state, genre: selectedGenre, search: undefined}:state
+        ),
+        handlePlatform: (selectedPlatform: Platform) => set(state =>
+            state.platform.id != selectedPlatform.id ? {...state, platform: selectedPlatform}:state
+        ),
+        handleGameMode: (selectedGameMode: GameMode) => set(state =>
+            selectedGameMode.id != state.gameMode.id ? {...state, gameMode: selectedGameMode}:state
+        ),
+        handleSortSelect: (selectedSort: SortOption) => set(state =>
+            state.sort?.name == selectedSort.name ? {...state, sort: undefined}:{...state, sort: selectedSort, order: 'asc', search: ''}
+        ),
+        handleOrderSelect: (selectedOrder: string) => set(state =>
+            selectedOrder != state.order ? {...state, order:selectedOrder} : state
+        ),
+        resetQueryToDefault: () => set(() => defaultSettings),
+        handleLayoutToggle: (useVerticalLayout: boolean) => set(state => {
             return {...state, verticalLayout:useVerticalLayout}
         }),
-        handleFavoriteSelect: () => set((state) => {
-            if (state.showOnlyFavorites) {
-                return {...state, showOnlyFavorites: false}
-            }
-            return {...state, ...defaultSettings, showOnlyFavorites: true}
-        })
+        handleFavoriteSelect: () => set(state =>
+            state.showOnlyFavorites ? {...state, showOnlyFavorites: false}:{...state, ...defaultSettings, showOnlyFavorites: true}
+        )
     }))
 
 export default useQueryStore
