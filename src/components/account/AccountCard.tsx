@@ -1,8 +1,10 @@
 import { Button, ButtonGroup, Center, Flex, Heading, Icon, Input, InputGroup, InputRightElement, Stack, VStack } from "@chakra-ui/react"
 import { CiCircleQuestion } from "react-icons/ci"
-import useUser from "../../hooks/useUser"
+import { useOutletContext } from "react-router-dom"
+import { User } from "../../entities/User"
+
 function AccountCard() {
-    const {data:user} = useUser()
+    const user = useOutletContext<User>()
 
     const cardNumber = "************" + (user ? user?.cardInfo.cardNumber:"****")
     const expirationDate = user ? user.cardInfo.expiryDate : "Expiration Date"

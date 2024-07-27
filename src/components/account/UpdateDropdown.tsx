@@ -1,5 +1,5 @@
 import { VStack, Flex, Heading, Spacer, Icon, Button, ButtonGroup, Input, Text, InputGroup, InputRightElement } from "@chakra-ui/react"
-import { ChevronUpIcon, ChevronDownIcon, CheckIcon, CloseIcon } from "@chakra-ui/icons"
+import { MinusIcon, AddIcon, CheckIcon, CloseIcon } from "@chakra-ui/icons"
 import apiClient from '../../utils/userService'
 import { useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
@@ -78,7 +78,7 @@ function UpdateDropDown({title, currentValue, key, userId, type}: Props) {
             <Flex width="100%" justifyContent='start'>
                 <Heading fontSize={20}>{title}</Heading>
                 <Spacer/>
-                <Icon as={setting.viewDropdown ? ChevronUpIcon:ChevronDownIcon} 
+                <Icon as={setting.viewDropdown ? MinusIcon:AddIcon} 
                       boxSize={8} _hover={{cursor: 'pointer'}} onClick={handleIconSelect}/>
             </Flex>  
             {

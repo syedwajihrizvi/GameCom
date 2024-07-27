@@ -3,16 +3,15 @@ import apiClient from "../utils/apiService"
 import { generateGameQuery, generateSearchQuery } from "../utils/query_utils"
 import useQueryStore from "../stores/useQueryStore"
 import { Game } from "../entities/Game"
-import useUser from "./useUser"
+import { User } from "../entities/User"
 
 export interface InfiniteQueryData<T> {
     data: T[],
     hasMore: boolean
 }
 
-const useGames = () => {
+const useGames = (user: User) => {
     const query = useQueryStore()
-    const {data: user} = useUser()
 
     const fetchGames = async (pageParam: number) => {
         let gameQuery = generateGameQuery(query, user, pageParam)

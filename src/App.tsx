@@ -12,7 +12,7 @@ import useQueryStore from './stores/useQueryStore'
 
 function App() {
   const {genre, platform, gameMode, sort} = useQueryStore()
-  const { toggleColorMode } = useColorMode()
+  const { toggleColorMode, colorMode } = useColorMode()
 
   return (
     <Grid
@@ -22,7 +22,7 @@ function App() {
                     lg: '200px 1fr'
                   }}>
       <GridItem pl='2' area={'header'}>
-        <GameNavBar handleSwitchChange={toggleColorMode}/>
+        <GameNavBar handleSwitchChange={toggleColorMode} mode={colorMode}/>
       </GridItem>
       <GridItem area={'nav'}>
         <SideBar/>

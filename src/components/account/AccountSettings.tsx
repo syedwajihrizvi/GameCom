@@ -1,11 +1,11 @@
 import { ChevronRightIcon } from "@chakra-ui/icons"
 import { Container, VStack, Heading, Flex, StackDivider, Icon, Spacer, Button } from "@chakra-ui/react"
-import { useNavigate } from "react-router-dom"
-import useUser from "../../hooks/useUser"
+import { useNavigate, useOutletContext } from "react-router-dom"
 import UpdateDropDown from "./UpdateDropdown"
+import { User } from "../../entities/User"
 
 function AccountSettings() {
-    const {data:user} = useUser()
+    const user = useOutletContext<User>()
     const navigate = useNavigate()
 
     return (

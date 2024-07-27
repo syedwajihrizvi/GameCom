@@ -14,15 +14,18 @@ import InfiniteLoader from "../common/InfiniteLoader"
 import { useNavigate } from 'react-router-dom'
 import useQueryStore from '../../stores/useQueryStore'
 import FavoriteIcon from './Favorite'
-import useUser from '../../hooks/useUser'
 import apiClient from '../../utils/userService'
 import { useQueryClient } from '@tanstack/react-query'
+import { User } from '../../entities/User'
 
-function GameGrid() {
+interface Props {
+    user: User
+}
+
+function GameGrid({user}: Props) {
     const queryClient = useQueryClient()
     const {verticalLayout} = useQueryStore()
-    const {data: user} = useUser()
-    const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames()
+    const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames(user)
     const [previewVideo, setPreviewVideo] = useState(0)
     const cardSkeletons = [1, 2, 3, 4, 5, 6, 7, 8]
     const numberOfGames = games ? games?.pages.reduce((total, currentValue) => total + currentValue.data.length, 0) : 0
@@ -48,7 +51,6 @@ function GameGrid() {
         }
         return result.status
     }
-
     return (
         <Box height="90vh" overflowY='scroll'>
             <InfiniteScroll dataLength={numberOfGames} next={fetchNextPage} hasMore={!!hasNextPage} loader=<InfiniteLoader/>>

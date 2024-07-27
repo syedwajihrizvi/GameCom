@@ -9,9 +9,13 @@ import SortSelector from "../selectors/SortSelector"
 import { CiGrid41, CiGrid2H } from "react-icons/ci";
 import useQueryStore from "../../stores/useQueryStore"
 import ShowOnlySelector from "../games/ShowOnlySelector"
+import { useOutletContext } from "react-router-dom"
+import { User } from "../../entities/User"
 
 function Home() {
     const {genre, platform, gameMode, sort, handleLayoutToggle} = useQueryStore()
+    const data = useOutletContext<User>()
+  
     return (
         <Grid
         templateAreas={`"nav main"`}
@@ -45,7 +49,7 @@ function Home() {
                   </HStack>
                 </GridItem>
               </SimpleGrid>
-              <GameGrid/>
+              <GameGrid user={data}/>
             </GridItem>
           </Grid>
     )

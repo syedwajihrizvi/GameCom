@@ -1,61 +1,19 @@
 import { Text, GridItem, Box, Heading, VStack, SimpleGrid, Card, Stack, StackDivider, CardBody, Flex, Spacer, Center, Button, Link } from "@chakra-ui/react"
 import PlanHeader from "./PlanHeader"
 import { useState } from "react"
-import { useLocation, useNavigate} from "react-router-dom"
+import { useLocation, useNavigate, useOutletContext} from "react-router-dom"
 import apiClient from "../../utils/userService"
-import useUser from "../../hooks/useUser"
-
-const plans = [
-    {
-        title: "Premium",
-        quality: "4K+HDR",
-        values: [
-            {name: "Price", value: "20.99"},
-            {name: "Video Quality", value: "Best"},
-            {name: "Resolution", value: "4K (Ultra HD) + HDR"},
-            {name: "Spatial Audio", value: "Immersive"},
-            {name: "Supported Devices", value: "TV, Computer, Mobile Phone, Tablet"},
-            {name: "Devices your household can use at the same time", value: "4"},
-            {name: "Download Devices", value: "6"},
-            {name: "Ads", value: "No Ads"}
-        ]
-    },
-    {
-        title: "Standard",
-        quality: "1080p",
-        values: [
-            {name: "Price", value: "16.99"},
-            {name: "Video Quality", value: "Good"},
-            {name: "Resolution", value: "1080p"},
-            {name: "Spatial Audio", value: "Included"},
-            {name: "Supported Devices", value: "TV, Computer, Mobile Phone, Tablet"},
-            {name: "Devices your household can use at the same time", value: "2"},
-            {name: "Download Devices", value: "2"},
-            {name: "Ads", value: "No Ads"}
-        ]
-    },
-    {
-        title: "Standard With Ads",
-        quality: "720p",
-        values: [
-            {name: "Price", value: "10.99"},
-            {name: "Video Quality", value: "Moderate"},
-            {name: "Spatial Audio", value: "Included"},
-            {name: "Supported Devices", value: "TV, Computer, Mobile Phone, Tablet"},
-            {name: "Devices your household can use at the same time", value: "2"},
-            {name: "Download Devices", value: "2"},
-            {name: "Ads", value: "Only Some"}
-        ]
-    }
-]
+import { User } from "../../entities/User"
+import { plans } from "./utils/plans"
 
 function PlanGrid() {
     const navigate = useNavigate()
     const [currentPlan, setCurrentPlan] =  useState(0)
     const {state:userData} = useLocation()
-    const {data:user} = useUser()
+    const user = useOutletContext<User>()
 
     const isLoggedIn = localStorage.getItem('x-auth-token')
+
     const handlePlanSelect = (index: number) => {
         setCurrentPlan(index)
     }
@@ -65,12 +23,8 @@ function PlanGrid() {
             userData.data["selectedPlan"] = plans[currentPlan].title
             navigate("/setup/payment", {state: userData.data})
         } else {
-            apiClient.put(`/${user?.id}`, {'selectedPlan': plans[currentPlan].title}).then(() => {
-                navigate("/account")
-            })
-            .catch(err => {
-                console.log(`Error: ${err}`)
-            })
+            apiClient.put(`/${user?.id}`, {'selectedPlan': plans[currentPlan].title})
+            .then(() => navigate("/account"))
         }
     }
 

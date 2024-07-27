@@ -5,19 +5,18 @@ import useQueryStore from "../../stores/useQueryStore"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { IoSearchCircleSharp } from "react-icons/io5"
-import useUser from "../../hooks/useUser"
+import { User } from "../../entities/User"
 
 interface Props {
     handleSwitchChange: () => void,
-    mode: string
+    mode: string,
+    user: User | undefined
 }
 
-function GameNavBar({handleSwitchChange, mode}: Props){
+function GameNavBar({handleSwitchChange, mode, user}: Props){
     const {handleSearch, resetQueryToDefault} = useQueryStore()
     const navigate = useNavigate()
     const [search, setSearch] = useState('')
-    const {data:user} = useUser()
-    console.log(user)
     const handleSearchInput = (event: string, value: string) => {
         if (event == "Enter") {
             handleSearch(value ? value : '')

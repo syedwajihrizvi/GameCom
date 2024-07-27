@@ -4,7 +4,6 @@ import { User } from "../entities/User"
 
 const useUser = () => {
     const token = localStorage.getItem('x-auth-token')
-    console.log(token)
     const fetchUser = () => {
         return apiClient.get<User>('/me', {
             headers: {
