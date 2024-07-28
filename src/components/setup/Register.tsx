@@ -17,11 +17,9 @@ function Register() {
     const { register, handleSubmit, formState: {errors} } = useForm<ValidationSchemaType>({
         resolver: zodResolver(schema)
     })
-
     const onFormSubmit:SubmitHandler<ValidationSchemaType> = (data) => {
         navigate("/setup/choose-plan", { state: { data } })
     }
-
     return (
         <Center  height='70vh' width="450px" margin='auto'>
             <VStack marginTop={30}>

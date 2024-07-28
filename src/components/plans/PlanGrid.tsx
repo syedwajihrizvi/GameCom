@@ -1,4 +1,4 @@
-import { Text, GridItem, Box, Heading, VStack, SimpleGrid, Card, Stack, StackDivider, CardBody, Flex, Spacer, Center, Button, Link } from "@chakra-ui/react"
+import { Text, GridItem, Box, Heading, VStack, SimpleGrid, Card, Stack, StackDivider, CardBody, Flex, Spacer, Center, Button, Link, useColorMode } from "@chakra-ui/react"
 import PlanHeader from "./PlanHeader"
 import { useState } from "react"
 import { useLocation, useNavigate, useOutletContext} from "react-router-dom"
@@ -9,9 +9,9 @@ function PlanGrid() {
     const navigate = useNavigate()
     const [currentPlan, setCurrentPlan] =  useState(0)
     const {state:userData} = useLocation()
-    const user = useOutletContext<User>()    
+    const user = useOutletContext<User>()
+    const {toggleColorMode} = useColorMode()    
     const isLoggedIn = localStorage.getItem('x-auth-token')
-
     const handlePlanSelect = (index: number) => {
         setCurrentPlan(index)
     }
@@ -28,6 +28,7 @@ function PlanGrid() {
 
     return (
         <VStack>
+            <Button onClick={toggleColorMode}></Button>
             {!isLoggedIn && <Text>Step 2 of 3</Text>}
             <Heading mb={2}>Choose the plan that’s right for you</Heading>
             <SimpleGrid templateAreas={ `"partialPlans"
@@ -55,9 +56,9 @@ function PlanGrid() {
                     </Stack>
                 </GridItem>
                 <GridItem area="fullPlans" display={{base: "none", lg:"block"}}>
-                    <SimpleGrid columns={3} spacingX={10} width='100%'>
+                    <SimpleGrid columns={3} spacingX="100px" width='100%'>
                         {plans.map((plan, index) => 
-                            <Card width={{lg: "250px", xl: "350px"}} onClick={() => handlePlanSelect(index)} height="700px" padding={2} _hover={{cursor: "pointer", transform: 'scale(1.01)', transition: 'transform 0.15s ease-in'}}>
+                            <Card border={currentPlan == index ? "3px solid red": ""} width={{md: "220px", lg: "220px", xl: "320px"}} onClick={() => handlePlanSelect(index)} height="700px" padding={2} _hover={{cursor: "pointer", transform: 'scale(1.01)', transition: 'transform 0.15s ease-in'}}>
                                 <VStack>
                                     <PlanHeader title={plan.title} quality={plan.quality} partial={false}/>
                                     <CardBody  width='100%'>
