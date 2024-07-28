@@ -17,7 +17,7 @@ function Main() {
     return (
             <VStack backgroundColor='black' width="100%" overflow='hidden'>
                 <Box className="background" width='100%'>
-                    <NavBar user={user}/>
+                    <NavBar/>
                     <Center className="register-main" width="100%">
                         <VStack textAlign='center'>
                             <Heading color="white" as='h1' size='3xl'>Unlimited Games, streams, and more.</Heading>
