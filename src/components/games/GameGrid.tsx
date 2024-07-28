@@ -36,7 +36,7 @@ function GameGrid({user}: Props) {
                         <React.Fragment>
                             {page.data.map(game =>
                             <Center>
-                                <GameCard game={game} favorites={user.favoriteGames} id={user.id}/>
+                                <GameCard game={game} favorites={user.favoriteGames} userId={user.id}/>
                             </Center>
                             )}
                         </React.Fragment>
