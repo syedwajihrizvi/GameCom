@@ -71,7 +71,7 @@
     }
 
     .gameCard {
-        height: fit-content;
+        height: 420px;
         width: 280px;
         padding-bottom: 5px;
     }
@@ -93,7 +93,7 @@
         width: 280px;
     }
     .gameCard {
-        height: fit-content;
+        height: 450px;
         width: 280px;
         padding-bottom: 5px;
     }
@@ -116,7 +116,7 @@
     }
 
     .gameCard {
-        height: fit-content;
+        height: 550px;
         width: 320px;
         padding-bottom: 5px;
     }
@@ -139,7 +139,7 @@
     }
 
     .gameCard {
-        height: fit-content;
+        height: 560px;
         width: 360px;
         padding-bottom: 5px;
     }

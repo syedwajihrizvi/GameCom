@@ -6,14 +6,14 @@ import { Video } from "../../entities/Video";
 
 interface Props {
     cover: Cover | undefined,
-    isPreview: boolean,
+    showPreview: boolean,
     videos: Video[]
 }
-function GameImage({cover, isPreview, videos}: Props) {
+function GameImage({cover, showPreview, videos}: Props) {
     const {verticalLayout} = useQueryStore()
 
     const gameImageClass = verticalLayout ? "singleGameImage":"gameImage"
-    if (isPreview && videos) {
+    if (showPreview && videos) {
         const preview = `https://www.youtube.com/embed/${videos[0].video_id}?controls=0&modestbranding=1&disablekb=1&rel=0&autoplay=1&mute=1&iv_load_policy=3&show_info=0&start=30&end=45&loop=1&playlist=${videos[0].video_id}`
         return  (
             <Box overflow='hidden'>

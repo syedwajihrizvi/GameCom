@@ -4,15 +4,15 @@ import { GoHeartFill } from "react-icons/go"
 interface Props {
     likeFor: number,
     isActive: boolean,
-    onFavoriteClick: (id: number, currentState: boolean) => Promise<number>
+    onFavoriteClick: (currentState: boolean) => Promise<number>
 }
 
-function FavoriteIcon({likeFor, isActive, onFavoriteClick}: Props) {
+function FavoriteIcon({isActive, onFavoriteClick}: Props) {
     const [active, setActive] = useState<boolean>(isActive)
 
     const handleSelectingFavorite = async () => {
         setActive(!active)
-        const status = await onFavoriteClick(likeFor, active)
+        const status = await onFavoriteClick(active)
         if (status != 200) {
             setActive(!active)
         }

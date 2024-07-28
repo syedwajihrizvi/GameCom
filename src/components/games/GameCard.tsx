@@ -1,0 +1,71 @@
+import { Card, VStack, Button, Container, HStack, Spacer, Image } from "@chakra-ui/react"
+import useQueryStore from "../../stores/useQueryStore"
+import Platforms from "../platforms/Platforms"
+import FavoriteIcon from "./Favorite"
+import GameImage from "./GameImage"
+import GameModes from "./GameModes"
+import GameName from "./GameName"
+import GameRating from "./GameRating"
+import { Game } from "../../entities/Game"
+import defaultPlaceHolder from "../../assets/no-image-placeholder-6f3882e0.webp"
+import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { useQueryClient } from "@tanstack/react-query"
+import apiClient from "../../utils/services/userService"
+
+interface Props {
+    game: Game
+    favorites: string[]
+    userId: string
+}
+
+function GameCard({game, favorites, userId}:Props) {
+    const queryClient = useQueryClient()
+    const {verticalLayout} = useQueryStore()
+    const [showPreview, setShowPreview] = useState(false)
+    const navigate = useNavigate()
+
+    const handleFavoriteGame = async (current_state: boolean) => {
+        if (current_state == true) {
+            const result = await apiClient.put(`/${userId}`, {"-favoriteGames": [String(game.id)]})
+            if (result.status == 200) {
+                queryClient.invalidateQueries(["me"])
+            }
+            return result.status
+        }
+        const result = await apiClient.put(`/${userId}`, {"favoriteGames": [String(game.id)]})
+        if (result.status == 200) {
+            queryClient.invalidateQueries(["me"])
+        }
+        return result.status
+    }
+
+    return (
+        <Card className={verticalLayout ? 'singleGameCard':'gameCard'} _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} 
+        key={game.id} onMouseEnter={() => setShowPreview(true)} onMouseLeave={() => setShowPreview(false)} overflow='hidden'>
+            <VStack>
+                {game.cover && <GameImage cover={game.cover} showPreview={showPreview} videos={game.videos}/>}
+                {!game.cover && <Image className="gameImage" src={defaultPlaceHolder} />}
+                {!showPreview  && <GameName gameName={game.name}/>}
+                {showPreview && <Button width="90%" backgroundColor='red.500' onClick={() => navigate(game.slug)}>View More</Button>}
+                <Container>
+                    <HStack>
+                        <VStack>
+                            <Container>
+                                {game.platforms && <Platforms platforms={game.platforms}/>}
+                                {game.game_modes && <GameModes gameModes={game.game_modes}/>}  
+                            </Container>
+                        </VStack>
+                        <Spacer />
+                        <HStack>
+                            <GameRating game={game}/>
+                            <FavoriteIcon likeFor={game.id} isActive={favorites.includes(String(game.id))} onFavoriteClick={handleFavoriteGame}/>
+                        </HStack>
+                    </HStack>
+                </Container>
+            </VStack>
+        </Card>
+    )
+}
+
+export default GameCard
