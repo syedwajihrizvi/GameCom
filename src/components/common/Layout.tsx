@@ -1,4 +1,4 @@
-import { useColorMode } from "@chakra-ui/react"
+import { Box, Center, Spinner, useColorMode } from "@chakra-ui/react"
 import GameNavBar from "../navbars/GameNavBar"
 import { Outlet } from "react-router-dom"
 import { Navigate } from "react-router-dom"
@@ -13,7 +13,13 @@ function Layout() {
         return <Navigate to='/'/>;
     }
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return (
+        <Box width="100vh" height="100vh">
+            <Center>
+                <Spinner/>
+            </Center>
+        </Box>
+    )
     
     return (
         <>

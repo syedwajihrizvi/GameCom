@@ -8,12 +8,12 @@ import {Faqs, faqs} from "../../utils/faqs"
 import Faq from "./Faq"
 import SignUp from "../setup/SignUp"
 import NavBar from "../navbars/NavBar"
-import useUser from "../../hooks/useUser"
 import { useNavigate } from "react-router-dom"
 
 function Main() {
-    const {data:user} = useUser()
     const navigate = useNavigate()
+    const isLoggedIn = localStorage.getItem('x-auth-token')
+
     return (
             <VStack backgroundColor='black' width="100%" overflow='hidden'>
                 <Box className="background" width='100%'>
@@ -22,8 +22,8 @@ function Main() {
                         <VStack textAlign='center'>
                             <Heading color="white" as='h1' size='3xl'>Unlimited Games, streams, and more.</Heading>
                             <Heading color="white" as='h6' size='lg'>Play Anywhere. Cancel Anytime</Heading>
-                            {!user?.id && <SignUp/>}
-                            {user?.id && 
+                            {!isLoggedIn && <SignUp/>}
+                            {isLoggedIn && 
                             <Button backgroundColor="red"  height={55} fontSize={32} padding={5} borderRadius={3} onClick={() => navigate('/games')}>
                                 View All Games
                             </Button>}
@@ -76,8 +76,8 @@ function Main() {
                     <VStack>
                         <Heading size={{lg:'2xl', md:'lg'}} color='white' paddingBottom={5}>Frequently Asked Questions</Heading>
                         {faqs.map((faq:Faqs) => <Faq question={faq.question} answer={faq.answer}/>)}
-                        {!user?.id && <SignUp/>}
-                        {user?.id && 
+                        {!isLoggedIn && <SignUp/>}
+                        {isLoggedIn && 
                         <Button backgroundColor="red"  height={55} fontSize={32} padding={5} borderRadius={3} onClick={() => navigate('/games')}>
                             View All Games
                         </Button>}
