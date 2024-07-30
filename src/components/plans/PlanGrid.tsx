@@ -31,9 +31,6 @@ function PlanGrid() {
     }
 
     const handleInitialAnimationState = () => {
-        console.log(`Back: ${back}`)
-        console.log(`Next: ${next}`)
-        console.log(state)
         if (back)
             return {x:0}
         else if (next)
@@ -60,7 +57,7 @@ function PlanGrid() {
             }
             else {
                 console.log("Navigate to Choose Plan")
-                navigate("/setup/choose-plan", {state: {onBack: true}}) 
+                navigate("/setup/choose-plan", {state: {...state, onBack: true}}) 
             }          
         }
         if (next)
@@ -71,7 +68,7 @@ function PlanGrid() {
             else {
                 console.log("Navigate to Payment")
                 state["selectedPlan"] = plans[currentPlan].title
-                navigate("/setup/payment", {state}) 
+                navigate("/setup/payment", {state: {...state, onBack: false}}) 
             } 
     }
 

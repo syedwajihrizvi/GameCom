@@ -1,4 +1,4 @@
-import { Center, Heading, HStack, VStack, Text, Image, Input, Flex, InputGroup, Link, Spacer, InputRightElement, Icon, Button, Stack } from "@chakra-ui/react"
+import { Center, Heading, HStack, VStack, Text, Image, Input, Flex, InputGroup, Link, Spacer, InputRightElement, Icon, Button, Stack, ButtonGroup } from "@chakra-ui/react"
 import { CiCircleQuestion, CiCreditCard1 } from "react-icons/ci"
 import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
@@ -6,10 +6,16 @@ import { useForm, SubmitHandler} from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { paymentSchema } from "../../utils/schema/userSchema"
+import {motion} from "framer-motion"
+import { useState } from "react"
+import {ToastContainer, toast} from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
 import userService from "../../utils/services/userService"
 import visa from "../../assets/Payment/VISA.png"
 import mastercard from "../../assets/Payment/MASTERCARD.png"
 import amex from "../../assets/Payment/AMEX.png"
+
+const MotionCenter = motion(Center)
 
 const schema = z.object({
     ...paymentSchema
@@ -19,22 +25,72 @@ type ValidationSchemaType = z.infer<typeof schema>
 
 function CreditDetails() {
     const navigate = useNavigate()
-    const { register, handleSubmit, formState: {errors} } = useForm<ValidationSchemaType>({
+    const { register, handleSubmit, formState: {errors}, watch } = useForm<ValidationSchemaType>({
         resolver: zodResolver(schema)
     })
-    const {state:userData} = useLocation()
-    const onFormSubmit:SubmitHandler<ValidationSchemaType> = (paymentData) => {
-        userService.post('', {...paymentData,...userData}).
-        then(() => {
-            navigate('/login')
+    const {state} = useLocation()
+    const [back, setBack] = useState(false)
+    const [next, setNext] = useState(false)
+    const [isAnimating, setIsAnimating] = useState(false)
+    const showToast = () => {
+        toast.error('An Error occured processing the request. Try Again!', {
+          autoClose: 3000,
+          position: "top-center" // Set the autoClose duration to 3 seconds
         })
-        .catch(err => console.log(err))
+    }
+
+    const onFormSubmit:SubmitHandler<ValidationSchemaType> = () => {
+        const userInformation = {...watch(), ...state}
+        delete userInformation["onBack"]
+        userService.post('', {...watch(),...state}).
+        then(() => {
+            setIsAnimating(true)
+            setNext(true)
+        })
+        .catch(() => {
+            showToast()
+        })
+    }
+
+    const handleSelectBack = () => {
+        setIsAnimating(true)
+        setBack(true)
+    }
+
+    const handleInitialAnimationState = () => {
+        if (back)
+            return {x:0}
+        else if (next)
+            return {x:0}
+        else if (state && state["onBack"])
+            return {x:-1500}
+        else
+            return {x:1500}
+    }
+
+    const handleFinalAnimationState = () => {
+        if (back)
+            return {x:1500}
+        else if (next)
+            return {x: -1500}
+        else if (state && state["onBack"])
+            return {x:0}
+        return {x:0}
+    }
+
+    const handleAnimationComplete = () => {
+        if (back)
+            navigate('/setup/payment', {state: {onBack: true}})
+        if (next) {
+            navigate('/login')
+        }            
     }
 
     return (
-        <Center>
+        <MotionCenter initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined}>
             <VStack width="500px" padding={5}>
                 <Text>Step 3 of 3</Text>
+                <ToastContainer autoClose={3000}/>
                 <Heading>Set up your credit or debit card.</Heading>
                 <Flex justifyContent='start' width="100%">
                     <HStack>
@@ -88,9 +144,12 @@ function CreditDetails() {
                     to your payment method until you cancel. You may cancel at any time to avoid future charges. 
                     To cancel, go to Account and click “Cancel Membership.
                 </Text>
-                <Button width="100%" backgroundColor="red" color="white" height="65px" fontSize={24} onClick={handleSubmit(onFormSubmit)}>Start Membership</Button>
+                <ButtonGroup width="450px">
+                    <Button width="100%" height="55px" borderRadius={1} backgroundColor="red" color="white" fontSize={24} onClick={handleSelectBack}>Back</Button>
+                    <Button width="100%" borderRadius={1} backgroundColor="red" color="white" height="55px" fontSize={24} onClick={handleSubmit(onFormSubmit)}>Start Membership</Button>
+                </ButtonGroup>
             </VStack>
-        </Center>
+        </MotionCenter>
     )
 }
 
