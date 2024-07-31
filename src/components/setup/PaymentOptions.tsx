@@ -54,7 +54,7 @@ function PaymentOptions() {
 
     const handleAnimationComplete = () => {
         if (back)
-            navigate('/setup/plans', {state: {onBack: true}})
+            navigate('/setup/plans', {state: {...state, onBack: true}})
         if (next)
             if (option == 'card')
                 navigate("/setup/creditoption", { state: {...state, onBack:false} })
@@ -62,6 +62,7 @@ function PaymentOptions() {
                 navigate("/home")        
     }
 
+    console.log(state)
     return (
         <MotionCenter initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined} height='70vh' width="450px" margin='auto'>
             <VStack>

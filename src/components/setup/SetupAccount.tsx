@@ -11,7 +11,7 @@ function SetupAccount() {
     const {state} = useLocation()
     const [isAnimating, setIsAnimating] = useState(false)
     const [next, setNext] = useState(false)
-
+    console.log(state)
     const handleInitialAnimationState = () => {
         if (next) {
             return {x:0}

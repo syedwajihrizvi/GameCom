@@ -29,13 +29,14 @@ function CreditDetails() {
         resolver: zodResolver(schema)
     })
     const {state} = useLocation()
+    console.log(state)
     const [back, setBack] = useState(false)
     const [next, setNext] = useState(false)
     const [isAnimating, setIsAnimating] = useState(false)
     const showToast = () => {
         toast.error('An Error occured processing the request. Try Again!', {
-          autoClose: 3000,
-          position: "top-center" // Set the autoClose duration to 3 seconds
+          autoClose: 5000,
+          position: "top-left" // Set the autoClose duration to 3 seconds
         })
     }
 
@@ -80,10 +81,14 @@ function CreditDetails() {
 
     const handleAnimationComplete = () => {
         if (back)
-            navigate('/setup/payment', {state: {onBack: true}})
+            navigate('/setup/payment', {state: {...state, onBack: true}})
         if (next) {
             navigate('/login')
         }            
+    }
+
+    const handleChangeSelect = () => {
+        navigate('/setup/plans', {state: {...state, onBack: true}})
     }
 
     return (
@@ -128,13 +133,13 @@ function CreditDetails() {
                 <Flex width="100%" borderRadius={5} backgroundColor="gray.100" height="75px" padding={3}>
                     <Center height="100%">
                         <VStack spacing={0}>
-                        <Text as='b'>$16.99/month (pre-tax)</Text>
-                        <Text width="100%">Standard</Text>
+                        <Text as='b'>${state.selectedPlanPrice}/month (pre-tax)</Text>
+                        <Text width="100%">{state.selectedPlan}</Text>
                         </VStack>
                     </Center>
                     <Spacer />
                     <Center height="100%">
-                        <Link color='blue' as='b'>Change</Link>
+                        <Link color='blue' as='b' onClick={handleChangeSelect}>Change</Link>
                     </Center>
                 </Flex>
                 <Text fontSize={10}>

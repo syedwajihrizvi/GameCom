@@ -2,6 +2,7 @@ export const plans = [
     {
         title: "Premium",
         quality: "4K+HDR",
+        price: "20.99",
         values: [
             {name: "Price", value: "20.99"},
             {name: "Video Quality", value: "Best"},
@@ -16,6 +17,7 @@ export const plans = [
     {
         title: "Standard",
         quality: "1080p",
+        price: "16.99",
         values: [
             {name: "Price", value: "16.99"},
             {name: "Video Quality", value: "Good"},
@@ -30,6 +32,7 @@ export const plans = [
     {
         title: "Standard With Ads",
         quality: "720p",
+        price: "10.99",
         values: [
             {name: "Price", value: "10.99"},
             {name: "Video Quality", value: "Moderate"},

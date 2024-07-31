@@ -1,4 +1,4 @@
-import { Text, GridItem, Box, Heading, VStack, SimpleGrid, Card, Stack, StackDivider, CardBody, Flex, Spacer, Center, Button, Link, useColorMode, ButtonGroup } from "@chakra-ui/react"
+import { Text, GridItem, Box, Heading, VStack, SimpleGrid, Card, Stack, StackDivider, CardBody, Flex, Spacer, Center, Button, Link, ButtonGroup } from "@chakra-ui/react"
 import PlanHeader from "./PlanHeader"
 import { useState } from "react"
 import { useLocation, useNavigate, useOutletContext} from "react-router-dom"
@@ -13,8 +13,7 @@ function PlanGrid() {
     const navigate = useNavigate()
     const [currentPlan, setCurrentPlan] =  useState(0)
     const {state} = useLocation()
-    const user = useOutletContext<User>()
-    const {toggleColorMode} = useColorMode()    
+    const user = useOutletContext<User>()   
     const isLoggedIn = localStorage.getItem('x-auth-token')
     const [back, setBack] = useState(false)
     const [next, setNext] = useState(false)
@@ -68,6 +67,7 @@ function PlanGrid() {
             else {
                 console.log("Navigate to Payment")
                 state["selectedPlan"] = plans[currentPlan].title
+                state["selectedPlanPrice"] = plans[currentPlan].price
                 navigate("/setup/payment", {state: {...state, onBack: false}}) 
             } 
     }
@@ -76,10 +76,10 @@ function PlanGrid() {
         setCurrentPlan(index)
     }
 
+    console.log(state)
     return (
         <MotionCenter initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined}>
             <VStack>
-                <Button onClick={toggleColorMode}></Button>
                 {!isLoggedIn && <Text>Step 2 of 3</Text>}
                 <Heading mb={2}>Choose the plan that’s right for you</Heading>
                 <SimpleGrid templateAreas={ `"partialPlans"

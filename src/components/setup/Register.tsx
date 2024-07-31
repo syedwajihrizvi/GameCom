@@ -23,7 +23,7 @@ function Register() {
     const [back, setBack] = useState(false)
     const [next, setNext] = useState(false)
     const [isAnimating, setIsAnimating] = useState(false)
-
+    console.log(state)
     const onFormSubmit:SubmitHandler<ValidationSchemaType> = () => {
         setIsAnimating(true)
         setNext(true)

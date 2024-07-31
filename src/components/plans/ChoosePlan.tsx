@@ -52,6 +52,7 @@ function ChoosePlan() {
             
     }
 
+    console.log(state)
     return (
         <MotionCenter initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined} height='70vh' width="450px" margin='auto'>
             <VStack marginTop={30}>
