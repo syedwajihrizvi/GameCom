@@ -144,7 +144,7 @@ function CreditDetails() {
                 </Flex>
                 <Text fontSize={10}>
                     By clicking the “Start Membership” button below, you agree to our Terms of Use, 
-                    Privacy Statement, that you are over 18, and that Netflix will automatically continue 
+                    Privacy Statement, that you are over 18, and that GameCom will automatically continue 
                     your membership and charge the membership fee (currently $16.49/month plus applicable taxes) 
                     to your payment method until you cancel. You may cancel at any time to avoid future charges. 
                     To cancel, go to Account and click “Cancel Membership.

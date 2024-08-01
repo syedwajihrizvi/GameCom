@@ -51,7 +51,7 @@ function SetupAccount() {
                     <CiMobile1 size={110}/>
                 </HStack>
                 <Heading textAlign='center'>Finish setting up your account.</Heading>
-                <Text textAlign='center' noOfLines={2} as='b'>GameCom is personalized for you. Create a password to begin your GameCom Journey</Text>
+                <Text textAlign='center' noOfLines={2} as='b'>GameCom is personalized for you. Create a password to begin your GameCom Journey.</Text>
                     <Button onClick={handleNext} backgroundColor='red' color='white' width="350px" height="55px" borderRadius={1} fontSize={24}>Next</Button>
             </VStack>
         </MotionCenter>

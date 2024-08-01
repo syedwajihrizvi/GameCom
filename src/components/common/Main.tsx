@@ -21,7 +21,7 @@ function Main() {
                     <Center className="register-main" width="100%">
                         <VStack textAlign='center'>
                             <Heading color="white" as='h1' size='3xl'>Unlimited Games, streams, and more.</Heading>
-                            <Heading color="white" as='h6' size='lg'>Play Anywhere. Cancel Anytime</Heading>
+                            <Heading color="white" as='h6' size='lg'>Play Anywhere. Cancel Anytime.</Heading>
                             {!isLoggedIn && <SignUp/>}
                             {isLoggedIn && 
                             <Button backgroundColor="red"  height={55} fontSize={32} padding={5} borderRadius={3} onClick={() => navigate('/games')}>
@@ -63,7 +63,7 @@ function Main() {
                         <Center width="100%">
                             <Stack color="white" textAlign='center'>
                                 <Heading as='h1' size='3xl'>Download your games offline.</Heading>
-                                <Heading as='h6' size='sm'>Play on a plane, train, or even a submarine...</Heading>
+                                <Heading as='h6' size='sm'>Play on a plane, train, or even a submarine.</Heading>
                             </Stack>
                         </Center>
                         <Center>

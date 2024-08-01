@@ -51,7 +51,7 @@ function Login() {
                         </Box>
                         <Box>
                             <Heading size='xs' color='white'>
-                            New to Netflix? <RouterLink to='/setup'>Sign Up Now</RouterLink>
+                            New to GameCom? <RouterLink to='/setup'>Sign Up Now</RouterLink>
                             </Heading>
                         </Box>
                         <Box>

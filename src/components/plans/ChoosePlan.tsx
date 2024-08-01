@@ -68,7 +68,7 @@ function ChoosePlan() {
                 </HStack>
                 <HStack>
                     <Icon as={IoCheckmark} color='red' boxSize={12}/>
-                    <Text width="250px" fontSize={20}>Enjoy GameCom on all your devices</Text>
+                    <Text width="250px" fontSize={20}>Enjoy GameCom on all your devices.</Text>
                 </HStack>
                 <ButtonGroup width="350px">
                     <Button backgroundColor='red' color='white' width="100%" height="55px" borderRadius={1} fontSize={24} onClick={handleSelectBack}>

@@ -159,5 +159,5 @@ export const generateGameDetailQuery = (gameName: string) => {
 }
 
 export const generateSearchQuery = (queryString: string) => {
-    return `search "${queryString}";`
+    return `search "${queryString}";limit 100;`
 }

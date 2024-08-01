@@ -132,7 +132,7 @@ function PlanGrid() {
                             <Text fontSize={14}>
                                 <Link color='blue'>Learn more about an ad-supported plan</Link>. If you select an ad-supported plan, 
                                 you will be required to provide your date of birth for ads personalization 
-                                and other purposes consistent with the Netflix Privacy Statement.
+                                and other purposes consistent with the GameCom Privacy Statement.
                             </Text>
                             <Text fontSize={14}>
                                 Full HD (1080p), Ultra HD (4K) and HDR availability subject to your internet service and device capabilities. 

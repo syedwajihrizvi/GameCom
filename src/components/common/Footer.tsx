@@ -22,7 +22,7 @@ function Footer() {
                     </GridItem>
                     <GridItem>
                         <List spacing={4}>
-                            <ListItem><Link>Netflix</Link></ListItem>
+                            <ListItem><Link>GameCom</Link></ListItem>
                             <ListItem><Link>Corporate Information</Link></ListItem>
                         </List>
                     </GridItem>
