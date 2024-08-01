@@ -2,9 +2,11 @@ import { Button, ButtonGroup, Center, Flex, Heading, Icon, Input, InputGroup, In
 import { CiCircleQuestion } from "react-icons/ci"
 import { useOutletContext } from "react-router-dom"
 import { User } from "../../entities/User"
+import { useNavigate } from "react-router-dom"
 
 function AccountCard() {
     const user = useOutletContext<User>()
+    const navigate = useNavigate()
 
     const cardNumber = "************" + (user ? user?.cardInfo.cardNumber:"****")
     const expirationDate = user ? user.cardInfo.expiryDate : "Expiration Date"
@@ -28,7 +30,7 @@ function AccountCard() {
                     <Button borderRadius={1} height="55px" width="100%" colorScheme="green" fontSize={20}>Save</Button>
                     <Button borderRadius={1} height="55px" width="100%" colorScheme="red" fontSize={20}>Delete Card</Button>
                 </ButtonGroup>
-                <Button borderRadius={1} height="55px" width="100%" colorScheme="gray" fontSize={20}>Back</Button>
+                <Button backgroundColor="red" borderRadius={1} height="55px" width="100%" colorScheme="gray" fontSize={20} onClick={() => navigate("/account")}>Back</Button>
             </VStack>
         </Center>
     )

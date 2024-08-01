@@ -13,8 +13,8 @@ function AccountSettings() {
             <VStack width="500px">
                 <Heading width="100%">Account Settings</Heading>
                 <VStack width="100%" padding={5} divider={<StackDivider borderColor='gray.200' />} spacing={4} align='stretch'>
-                    <UpdateDropDown title="Email" currentValue={user ? user.email : ""} key="email" userId={user ? user.id : ""} type="text"/>
-                    <UpdateDropDown title="Password" currentValue={user ? user.password : ""} key="password" userId={user ? user.id : ""} type="password"/>
+                    <UpdateDropDown title="Email" currentValue={user ? user.email : ""} changeKey="email" userId={user ? user.id : ""} type="text"/>
+                    <UpdateDropDown title="Password" currentValue={user ? user.password : ""} changeKey="password" userId={user ? user.id : ""} type="password"/>
                     <Flex width="100%" justifyContent='start'>
                         <Heading fontSize={20}>Payment Info</Heading>
                         <Spacer/>
