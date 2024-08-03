@@ -1,4 +1,4 @@
-import { Center, Heading, HStack, VStack, Text, Image, Input, Flex, InputGroup, Link, Spacer, InputRightElement, Icon, Button, Stack, ButtonGroup, Box, Card, CardBody, CardFooter, CardHeader } from "@chakra-ui/react"
+import { Center, Heading, HStack, VStack, Text, Image, Input, Flex, InputGroup, Link, Spacer, InputRightElement, Icon, Button, Stack, ButtonGroup, Card, CardBody, CardFooter, CardHeader } from "@chakra-ui/react"
 import { CiCircleQuestion, CiCreditCard1 } from "react-icons/ci"
 import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
