@@ -4,6 +4,7 @@ import { Link as RouterLink, useNavigate} from "react-router-dom"
 import { Box, Card, Center, CardBody, Heading, Image, Stack, StackDivider, VStack, Text, Input, Button, Link } from "@chakra-ui/react"
 import logo from "../../assets/logo.png"
 import { useState } from "react"
+import Footer from "../common/Footer"
 
 interface LoginForm {
     email: string,
@@ -62,9 +63,7 @@ function Login() {
                         </Stack>
                     </CardBody>
                 </Card>
-                <Center className="footer" backgroundColor='rgba(22, 0, 0, 0.7)' width="100%" height="200px" marginTop='30px'>
-                    <Heading color='white' size='sm'>Questions: Call 1-844-542-4813</Heading>
-                </Center>
+                <Footer/>
             </VStack>
         </Box>
     )
