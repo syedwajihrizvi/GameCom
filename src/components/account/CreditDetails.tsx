@@ -1,4 +1,4 @@
-import { Center, Heading, HStack, VStack, Text, Image, Input, Flex, InputGroup, Link, Spacer, InputRightElement, Icon, Button, Stack, ButtonGroup } from "@chakra-ui/react"
+import { Center, Heading, HStack, VStack, Text, Image, Input, Flex, InputGroup, Link, Spacer, InputRightElement, Icon, Button, Stack, ButtonGroup, Box, Card, CardBody, CardFooter, CardHeader } from "@chakra-ui/react"
 import { CiCircleQuestion, CiCreditCard1 } from "react-icons/ci"
 import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
@@ -29,10 +29,11 @@ function CreditDetails() {
         resolver: zodResolver(schema)
     })
     const {state} = useLocation()
-    console.log(state)
     const [back, setBack] = useState(false)
     const [next, setNext] = useState(false)
     const [isAnimating, setIsAnimating] = useState(false)
+    const [showWarning, setShowWarning] = useState(true)
+
     const showToast = () => {
         toast.error('An Error occured processing the request. Try Again!', {
           autoClose: 5000,
@@ -94,6 +95,17 @@ function CreditDetails() {
     return (
         <MotionCenter initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined}>
             <VStack width="500px" padding={5}>
+            {showWarning && <Card align='center'>
+                <CardHeader>
+                    <Heading size='md'> This is only a Sample Project</Heading>
+                    </CardHeader>
+                    <CardBody>
+                    <Text as='b'>Please do NOT enter You Actual Card Information.</Text>
+                    </CardBody>
+                    <CardFooter>
+                    <Button colorScheme='red' onClick={() => setShowWarning(false)}>I Understand</Button>
+                    </CardFooter>
+                </Card>}
                 <Text>Step 3 of 3</Text>
                 <ToastContainer autoClose={3000}/>
                 <Heading>Set up your credit or debit card.</Heading>
