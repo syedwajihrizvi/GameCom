@@ -8,7 +8,7 @@ function NavBar() {
     return (
         <SimpleGrid columns={{lg:2, md:1}} spacingX="100vh" spacingY={3} paddingBottom={3}>
             <Center>
-                <Image src={logo}/>
+                <Image src={logo} width={250} height='80px'/>
             </Center>
             <Center>
                 <HStack>
