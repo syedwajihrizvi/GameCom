@@ -1,4 +1,4 @@
-import { Button, HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Switch, MenuButton, Menu, MenuItem, MenuList} from "@chakra-ui/react"
+import { Button, Image, Input, InputGroup, InputLeftElement, InputRightElement, Switch, MenuButton, Menu, MenuItem, MenuList, Flex, HStack} from "@chakra-ui/react"
 import logo from "../../assets/logo.png"
 import { CloseIcon } from "@chakra-ui/icons"
 import useQueryStore from "../../stores/useQueryStore"
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { IoSearchCircleSharp } from "react-icons/io5"
 import { User } from "../../entities/User"
+import "../../assets/css/navbar.css"
 
 interface Props {
     handleSwitchChange: () => void,
@@ -36,7 +37,7 @@ function GameNavBar({handleSwitchChange, mode, user}: Props){
     }
 
     return (
-        <HStack padding={2}>
+        <Flex className="navbar">
             <Image src={logo} cursor='pointer' onClick={() => navigate('/games')}/>
             <InputGroup>
                 <InputLeftElement>
@@ -49,19 +50,21 @@ function GameNavBar({handleSwitchChange, mode, user}: Props){
                     {search && <CloseIcon cursor='pointer' color='red.500' onClick={() => handleCloseIcon()}/>}
                 </InputRightElement>
             </InputGroup>
-            <Switch isChecked={mode=="dark"} colorScheme='red' size='lg' onChange={handleSwitchChange}/>
-            <Menu>
-                <MenuButton >
-                    <Button backgroundColor="red" borderRadius="100%" fontSize={18} color="white">
-                        {user?.firstName.toUpperCase()}
-                    </Button>
-                </MenuButton>
-                <MenuList>
-                    <MenuItem onClick={() => navigate('/account')}>Settings</MenuItem>
-                    <MenuItem onClick={signOut}>Sign Out</MenuItem>
-                </MenuList>
-            </Menu>
-        </HStack>
+            <HStack>
+                <Switch isChecked={mode=="dark"} colorScheme='red' size='lg' onChange={handleSwitchChange}/>
+                <Menu>
+                    <MenuButton >
+                        <Button backgroundColor="red" borderRadius="100%" fontSize={18} color="white">
+                            {user?.firstName.toUpperCase()}
+                        </Button>
+                    </MenuButton>
+                    <MenuList>
+                        <MenuItem onClick={() => navigate('/account')}>Settings</MenuItem>
+                        <MenuItem onClick={signOut}>Sign Out</MenuItem>
+                    </MenuList>
+                </Menu>
+            </HStack>
+        </Flex>
     )
 }
 

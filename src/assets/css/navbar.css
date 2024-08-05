@@ -1,0 +1,14 @@
+.navbar {
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px
+}
+
+@media screen and (min-width: 580px) {
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

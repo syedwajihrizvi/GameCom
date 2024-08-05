@@ -1,4 +1,4 @@
-import { Text, Grid, GridItem, HStack, SimpleGrid, Button, ButtonGroup} from "@chakra-ui/react"
+import { Text, Grid, GridItem, HStack, SimpleGrid, Button, ButtonGroup, Flex} from "@chakra-ui/react"
 import FilterHeading from "../games/FilterHeading"
 import GameGrid from "../games/GameGrid"
 import GameModeSelector from "../games/GameModeSelector"
@@ -11,6 +11,7 @@ import useQueryStore from "../../stores/useQueryStore"
 import ShowOnlySelector from "../games/ShowOnlySelector"
 import { useOutletContext } from "react-router-dom"
 import { User } from "../../entities/User"
+import "../../assets/css/home.css"
 
 function Home() {
     const {genre, platform, gameMode, sort, handleLayoutToggle} = useQueryStore()
@@ -31,13 +32,13 @@ function Home() {
               <FilterHeading />}
               <SimpleGrid columns={{sm:1, md:1, lg:2, xl: 2, '2xl': 2}} spacingX="60%">
                 <GridItem>
-                  <HStack>
+                  <Flex className="filter">
                       <GameModeSelector/>
                       <PlatformSelector/>
                       <SortSelector/>
                       {sort && <OrderSelector/>}
                       <ShowOnlySelector/>
-                  </HStack>
+                  </Flex>
                 </GridItem>
                 <GridItem>
                   <HStack className="display">
