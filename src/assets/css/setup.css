@@ -1,0 +1,38 @@
+.signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+
+.content {
+    padding: 10px;
+    width: 500px;
+}
+
+.register {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 500px;
+}
+
+.button-group {
+    width: 500px;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 600px){
+    .register {
+        width: 100%;
+        padding: 10px
+    }
+
+    .button-group {
+        width: 90%;
+    }
+}
+
+

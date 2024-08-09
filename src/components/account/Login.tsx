@@ -6,6 +6,8 @@ import logo from "../../assets/logo.png"
 import { useState } from "react"
 import Footer from "../common/Footer"
 
+import "../../assets/css/login.css"
+
 interface LoginForm {
     email: string,
     password: string
@@ -29,9 +31,9 @@ function Login() {
 
     return (
         <Box className="login-background" width="100%">
-            <VStack overflowY='hidden'>
+            <VStack>
                 <Image src={logo}/>
-                <Card backgroundColor='rgba(22, 0, 0, 0.7)' width="500px" height="70vh" padding={30} paddingBottom={40}>
+                <Card className="login" backgroundColor="rgba(22, 0, 0, 0.7)">
                     <CardBody>
                         <Heading color='white'>Sign In</Heading>
                         <Stack divider={<StackDivider />} spacing='4'>

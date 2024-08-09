@@ -18,7 +18,7 @@ function Faq({question, answer}: Props) {
     }
 
     return (
-        <Stack width="60vw" backgroundColor='gray.800' color="white" padding={5}>
+        <Stack className="faq">
             <Flex>
                 <Box padding={2}>
                     <Heading as='h2' size='lg'>{question}</Heading>

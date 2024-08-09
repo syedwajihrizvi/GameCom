@@ -1,10 +1,10 @@
-import { Center, VStack, Heading, Button, Text, Icon, HStack, ButtonGroup } from "@chakra-ui/react"
+import { Box, VStack, Heading, Button, Text, Icon, HStack, ButtonGroup } from "@chakra-ui/react"
 import { IoCheckmark } from "react-icons/io5"
 import { useLocation, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import { useState } from "react"
 
-const MotionCenter = motion(Center)
+const MotionCenter = motion(Box)
 
 function ChoosePlan() {
     const navigate = useNavigate()
@@ -52,9 +52,8 @@ function ChoosePlan() {
             
     }
 
-    console.log(state)
     return (
-        <MotionCenter initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined} height='70vh' width="450px" margin='auto'>
+        <MotionCenter className='signup' initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined} height='70vh'>
             <VStack marginTop={30}>
                 <Text>Step 2 of 3</Text>
                 <Heading>Choose your plan.</Heading>

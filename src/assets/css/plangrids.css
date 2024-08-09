@@ -1,0 +1,16 @@
+.partialPlans {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    display: none;
+}
+
+@media screen and (max-width: 850px) {
+    .partialPlans {
+        display: block;
+    }
+
+    .fullPlans {
+        display: none;
+    }
+}

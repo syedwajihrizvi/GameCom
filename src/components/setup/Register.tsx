@@ -1,4 +1,4 @@
-import { Center, VStack, Text, Button, Heading, Input, InputGroup, InputRightElement, Icon, Flex, Stack, ButtonGroup } from "@chakra-ui/react"
+import { Box, Center, Text, Button, Heading, Input, InputGroup, InputRightElement, Icon, Flex, Stack, ButtonGroup } from "@chakra-ui/react"
 import { IoEyeOutline } from "react-icons/io5"
 import { useState } from "react"
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion"
 
 const schema = z.object(registerSchema).required()
-const MotionCenter = motion(Center)
+const MotionCenter = motion(Box)
 
 type ValidationSchemaType = z.infer<typeof schema>
 
@@ -23,7 +23,6 @@ function Register() {
     const [back, setBack] = useState(false)
     const [next, setNext] = useState(false)
     const [isAnimating, setIsAnimating] = useState(false)
-    console.log(state)
     const onFormSubmit:SubmitHandler<ValidationSchemaType> = () => {
         setIsAnimating(true)
         setNext(true)
@@ -64,10 +63,10 @@ function Register() {
     }
 
     return (
-        <MotionCenter initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined} height='70vh' width="450px" margin='auto'>
-            <VStack marginTop={30}>
+        <MotionCenter className='signup' initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined} height='70vh'>
+            <Flex className="register">
                 <Text>Step 1 of 3</Text>
-                <Heading>Create a password to start your membership.</Heading>
+                <Heading textAlign='center'>Create a password to start your membership.</Heading>
                 <Text>Just a few more steps and we're done. We hate paperwork too!</Text>
                 <Input {...register('email')} placeholder="Enter your Email" borderRadius={1} height="50px"/>
                 {errors.email && <Text color="red" width="100%">{errors.email.message}</Text>}
@@ -90,11 +89,11 @@ function Register() {
                     <Input {...register("password")} placeholder="Enter your Password" borderRadius={1} height="50px" type={viewPassword?"text":"password"}/>
                 </InputGroup>
                 {errors.password && <Text color="red" width="100%">{errors.password.message}</Text>}
-                <ButtonGroup width="450px">
-                    <Button backgroundColor='red' color='white' width="450px" height="55px" borderRadius={1} fontSize={24} onClick={handleSelectBack}>Back</Button>
-                    <Button backgroundColor='red' color='white' width="450px" height="55px" borderRadius={1} fontSize={24} onClick={handleSubmit(onFormSubmit)}>Next</Button>
+                <ButtonGroup className='button-group'>
+                    <Button backgroundColor='red' color='white' width="100%" height="55px" borderRadius={1} fontSize={24} onClick={handleSelectBack}>Back</Button>
+                    <Button backgroundColor='red' color='white' width="100%" height="55px" borderRadius={1} fontSize={24} onClick={handleSubmit(onFormSubmit)}>Next</Button>
                 </ButtonGroup>
-            </VStack>
+            </Flex>
         </MotionCenter>
     )
 }

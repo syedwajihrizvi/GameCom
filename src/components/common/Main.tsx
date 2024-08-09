@@ -10,6 +10,8 @@ import SignUp from "../setup/SignUp"
 import NavBar from "../navbars/NavBar"
 import { useNavigate } from "react-router-dom"
 
+import "../../assets/css/main.css"
+
 function Main() {
     const navigate = useNavigate()
     const isLoggedIn = localStorage.getItem('x-auth-token')
@@ -18,7 +20,7 @@ function Main() {
             <VStack backgroundColor='black' width="100%" overflow='hidden'>
                 <Box className="background" width='100%'>
                     <NavBar/>
-                    <Center className="register-main" width="100%">
+                    <Box className="register-main">
                         <VStack textAlign='center'>
                             <Heading color="white" as='h1' size='3xl'>Unlimited Games, streams, and more.</Heading>
                             <Heading color="white" as='h6' size='lg'>Play Anywhere. Cancel Anytime.</Heading>
@@ -28,53 +30,35 @@ function Main() {
                                 View All Games
                             </Button>}
                         </VStack>
-                    </Center>
+                    </Box>
                 </Box>
-                <Center padding={20}>
-                    <SimpleGrid columns={{lg: 2, md:1}} spacingX={5}>
-                        <Center width="100%">
-                            <Stack color="white" textAlign='center'>
-                                <Heading as='h1' size='3xl'>Enjoy Anywhere. Enjoy Anytime.</Heading>
-                                <Heading as='h6' size='sm'>Play on Smart TVs, tablets, laptops, phones, and more.</Heading>
-                            </Stack>
-                        </Center>
-                        <Center>
-                            <Image src={sectionOneImage} height={300}/>
-                        </Center> 
-                    </SimpleGrid>
-                </Center>
+                <Box className="main-section">
+                    <Stack color="white" textAlign='center'>
+                        <Heading as='h1' size='3xl'>Enjoy Anywhere. Enjoy Anytime.</Heading>
+                        <Heading as='h6' size='sm'>Play on Smart TVs, tablets, laptops, phones, and more.</Heading>
+                    </Stack>
+                    <Image src={sectionOneImage} height={300}/>
+                </Box>
                 <Box backgroundColor='gray.800' width='100%' height='10px'/>
-                <Center padding={20}>
-                    <SimpleGrid columns={{lg: 2, md:1}}>
-                        <Center overflowX='hidden'>
-                            <Image src={sectionTwoImage} height={300}/>
-                        </Center> 
-                        <Center width='100%'>
-                            <Stack color="white" textAlign='center'>
-                                <Heading as='h1' size='3xl'>Play Anywhere. Play Anytime.</Heading>
-                                <Heading as='h6' size='sm'>Stream your favorite games anywhere you want.</Heading>
-                            </Stack>
-                        </Center>
-                    </SimpleGrid>
-                </Center>
+                <Box className="main-section">
+                    <Image src={sectionTwoImage} height={300}/>
+                    <Stack color="white" textAlign='center'>
+                        <Heading as='h1' size='3xl'>Play Anywhere. Play Anytime.</Heading>
+                        <Heading as='h6' size='sm'>Stream your favorite games anywhere you want.</Heading>
+                    </Stack>
+                </Box>
                 <Box backgroundColor='gray.800' width='100%' height='10px'/>
-                <Center padding={20}>
-                    <SimpleGrid columns={{lg: 2, md:1}}> 
-                        <Center width="100%">
-                            <Stack color="white" textAlign='center'>
-                                <Heading as='h1' size='3xl'>Download your games offline.</Heading>
-                                <Heading as='h6' size='sm'>Play on a plane, train, or even a submarine.</Heading>
-                            </Stack>
-                        </Center>
-                        <Center>
-                            <Image src={sectionThreeImage} height={300}/>
-                        </Center>
-                    </SimpleGrid>
-                </Center>
+                <Box className="main-section">
+                    <Stack color="white" textAlign='center'>
+                        <Heading as='h1' size='3xl'>Download your games offline.</Heading>
+                        <Heading as='h6' size='sm'>Play on a plane, train, or even a submarine.</Heading>
+                    </Stack>
+                    <Image src={sectionThreeImage} height={300}/>
+                </Box>
                 <Box backgroundColor='gray.800' width='100%' height='10px'/>
-                <Center backgroundColor='black' width='100%' paddingTop={10} paddingBottom={10}>
+                <Center backgroundColor='black' width='100%'>
                     <VStack>
-                        <Heading size={{lg:'2xl', md:'lg'}} color='white' paddingBottom={5}>Frequently Asked Questions</Heading>
+                        <Heading textAlign='center' size='2xl' color='white' paddingBottom={5}>Frequently Asked Questions</Heading>
                         {faqs.map((faq:Faqs) => <Faq question={faq.question} answer={faq.answer}/>)}
                         {!isLoggedIn && <SignUp/>}
                         {isLoggedIn && 

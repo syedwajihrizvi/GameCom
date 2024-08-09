@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { HStack, Menu, MenuButton, Button, MenuList, MenuItem, Image, Flex } from "@chakra-ui/react";
+import { Box, Menu, MenuButton, Button, MenuList, MenuItem, Image, Flex } from "@chakra-ui/react";
 import logo from "../../assets/logo.png"
 import { Link } from "react-router-dom";
 import '../../assets/css/navbar.css'
@@ -9,7 +9,7 @@ function NavBar() {
     return (
         <Flex className="navbar">
             <Image src={logo}/>
-            <HStack>
+            <Box className="buttons" paddingRight="10px" paddingLeft="10px">
                 <Menu>
                     <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color='white' backgroundColor='rgba(22, 0, 0, 0.2)'>
                         Language
@@ -23,7 +23,7 @@ function NavBar() {
                     {!isLoggedIn && <Link to='/login'>Sign In</Link>}
                     {isLoggedIn && <Link to='/games'>Games</Link>}
                 </Button>
-            </HStack>
+            </Box>
         </Flex>
     )
 }

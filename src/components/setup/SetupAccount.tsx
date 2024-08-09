@@ -1,17 +1,16 @@
-import { Center, VStack, HStack, Heading, Button, Text } from "@chakra-ui/react";
+import { Box, VStack, HStack, Heading, Button, Text } from "@chakra-ui/react";
 import { CiLaptop, CiMonitor, CiMobile1 } from "react-icons/ci";
 import { useNavigate, useLocation } from "react-router-dom"
 import { motion } from 'framer-motion'
 import { useState } from "react";
 
-const MotionCenter = motion(Center)
+const MotionCenter = motion(Box)
 
 function SetupAccount() {
     const navigate = useNavigate()
     const {state} = useLocation()
     const [isAnimating, setIsAnimating] = useState(false)
     const [next, setNext] = useState(false)
-    console.log(state)
     const handleInitialAnimationState = () => {
         if (next) {
             return {x:0}
@@ -43,16 +42,16 @@ function SetupAccount() {
         }
     }
     return (
-        <MotionCenter initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete:undefined} height='70vh' width="500px" margin='auto'>
-            <VStack marginTop={30}>
+        <MotionCenter className="signup" initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete:undefined} height='60vh'>
+            <VStack className='content'>
                 <HStack>
-                    <CiMonitor size={110}/>
-                    <CiLaptop size={110}/>
-                    <CiMobile1 size={110}/>
+                    <CiMonitor size={50}/>
+                    <CiLaptop size={50}/>
+                    <CiMobile1 size={50}/>
                 </HStack>
                 <Heading textAlign='center'>Finish setting up your account.</Heading>
                 <Text textAlign='center' noOfLines={2} as='b'>GameCom is personalized for you. Create a password to begin your GameCom Journey.</Text>
-                    <Button onClick={handleNext} backgroundColor='red' color='white' width="350px" height="55px" borderRadius={1} fontSize={24}>Next</Button>
+                    <Button onClick={handleNext} backgroundColor='red' color='white' width="300px" height="55px" borderRadius={1} fontSize={24}>Next</Button>
             </VStack>
         </MotionCenter>
     )

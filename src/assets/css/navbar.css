@@ -1,14 +1,18 @@
 .navbar {
-    flex-direction: column;
-    justify-content: space-evenly;
+    width: 100vw;
+    padding: 10px;
+    justify-content: space-between;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 10px
 }
 
-@media screen and (min-width: 580px) {
+.buttons {
+    display: flex;
+    gap: 5px;
+}
+@media screen and (max-width: 650px) {
     .navbar {
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }

@@ -4,7 +4,7 @@ function Footer() {
 
     const {colorMode} = useColorMode()
     return (
-        <Flex backgroundColor="#F7F7F7" className="footer" width="100%" justifyContent='center' marginTop={5}>
+        <Flex className="footer">
             <VStack color="black" alignItems={{md:'start', sm:'center'}} padding={10}>
                 <Text>Questions? Call 1-844-542-4813</Text>
                 <SimpleGrid columns={{lg: 4, md: 2}} spacingX={40} >

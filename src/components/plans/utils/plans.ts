@@ -30,7 +30,7 @@ export const plans = [
         ]
     },
     {
-        title: "Standard With Ads",
+        title: "With Ads",
         quality: "720p",
         price: "10.99",
         values: [
