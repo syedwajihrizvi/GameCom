@@ -93,8 +93,8 @@ function CreditDetails() {
     }
 
     return (
-        <MotionCenter initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined}>
-            <VStack width="500px" padding={5}>
+        <MotionCenter className='signup' initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined} height='fit-content'>
+            <VStack className='register' padding={5}>
             {showWarning && <Card align='center'>
                 <CardHeader>
                     <Heading size='md'> This is only a Sample Project</Heading>
@@ -161,9 +161,9 @@ function CreditDetails() {
                     to your payment method until you cancel. You may cancel at any time to avoid future charges. 
                     To cancel, go to Account and click “Cancel Membership.
                 </Text>
-                <ButtonGroup width="450px">
-                    <Button width="100%" height="55px" borderRadius={1} backgroundColor="red" color="white" fontSize={24} onClick={handleSelectBack}>Back</Button>
-                    <Button width="100%" borderRadius={1} backgroundColor="red" color="white" height="55px" fontSize={24} onClick={handleSubmit(onFormSubmit)}>Start Membership</Button>
+                <ButtonGroup className="button-group">
+                    <Button width="100%" height="55px" borderRadius={1} backgroundColor="red" color="white" fontSize={20} onClick={handleSelectBack}>Back</Button>
+                    <Button width="100%" borderRadius={1} backgroundColor="red" color="white" height="55px" fontSize={20} onClick={handleSubmit(onFormSubmit)}>Ready</Button>
                 </ButtonGroup>
             </VStack>
         </MotionCenter>

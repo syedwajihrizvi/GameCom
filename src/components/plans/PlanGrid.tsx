@@ -81,9 +81,9 @@ function PlanGrid() {
             <VStack width="100%" padding={10}>
                 {!isLoggedIn && <Text>Step 2 of 3</Text>}
                 <Heading mb={2}>Choose the plan that’s right for you</Heading>
-                <Flex className="fullPlans" gap={5}>
+                <Box className="fullPlans" gap={5}>
                     {plans.map((plan, index) => 
-                        <Card border={currentPlan == index ? "3px solid red": ""} onClick={() => handlePlanSelect(index)} padding={2} _hover={{cursor: "pointer", transform: 'scale(1.01)', transition: 'transform 0.15s ease-in'}}>
+                        <Card border={currentPlan == index ? "3px solid red": ""} onClick={() => handlePlanSelect(index)} padding={2} _hover={{cursor: "pointer", transform: 'scale(1.01)', transition: 'transform 0.15s ease-in'}} boxShadow='0 0 30px 20px #f3f3f3'>
                             <VStack>
                                 <PlanHeader title={plan.title} quality={plan.quality} partial={false}/>
                                 <CardBody  width='100%'>
@@ -99,8 +99,8 @@ function PlanGrid() {
                             </VStack>
                         </Card>
                     )}                 
-                </Flex>
-                <Flex className="partialPlans">
+                </Box>
+                <Box className="partialPlans">
                     <Flex gap={3} mb={5} padding={3} alignItems='center' justifyContent='center'>
                         {plans.map((plan, index) =>
                             <Card width="100%" onClick={() => handlePlanSelect(index)} _hover={{cursor: "pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} borderRadius={10} border={index == currentPlan ? "1px solid black":""}>
@@ -119,8 +119,8 @@ function PlanGrid() {
                                 )}
                             </Stack>
                     </Flex>
-                </Flex>
-                <Stack spacing={2}>
+                </Box>
+                <Stack spacing={2} marginTop="1rem">
                     <Text fontSize={14}>
                         <Link color='blue'>Learn more about an ad-supported plan</Link>. If you select an ad-supported plan, 
                         you will be required to provide your date of birth for ads personalization 

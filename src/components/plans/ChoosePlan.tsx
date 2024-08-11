@@ -1,4 +1,4 @@
-import { Box, VStack, Heading, Button, Text, Icon, HStack, ButtonGroup } from "@chakra-ui/react"
+import { Box, Flex, Heading, Button, Text, Icon, HStack, ButtonGroup } from "@chakra-ui/react"
 import { IoCheckmark } from "react-icons/io5"
 import { useLocation, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
@@ -54,7 +54,7 @@ function ChoosePlan() {
 
     return (
         <MotionCenter className='signup' initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined} height='70vh'>
-            <VStack marginTop={30}>
+            <Flex className="register">
                 <Text>Step 2 of 3</Text>
                 <Heading>Choose your plan.</Heading>
                 <HStack>
@@ -77,7 +77,7 @@ function ChoosePlan() {
                         Next
                     </Button>
                 </ButtonGroup>
-            </VStack>
+            </Flex>
         </MotionCenter>
     )
 }

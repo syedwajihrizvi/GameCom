@@ -11,7 +11,7 @@ function SetUp() {
     if (colorMode == "dark")
         toggleColorMode()
     return (
-        <Box>
+        <Box overflow='hidden'>
             <NavBar/>
             <Outlet/>
             <Footer/>

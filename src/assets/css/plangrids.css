@@ -5,6 +5,11 @@
     display: none;
 }
 
+.fullPlans {
+    display: flex;
+    flex-direction: row;
+}
+
 @media screen and (max-width: 850px) {
     .partialPlans {
         display: block;
