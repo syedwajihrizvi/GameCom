@@ -1,4 +1,4 @@
-import { Card, VStack, Button, Container, HStack, Spacer, Image } from "@chakra-ui/react"
+import { Card, VStack, Button, Container, Box, Spacer, Image } from "@chakra-ui/react"
 import useQueryStore from "../../stores/useQueryStore"
 import Platforms from "../platforms/Platforms"
 import FavoriteIcon from "./Favorite"
@@ -42,27 +42,25 @@ function GameCard({game, favorites, userId}:Props) {
 
     return (
         <Card className={verticalLayout ? 'singleGameCard':'gameCard'} _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} 
-        key={game.id} onMouseEnter={() => setShowPreview(true)} onMouseLeave={() => setShowPreview(false)} overflow='hidden'>
+        key={game.id} onMouseEnter={() => setShowPreview(true)} onMouseLeave={() => setShowPreview(false)} overflow='hidden' boxShadow="0 4px 12px rgba(0, 0, 0, 0.15)">
             <VStack>
                 {game.cover && <GameImage cover={game.cover} showPreview={showPreview} videos={game.videos}/>}
                 {!game.cover && <Image className="gameImage" src={defaultPlaceHolder} />}
                 {!showPreview  && <GameName gameName={game.name}/>}
                 {showPreview && <Button width="90%" backgroundColor='red.500' onClick={() => navigate(game.slug)}>View More</Button>}
-                <Container>
-                    <HStack>
-                        <VStack>
-                            <Container>
-                                {game.platforms && <Platforms platforms={game.platforms}/>}
-                                {game.game_modes && <GameModes gameModes={game.game_modes}/>}  
-                            </Container>
-                        </VStack>
-                        <Spacer />
-                        <HStack>
-                            <GameRating game={game}/>
-                            <FavoriteIcon likeFor={game.id} isActive={favorites.includes(String(game.id))} onFavoriteClick={handleFavoriteGame}/>
-                        </HStack>
-                    </HStack>
-                </Container>
+                <Box display='flex' width='100%' padding="0 10px">
+                    <VStack>
+                        <Container>
+                            {game.platforms && <Platforms platforms={game.platforms}/>}
+                            {game.game_modes && <GameModes gameModes={game.game_modes}/>}  
+                        </Container>
+                    </VStack>
+                    <Spacer />
+                    <VStack>
+                        <GameRating game={game}/>
+                        <FavoriteIcon likeFor={game.id} isActive={favorites.includes(String(game.id))} onFavoriteClick={handleFavoriteGame}/>
+                    </VStack>
+                </Box>
             </VStack>
         </Card>
     )

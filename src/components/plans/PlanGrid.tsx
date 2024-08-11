@@ -83,7 +83,7 @@ function PlanGrid() {
                 <Heading mb={2}>Choose the plan that’s right for you</Heading>
                 <Box className="fullPlans" gap={5}>
                     {plans.map((plan, index) => 
-                        <Card border={currentPlan == index ? "3px solid red": ""} onClick={() => handlePlanSelect(index)} padding={2} _hover={{cursor: "pointer", transform: 'scale(1.01)', transition: 'transform 0.15s ease-in'}} boxShadow='0 0 30px 20px #f3f3f3'>
+                        <Card border={currentPlan == index ? "3px solid red": ""} onClick={() => handlePlanSelect(index)} padding={2} _hover={{cursor: "pointer", transform: 'scale(1.01)', transition: 'transform 0.15s ease-in'}} boxShadow='0 4px 12px rgba(0, 0, 0, 0.15)'>
                             <VStack>
                                 <PlanHeader title={plan.title} quality={plan.quality} partial={false}/>
                                 <CardBody  width='100%'>
@@ -135,7 +135,7 @@ function PlanGrid() {
                     <Link color="blue">Learn more</Link>. Watch on 4 different devices at the same time with Premium and 2 with Standard or Standard with ads.
                     </Text>
                     <Flex width="100%" justifyContent='center'>
-                        <ButtonGroup className="button-group">
+                        <ButtonGroup className="button-group" width='60%'>
                             <Button backgroundColor='red' width="100%" color='white' height="55px" borderRadius={1} fontSize={28} onClick={handleSelectBack}>Back</Button>
                             <Button backgroundColor='red' width="100%" color='white' height="55px" borderRadius={1} fontSize={28} onClick={handleSelectNext}>{isLoggedIn?"Update Plan": "Next"}</Button>
                         </ButtonGroup>

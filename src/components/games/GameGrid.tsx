@@ -22,7 +22,7 @@ function GameGrid({user}: Props) {
     return (
         <Box height="90vh" overflowY='scroll'>
             <InfiniteScroll dataLength={numberOfGames} next={fetchNextPage} hasMore={!!hasNextPage} loader=<InfiniteLoader/>>
-                <SimpleGrid columns={verticalLayout ? 1 : {sm:1, md:1, lg:2, xl: 3, '2xl': 4}} spacingX={2} spacingY={6}>
+                <SimpleGrid columns={verticalLayout ? 1 : {sm:1, md:1, lg:2, xl: 4, '2xl': 5}} spacingX={5} spacingY={6}>
                     {isLoading && !verticalLayout && cardSkeletons.map(skeleton =>
                     <Center>
                         <Card className={verticalLayout ? 'singleGameCard':'gameCard'}  key={skeleton}>

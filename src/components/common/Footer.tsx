@@ -6,7 +6,7 @@ function Footer() {
 
     return (
         <Center backgroundColor='black' w='100%' paddingTop={10} paddingBottom={10}>
-        <Flex className="register">
+        <Flex flexDirection='column' justifyContent='center' alignItems='center'>
             <Heading color='white' as='h5' size='md' paddingBottom={10}>Questions? Call 1-844-542-4813</Heading>
             <SimpleGrid columns={{lg:4, md:2}} spacingY={10} spacingX={10} justifyContent='center' alignContent='center' justifyItems='center'>
                 <GridItem>

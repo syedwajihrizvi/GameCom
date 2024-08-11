@@ -1,13 +1,12 @@
-import { Container, Heading } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 
 interface Props {
     gameName: string
 }
 function GameName({gameName}: Props) {
     return (
-        <Container textAlign='center'>
-            <Heading size='lg'>{gameName}</Heading>
-        </Container> 
+
+            <Heading size='lg' width="100%" textAlign='center'>{gameName}</Heading>
     )
 }
 

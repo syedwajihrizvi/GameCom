@@ -93,7 +93,7 @@ function CreditDetails() {
     }
 
     return (
-        <MotionCenter className='signup' initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined} height='fit-content'>
+        <MotionCenter className='signup' initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined} height='fit-content' paddingBottom={10}>
             <VStack className='register' padding={5}>
             {showWarning && <Card align='center'>
                 <CardHeader>

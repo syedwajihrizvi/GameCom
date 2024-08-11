@@ -16,13 +16,13 @@ function GameImage({cover, showPreview, videos}: Props) {
     if (showPreview && videos) {
         const preview = `https://www.youtube.com/embed/${videos[0].video_id}?controls=0&modestbranding=1&disablekb=1&rel=0&autoplay=1&mute=1&iv_load_policy=3&show_info=0&start=30&end=45&loop=1&playlist=${videos[0].video_id}`
         return  (
-            <Box overflow='hidden'>
-                <iframe src={preview} allow='autoplay' className={gameImageClass}></iframe> 
+            <Box>
+                <iframe width="264px" height="374px" src={preview} allow='autoplay' className={gameImageClass}></iframe> 
             </Box>
         )
     }
     return (
-        <Image className={gameImageClass} border={10} objectFit='cover' src={generate_image_url(cover ? cover.image_id : '')}/>
+        <Image className={gameImageClass} border={10} src={generate_image_url(cover ? cover.image_id : '')}/>
     )
 }
 
