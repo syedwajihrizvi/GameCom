@@ -63,7 +63,7 @@ function Main() {
                         {faqs.map((faq:Faqs) => <Faq question={faq.question} answer={faq.answer}/>)}
                         {!isLoggedIn && <SignUp/>}
                         {isLoggedIn && 
-                        <Button backgroundColor="red"  height={55} fontSize={32} padding={5} borderRadius={3} onClick={() => navigate('/games')}>
+                        <Button backgroundColor="red"  color="white" height={55} fontSize={32} padding={5} borderRadius={3} onClick={() => navigate('/games')}>
                             View All Games
                         </Button>}
                     </VStack>
