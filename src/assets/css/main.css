@@ -1,5 +1,5 @@
 .background {
-    background: linear-gradient(rgba(0, 39, 11, 0.595), rgba(22, 0, 0, 0.8)), url('../home-wallpaper.jpg');
+    background: linear-gradient(rgba(0, 39, 11, 0.595), rgba(22, 0, 0, 0.8)), url('../home-wallpaper.webp');
     height: 750px;
     background-position: center;
     background-repeat: no-repeat;
@@ -24,6 +24,10 @@
     align-items: center;
 }
 
+.main-section__text {
+    width: 50%;
+}
+
 .faq {
     width:60vw; 
     background-color:rgb(128, 128, 128, 0.3);
@@ -44,5 +48,9 @@
         height: 100%;
         justify-content: center;
         align-items: center;
-    }    
+    }
+
+    .main-section__text {
+        width: 100%
+    }
 }

@@ -1,8 +1,8 @@
 import { Box, Center, Image, Stack, Button} from "@chakra-ui/react"
 import { Heading, VStack } from "@chakra-ui/react"
-import sectionOneImage from "../../assets/image-1.png"
-import sectionTwoImage from "../../assets/image-2.png"
-import sectionThreeImage from "../../assets/image-3.png"
+import sectionOneImage from "../../assets/image-1.webp"
+import sectionTwoImage from "../../assets/image-2.webp"
+import sectionThreeImage from "../../assets/image-3.webp"
 import {Faqs, faqs} from "../../utils/faqs"
 import Faq from "./Faq"
 import SignUp from "../setup/SignUp"
@@ -34,8 +34,8 @@ function Main() {
                     </Box>
                 </Box>
                 <Box className="main-section">
-                    <Stack color="white" textAlign='center'>
-                        <Heading as='h1' size='3xl'>Enjoy Anywhere. Enjoy Anytime.</Heading>
+                    <Stack className="main-section__text" color="white" textAlign='center'>
+                        <Heading width="100%" as='h1' size='3xl'>Enjoy Anywhere. Enjoy Anytime.</Heading>
                         <Heading as='h6' size='sm'>Play on Smart TVs, tablets, laptops, phones, and more.</Heading>
                     </Stack>
                     <Image src={sectionOneImage} height={300}/>
@@ -43,14 +43,14 @@ function Main() {
                 <Divider/>
                 <Box className="main-section">
                     <Image src={sectionTwoImage} height={300}/>
-                    <Stack color="white" textAlign='center'>
+                    <Stack className="main-section__text" color="white" textAlign='center'>
                         <Heading as='h1' size='3xl'>Play Anywhere. Play Anytime.</Heading>
                         <Heading as='h6' size='sm'>Stream your favorite games anywhere you want.</Heading>
                     </Stack>
                 </Box>
                 <Divider/>
                 <Box className="main-section">
-                    <Stack color="white" textAlign='center'>
+                    <Stack className="main-section__text" color="white" textAlign='center'>
                         <Heading as='h1' size='3xl'>Download your games offline.</Heading>
                         <Heading as='h6' size='sm'>Play on a plane, train, or even a submarine.</Heading>
                     </Stack>
