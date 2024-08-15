@@ -65,7 +65,7 @@ function PaymentOptions() {
     console.log(state)
     return (
         <MotionCenter className="setup" initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete: undefined} height='70vh' margin='auto'>
-            <VStack boxShadow="0 4px 12px rgba(0, 0, 0, 0.15)" padding="10px">
+            <VStack className="payment-stack">
                 <Icon as={CiLock} color='red' fontSize={40} border="1px solid red" borderRadius={100} padding={1}/>
                 <Text>Step 3 of 3</Text>
                 <Heading>Choose how to pay.</Heading>

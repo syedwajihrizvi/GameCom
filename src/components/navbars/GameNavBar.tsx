@@ -50,7 +50,7 @@ function GameNavBar({handleSwitchChange, mode, user}: Props){
                     {search && <CloseIcon cursor='pointer' color='red.500' onClick={() => handleCloseIcon()}/>}
                 </InputRightElement>
             </InputGroup>
-            <HStack>
+            <HStack marginRight='1rem'>
                 <Switch isChecked={mode=="dark"} colorScheme='red' size='lg' onChange={handleSwitchChange}/>
                 <Menu>
                     <MenuButton >

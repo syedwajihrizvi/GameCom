@@ -83,7 +83,7 @@ function PlanGrid() {
                 <Heading mb={2}>Choose the plan that’s right for you</Heading>
                 <Box className="fullPlans" gap={5}>
                     {plans.map((plan, index) => 
-                        <Card border={currentPlan == index ? "3px solid red": ""} onClick={() => handlePlanSelect(index)} padding={2} _hover={{cursor: "pointer", transform: 'scale(1.01)', transition: 'transform 0.15s ease-in'}} boxShadow='0 4px 12px rgba(0, 0, 0, 0.15)'>
+                        <Card border={currentPlan == index ? "3px solid red": ""} onClick={() => handlePlanSelect(index)} padding={2} _hover={{cursor: "pointer", transform: 'scale(1.01)', transition: 'transform 0.3s'}} boxShadow='0 4px 12px rgba(0, 0, 0, 0.15)'>
                             <VStack>
                                 <PlanHeader title={plan.title} quality={plan.quality} partial={false}/>
                                 <CardBody  width='100%'>
@@ -101,7 +101,7 @@ function PlanGrid() {
                     )}                 
                 </Box>
                 <Box className="partialPlans">
-                    <Flex gap={3} mb={5} padding={3} alignItems='center' justifyContent='center'>
+                    <Flex gap={1} mb={5} alignItems='center' justifyContent='center'>
                         {plans.map((plan, index) =>
                             <Card width="100%" onClick={() => handlePlanSelect(index)} _hover={{cursor: "pointer", transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} borderRadius={10} border={index == currentPlan ? "1px solid black":""}>
                                 <PlanHeader title={plan.title} quality={plan.quality} partial={true}/>

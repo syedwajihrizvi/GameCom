@@ -8,7 +8,7 @@ function SetUp() {
     const {colorMode, toggleColorMode} = useColorMode()
 
     // Needed since Chakra by default deploys with dark mode on producuction
-    if (colorMode == "dark")
+    if (colorMode == "light")
         toggleColorMode()
     return (
         <Box overflow='hidden'>

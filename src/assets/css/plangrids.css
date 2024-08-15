@@ -1,7 +1,7 @@
 .partialPlans {
     display: flex;
     flex-direction: column;
-    width: 100vw;
+    width: 95vw;
     display: none;
 }
 

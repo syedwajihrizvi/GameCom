@@ -120,13 +120,13 @@ function CreditDetails() {
                 <InputRightElement height="100%">
                     <Icon as={CiCreditCard1} fontSize={30}/>
                 </InputRightElement>
-                <Input {...register('cardNumber')} placeholder="Card number" height="55px" borderRadius={1} border='1px solid black'/>
+                <Input {...register('cardNumber')} placeholder="Card number" height="55px" borderRadius={1} border='1px solid black' _placeholder={{color: "white"}}/>
                 </InputGroup>
                 {errors.cardNumber && <Text color="red" width="100%">{errors.cardNumber.message}</Text>}
                 <Flex justifyContent='start' width="100%">
                     <InputGroup>
                         <Stack mr={2}>
-                            <Input {...register('expirationDate')} placeholder="MM/YY" height="55px" mr={1} borderRadius={1} border='1px solid black'/>
+                            <Input {...register('expirationDate')} placeholder="MM/YY" height="55px" mr={1} borderRadius={1} border='1px solid black' _placeholder={{color: "white"}}/>
                             {errors.expirationDate && <Text color="red" width="100%">{errors.expirationDate.message}</Text>}
                         </Stack>
                         <Stack>
@@ -134,15 +134,15 @@ function CreditDetails() {
                                 <InputRightElement height="100%">
                                     <Icon as={CiCircleQuestion} fontSize={30}/>
                                 </InputRightElement>
-                                <Input {...register("cvv")} placeholder="CVV" height="55px" borderRadius={1} border='1px solid black'/>
+                                <Input {...register("cvv")} placeholder="CVV" height="55px" borderRadius={1} border='1px solid black' _placeholder={{color: "white"}}/>
                             </InputGroup>
                             {errors.cvv && <Text color="red" width="100%">{errors.cvv.message}</Text>}
                         </Stack>
                     </InputGroup>
                 </Flex>
-                <Input {...register('nameOnCard')} placeholder="Name on card" height="55px" borderRadius={1} border='1px solid black'/>
+                <Input {...register('nameOnCard')} placeholder="Name on card" height="55px" borderRadius={1} border='1px solid black' _placeholder={{color: "white"}}/>
                 {errors.nameOnCard && <Text color="red" width="100%">{errors.nameOnCard.message}</Text>}
-                <Flex width="100%" borderRadius={5} backgroundColor="gray.100" height="75px" padding={3}>
+                <Flex width="100%" borderRadius={5} height="75px" padding={3}>
                     <Center height="100%">
                         <VStack spacing={0}>
                         <Text as='b'>${state.selectedPlanPrice}/month (pre-tax)</Text>
@@ -151,7 +151,7 @@ function CreditDetails() {
                     </Center>
                     <Spacer />
                     <Center height="100%">
-                        <Link color='blue' as='b' onClick={handleChangeSelect}>Change</Link>
+                        <Link color='red' as='b' onClick={handleChangeSelect}>Change</Link>
                     </Center>
                 </Flex>
                 <Text fontSize={10}>
