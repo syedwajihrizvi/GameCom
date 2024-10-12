@@ -10,8 +10,9 @@ a) Front-End
 
 b) BackEnd
    1) To avoid running into CORS issues
-   2) Go to the following repo: https://github.com/syedwajihrizvi/cors-anywhere
-   3) Clone the repo using _git clone_
-   4) Do an _npm init_ to install all the packages
-   5) Run _node server.js_ on a separate terminal from the front end
+   2) Also includes all routes database configurations
+   3) Go to the following repo: https://github.com/syedwajihrizvi/GameCom-BackEnd
+   4) Clone the repo using _git clone_
+   5) Do an _npm init_ to install all the packages
+   6) Run _node server.js_ on a separate terminal from the front end
   
