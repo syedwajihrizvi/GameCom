@@ -42,7 +42,10 @@ function SetupAccount() {
         }
     }
     return (
-        <MotionCenter className="signup" initial={handleInitialAnimationState} animate={handleFinalAnimationState} transition={{ duration: 0.5 }} onAnimationComplete={isAnimating ? handleAnimationComplete:undefined} height='60vh'>
+        <MotionCenter className="signup" 
+        initial={handleInitialAnimationState()} 
+        animate={handleFinalAnimationState()} transition={{ duration: 0.5 }} 
+        onAnimationComplete={isAnimating ? handleAnimationComplete:undefined} height='60vh'>
             <VStack className='content'>
                 <HStack>
                     <CiMonitor size={50}/>

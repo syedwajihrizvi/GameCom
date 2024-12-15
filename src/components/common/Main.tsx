@@ -12,19 +12,72 @@ import { useNavigate } from "react-router-dom"
 import "../../assets/css/main.css"
 import Divider from "./Divider"
 import Footer from "./Footer"
+import { ScrollTrigger } from "gsap/all"
+import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
+
+gsap.registerPlugin(ScrollTrigger)
 
 function Main() {
     const navigate = useNavigate()
     const isLoggedIn = localStorage.getItem('x-auth-token')
 
+    useGSAP(() => {
+        gsap.to('.register-main', {
+            opacity: 1,
+            top: 0,
+            duration: 1
+        })
+
+        const mainSections = document.querySelectorAll('.main-section')
+        mainSections.forEach(section => {
+            console.log("Section being called")
+            const children = [section.querySelector('.main-section__text'), 
+                              section.querySelector('.img')]
+            children.forEach(child => {
+                gsap.to(child, {
+                    scrollTrigger: {
+                        trigger: section,
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 1,
+                    top: 0,
+                    duration: 1
+                })
+            })
+            
+        })
+        gsap.to('.section-one .main-section__text', {
+            scrollTrigger: {
+                trigger: '.section-one .main-section__text',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 1,
+            top: 0
+        })
+    
+        gsap.to('.section-one .img', {
+            scrollTrigger: {
+                trigger: '.section-one .img',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 1,
+            top: 0
+        })
+    }, [])
+
     return (
             <VStack backgroundColor='black' width="100%" overflow='hidden'>
                 <Box className="background" width='100%'>
                     <NavBar/>
-                    <Box className="register-main">
+                    <Box className="register-main" opacity={0} position='relative' top={-100}>
                         <VStack textAlign='center'>
-                            <Heading color="white" as='h1' size='3xl'>Unlimited Games, streams, and more.</Heading>
-                            <Heading color="white" as='h6' size='lg'>Play Anywhere. Cancel Anytime.</Heading>
+                            <Heading className="register-main__heading" color="white" as='h1' size='3xl'>
+                                Unlimited Games, streams, and more.
+                            </Heading>
+                            <Heading className="register-main__heading" color="white" as='h6' size='lg'>
+                                Play Anywhere. Cancel Anytime.
+                            </Heading>
                             {!isLoggedIn && <SignUp/>}
                             {isLoggedIn && 
                             <Button backgroundColor="red" color="white" height={55} fontSize={32} padding={5} borderRadius={3} onClick={() => navigate('/games')}>
@@ -38,11 +91,11 @@ function Main() {
                         <Heading width="100%" as='h1' size='3xl'>Enjoy Anywhere. Enjoy Anytime.</Heading>
                         <Heading as='h6' size='sm'>Play on Smart TVs, tablets, laptops, phones, and more.</Heading>
                     </Stack>
-                    <Image src={sectionOneImage} height={300}/>
+                    <Image className='img' src={sectionOneImage} height={300}/>
                 </Box>
                 <Divider/>
                 <Box className="main-section">
-                    <Image src={sectionTwoImage} height={300}/>
+                    <Image className='img' src={sectionTwoImage} height={300}/>
                     <Stack className="main-section__text" color="white" textAlign='center'>
                         <Heading as='h1' size='3xl'>Play Anywhere. Play Anytime.</Heading>
                         <Heading as='h6' size='sm'>Stream your favorite games anywhere you want.</Heading>
@@ -54,7 +107,7 @@ function Main() {
                         <Heading as='h1' size='3xl'>Download your games offline.</Heading>
                         <Heading as='h6' size='sm'>Play on a plane, train, or even a submarine.</Heading>
                     </Stack>
-                    <Image src={sectionThreeImage} height={300}/>
+                    <Image className='img' src={sectionThreeImage} height={300}/>
                 </Box>
                 <Divider/>
                 <Center backgroundColor='black' width='100%'>

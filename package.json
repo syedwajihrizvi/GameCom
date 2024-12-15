@@ -12,6 +12,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
+    "@gsap/react": "^2.1.1",
     "@hookform/resolvers": "^3.9.0",
     "@tanstack/react-query": "4.28",
     "@tanstack/react-query-devtools": "4.28",
@@ -20,6 +21,7 @@
     "axios": "^1.7.2",
     "config": "^3.3.12",
     "framer-motion": "^11.3.19",
+    "gsap": "^3.12.5",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
