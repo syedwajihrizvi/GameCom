@@ -27,20 +27,17 @@
 
 .main-section__text {
     width: 50%;
-    position: relative;
-    top: 400px
 }
 
 .main-section .img {
-    position: relative;
     top: 400px
 }
 
 .faq {
-    width:60vw; 
+    width:70vw; 
     background-color:rgb(128, 128, 128, 0.3);
-     color:white; 
-     padding:5px;
+    color:white; 
+    padding:5px;
 }
 
 @media screen and (max-width: 500px) {

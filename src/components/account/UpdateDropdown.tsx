@@ -41,7 +41,7 @@ function UpdateDropDown({title, currentValue, changeKey, userId, type}: Props) {
     const [showHidden, setShowHidden] = useState(false)
 
     const showToast = (message: errorDetail) => {
-        console.log("Called " + message.message)
+
         toast.error(message.message, {
           autoClose: 3000,
           position: "top-center",

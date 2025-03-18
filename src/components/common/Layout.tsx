@@ -8,7 +8,7 @@ import useUser from "../../hooks/useUser"
 function Layout() {
     const { toggleColorMode, colorMode } = useColorMode()
     const {data: user, error, isLoading} = useUser()
-
+    console.log(user)
     if (!localStorage.getItem('x-auth-token') || error) {
         return <Navigate to='/'/>;
     }

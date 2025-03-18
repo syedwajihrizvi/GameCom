@@ -31,7 +31,6 @@ function Main() {
 
         const mainSections = document.querySelectorAll('.main-section')
         mainSections.forEach(section => {
-            console.log("Section being called")
             const children = [section.querySelector('.main-section__text'), 
                               section.querySelector('.img')]
             children.forEach(child => {
