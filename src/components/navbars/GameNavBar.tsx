@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png"
 import { CloseIcon } from "@chakra-ui/icons"
 import useQueryStore from "../../stores/useQueryStore"
 import { Link, useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { IoSearchCircleSharp } from "react-icons/io5"
 import "../../assets/css/navbar.css"
 import { useGlobalContext } from "../../providers/global-provider"
@@ -17,7 +17,11 @@ function GameNavBar({handleSwitchChange, mode}: Props){
     const {handleSearch, resetQueryToDefault} = useQueryStore()
     const navigate = useNavigate()
     const [search, setSearch] = useState('')
-    const {isLoggedIn, user} = useGlobalContext()
+    const {isLoggedIn, user, isLoading} = useGlobalContext()
+
+    useEffect(() => {
+        if (isLoading) return;
+    }, [isLoading])
     const handleSearchInput = (event: string, value: string) => {
         if (event == "Enter") {
             handleSearch(value ? value : '')
