@@ -2,33 +2,33 @@ import { Button, Image, Input, InputGroup, InputLeftElement, InputRightElement, 
 import logo from "../../assets/logo.png"
 import { CloseIcon } from "@chakra-ui/icons"
 import useQueryStore from "../../stores/useQueryStore"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { IoSearchCircleSharp } from "react-icons/io5"
-import { User } from "../../entities/User"
 import "../../assets/css/navbar.css"
+import { useGlobalContext } from "../../providers/global-provider"
 
 interface Props {
     handleSwitchChange: () => void,
     mode: string,
-    user: User | undefined
 }
 
-function GameNavBar({handleSwitchChange, mode, user}: Props){
+function GameNavBar({handleSwitchChange, mode}: Props){
     const {handleSearch, resetQueryToDefault} = useQueryStore()
     const navigate = useNavigate()
     const [search, setSearch] = useState('')
+    const {isLoggedIn, user} = useGlobalContext()
     const handleSearchInput = (event: string, value: string) => {
         if (event == "Enter") {
             handleSearch(value ? value : '')
-            navigate('/games')
+            navigate('/')
         }
     }
 
     const handleCloseIcon = () => {
         setSearch('')
         resetQueryToDefault()
-        navigate('/games')
+        navigate('/')
     }
 
     const signOut = () => {
@@ -38,12 +38,13 @@ function GameNavBar({handleSwitchChange, mode, user}: Props){
 
     return (
         <Flex className="navbar">
-            <Image src={logo} cursor='pointer' onClick={() => navigate('/games')}/>
+            <Image src={logo} cursor='pointer' onClick={() => navigate('/home')}/>
             <InputGroup>
                 <InputLeftElement>
                     <IoSearchCircleSharp size={46} color="red"/>
                 </InputLeftElement>
-                    <Input value={search} onKeyDown={(event) => handleSearchInput(event.key, event.currentTarget.value)} 
+                    <Input value={search} 
+                    onKeyDown={(event) => handleSearchInput(event.key, event.currentTarget.value)} 
                     onChange={(event) => setSearch(event.target.value)} borderRadius={20}
                     placeholder="Search For Games"/>
                 <InputRightElement>
@@ -52,6 +53,7 @@ function GameNavBar({handleSwitchChange, mode, user}: Props){
             </InputGroup>
             <HStack marginRight='1rem'>
                 <Switch isChecked={mode=="dark"} colorScheme='red' size='lg' onChange={handleSwitchChange}/>
+                {isLoggedIn ?
                 <Menu>
                     <MenuButton >
                         <Button backgroundColor="red" borderRadius="100%" fontSize={18} color="white">
@@ -62,7 +64,11 @@ function GameNavBar({handleSwitchChange, mode, user}: Props){
                         <MenuItem onClick={() => navigate('/account')}>Settings</MenuItem>
                         <MenuItem onClick={signOut}>Sign Out</MenuItem>
                     </MenuList>
-                </Menu>
+                </Menu> :
+                <Link to="/home">
+                    <Button backgroundColor="red" fontSize={18} color="white" paddingX={10} paddingY={5}>Sign Up</Button>
+                </Link>
+            }
             </HStack>
         </Flex>
     )

@@ -12,28 +12,28 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import apiClient from "../../utils/services/userService"
+import { useGlobalContext } from "../../providers/global-provider"
 
 interface Props {
     game: Game
-    favorites: string[]
-    userId: string
 }
 
-function GameCard({game, favorites, userId}:Props) {
+function GameCard({game}:Props) {
     const queryClient = useQueryClient()
     const {verticalLayout} = useQueryStore()
+    const {isLoggedIn, user} = useGlobalContext()
     const [showPreview, setShowPreview] = useState(false)
     const navigate = useNavigate()
 
     const handleFavoriteGame = async (current_state: boolean) => {
         if (current_state == true) {
-            const result = await apiClient.put(`/${userId}`, {"-favoriteGames": [String(game.id)]})
+            const result = await apiClient.put(`/${user?.id}`, {"-favoriteGames": [String(game.id)]})
             if (result.status == 200) {
                 queryClient.invalidateQueries(["me"])
             }
             return result.status
         }
-        const result = await apiClient.put(`/${userId}`, {"favoriteGames": [String(game.id)]})
+        const result = await apiClient.put(`/${user?.id}`, {"favoriteGames": [String(game.id)]})
         if (result.status == 200) {
             queryClient.invalidateQueries(["me"])
         }
@@ -41,8 +41,9 @@ function GameCard({game, favorites, userId}:Props) {
     }
 
     return (
-        <Card className={verticalLayout ? 'singleGameCard':'gameCard'} _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} 
-        key={game.id} onMouseEnter={() => setShowPreview(true)} onMouseLeave={() => setShowPreview(false)} overflow='hidden' boxShadow="0 4px 12px rgba(0, 0, 0, 0.15)">
+        <Card className={verticalLayout ? 'singleGameCard':'gameCard'} 
+            _hover={{transform: 'scale(1.05)', transition: 'transform 0.15s ease-in'}} 
+            key={game.id} onMouseEnter={() => setShowPreview(true)} onMouseLeave={() => setShowPreview(false)} overflow='hidden' boxShadow="0 4px 12px rgba(0, 0, 0, 0.15)">
             <VStack>
                 {game.cover && <GameImage cover={game.cover} showPreview={showPreview} videos={game.videos}/>}
                 {!game.cover && <Image className="gameImage" src={defaultPlaceHolder} />}
@@ -58,7 +59,9 @@ function GameCard({game, favorites, userId}:Props) {
                     <Spacer />
                     <VStack>
                         <GameRating game={game}/>
-                        <FavoriteIcon likeFor={game.id} isActive={favorites.includes(String(game.id))} onFavoriteClick={handleFavoriteGame}/>
+                        {isLoggedIn && <FavoriteIcon likeFor={game.id} 
+                                                     isActive={user && user.favoriteGames ? user.favoriteGames.includes(String(game.id)): false} 
+                                                     onFavoriteClick={handleFavoriteGame}/>}
                     </VStack>
                 </Box>
             </VStack>

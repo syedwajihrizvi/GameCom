@@ -9,9 +9,12 @@ function NavBar() {
         <Flex className="navbar">
             <Image src={logo}/>
             <Box className="buttons" paddingRight="10px" paddingLeft="10px">
+                <Button backgroundColor='red' color='white' className="nav__btn" mr={5}>
+                    {!isLoggedIn && <Link to='/'>View Games</Link>}
+                </Button>
                 <Button backgroundColor='red' color='white' className="nav__btn">
                     {!isLoggedIn && <Link to='/login'>Sign In</Link>}
-                    {isLoggedIn && <Link to='/games'>Games</Link>}
+                    {isLoggedIn && <Link to='/'>Games</Link>}
                 </Button>
             </Box>
         </Flex>

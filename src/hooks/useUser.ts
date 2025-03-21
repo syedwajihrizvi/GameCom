@@ -7,7 +7,9 @@ const useUser = () => {
     const headers = {'x-auth-token': token}
     const fetchUser = () => 
         userClient.get<User>('/me', {headers})
-                  .then(res => res.data)
+                  .then(res => {
+                    return res.data
+                })
                   .catch(err => err)
 
     return useQuery<User>({

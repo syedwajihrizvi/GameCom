@@ -7,6 +7,7 @@ import theme from './theme.ts'
 import './index.css'
 import router from './routes/routes.tsx'
 import { RouterProvider } from 'react-router-dom'
+import GlobalProvider from './providers/global-provider.tsx'
 
 const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <ChakraProvider  theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode}/>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router}/>
+        <GlobalProvider>
+          <RouterProvider router={router}/>
+        </GlobalProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ChakraProvider>

@@ -47,7 +47,7 @@ export const generateGameQuery = (params: Query, user: User | undefined,
         }
     
         if (sort) {
-            queryString += `sort ${sort.queryString} ${order}; limit 9;`
+            queryString += `sort ${sort.queryString} ${order}; limit 25;`
         }
         else {
             if (platform.id == 0 && genre.id == 0 && gameMode.id == 0)

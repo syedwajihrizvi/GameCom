@@ -3,21 +3,22 @@ import dataClient from "../utils/services/dataService"
 import { generateGameQuery, generateSearchQuery } from "../utils/query_utils"
 import useQueryStore from "../stores/useQueryStore"
 import { Game } from "../entities/Game"
-import { User } from "../entities/User"
+import { useGlobalContext } from "../providers/global-provider"
 
 export interface InfiniteQueryData<T> {
     data: T[],
     hasMore: boolean
 }
 
-const useGames = (user: User) => {
+const useGames = () => {
     const query = useQueryStore()
-
+    const {user} = useGlobalContext()
     const fetchGames = async (pageParam: number) => {
         let gameQuery = generateGameQuery(query, user, pageParam)
         // Workaround untilt the twerps at IGDB fix their API
         if (query.search) {
-            const games = await dataClient.post<Game[]>('/games', {query:generateSearchQuery(query.search)}).then(res => res.data)
+            const games = await dataClient.post<Game[]>('/games', {query:generateSearchQuery(query.search)})
+                                          .then(res => res.data)
             gameQuery = generateGameQuery(query, user, pageParam, games.map(game => game.id))
         }
         return dataClient.post<Game[]>('/games', {query: gameQuery})

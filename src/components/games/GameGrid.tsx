@@ -6,19 +6,13 @@ import { Game } from "../../entities/Game"
 import InfiniteScroll from "react-infinite-scroll-component"
 import InfiniteLoader from "../common/InfiniteLoader"
 import useQueryStore from '../../stores/useQueryStore'
-import { User } from '../../entities/User'
 import GameCard from './GameCard'
 
-interface Props {
-    user: User
-}
-
-function GameGrid({user}: Props) {
+function GameGrid() {
     const {verticalLayout} = useQueryStore()
-    const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames(user)
+    const {data:games, isLoading, fetchNextPage, hasNextPage} = useGames()
     const cardSkeletons = [1, 2, 3, 4, 5, 6, 7, 8]
     const numberOfGames = games ? games?.pages.reduce((total, currentValue) => total + currentValue.data.length, 0) : 0
-
     return (
         <Box height="90vh" overflowY='scroll'>
             <InfiniteScroll dataLength={numberOfGames} next={fetchNextPage} hasMore={!!hasNextPage} loader=<InfiniteLoader/>>
@@ -36,7 +30,7 @@ function GameGrid({user}: Props) {
                         <React.Fragment>
                             {page.data.map(game =>
                             <Center>
-                                <GameCard game={game} favorites={user.favoriteGames} userId={user.id}/>
+                                <GameCard game={game}/>
                             </Center>
                             )}
                         </React.Fragment>
