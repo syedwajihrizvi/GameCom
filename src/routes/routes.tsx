@@ -14,9 +14,19 @@ import CreditDetails from "../components/account/CreditDetails";
 import Setup from "../components/setup/Setup";
 import AccountSettings from "../components/account/AccountSettings";
 import AccountCard from "../components/account/AccountCard";
+import { ProtectedRoute } from "../components/common/ProtectedRoute";
 
 const router = createBrowserRouter([
-    {path: '/', element: <Main/>},
+    {
+        path: '/', 
+        element: <Layout/>,
+        errorElement: <ErrorPage/>,
+        children: [
+            {path: '', element: <Home/>},
+            {path: ':id', element: <GameDetails/>}
+        ]
+    },
+    {path: '/home', element: <Main/>},
     {path: '/login', element: <Login/>},
     {
         path: '/setup',
@@ -31,22 +41,17 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/games', 
-        element: <Layout/>,
-        errorElement: <ErrorPage/>,
-        children: [
-            {path: '', element: <Home/>},
-            {path: ':id', element: <GameDetails/>}
-        ]
-    },
-    {
         path: '/account',
         element: <Layout/>,
         errorElement: <ErrorPage/>,
         children: [
-            {path: '', element: <AccountSettings/>},
-            {path: 'plans', element: <PlanGrid/>},
-            {path: 'payment', element: <AccountCard/>}
+            {path: '', 
+            element: <ProtectedRoute/>, 
+            children: [
+                {path: '', element: <AccountSettings/>},
+                {path: 'plans', element: <PlanGrid/>},
+                {path: 'payment', element: <AccountCard/>}
+            ]}
         ]
     }
 ])

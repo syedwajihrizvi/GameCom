@@ -7,6 +7,7 @@ import { useState } from "react"
 import Footer from "../common/Footer"
 
 import "../../assets/css/login.css"
+import { useQueryClient } from "@tanstack/react-query"
 
 interface LoginForm {
     email: string,
@@ -14,6 +15,7 @@ interface LoginForm {
 }
 
 function Login() {
+    const queryClient = useQueryClient()
     const { register, handleSubmit } = useForm<LoginForm>()
     const [loginError, setLoginError] = useState<string>()
     const navigate = useNavigate()
@@ -22,7 +24,9 @@ function Login() {
         apiClient.post('/', data)
         .then(res => {
             localStorage.setItem('x-auth-token', res.data)
-            navigate('/games')
+            queryClient.invalidateQueries(['me'])
+            queryClient.refetchQueries(["me"])
+            navigate('/')
         })
         .catch(err => {
             setLoginError(err.response.data) 

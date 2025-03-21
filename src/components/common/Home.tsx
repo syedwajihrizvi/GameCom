@@ -9,13 +9,12 @@ import SortSelector from "../selectors/SortSelector"
 import { CiGrid41, CiGrid2H } from "react-icons/ci";
 import useQueryStore from "../../stores/useQueryStore"
 import ShowOnlySelector from "../games/ShowOnlySelector"
-import { useOutletContext } from "react-router-dom"
-import { User } from "../../entities/User"
 import "../../assets/css/home.css"
+import { useGlobalContext } from "../../providers/global-provider"
 
 function Home() {
     const {genre, platform, gameMode, sort, handleLayoutToggle} = useQueryStore()
-    const data = useOutletContext<User>()
+    const {isLoggedIn} = useGlobalContext()
   
     return (
         <Grid
@@ -37,7 +36,7 @@ function Home() {
                       <PlatformSelector/>
                       <SortSelector/>
                       {sort && <OrderSelector/>}
-                      <ShowOnlySelector/>
+                      {isLoggedIn && <ShowOnlySelector/>}
                   </Flex>
                 </GridItem>
                 <GridItem>
@@ -50,7 +49,7 @@ function Home() {
                   </HStack>
                 </GridItem>
               </SimpleGrid>
-              <GameGrid user={data}/>
+              <GameGrid/>
             </GridItem>
           </Grid>
     )
